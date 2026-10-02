@@ -1,0 +1,21 @@
+# Secrets (CHPL API key) never go to GitHub
+.env
+
+# Raw downloads are large and re-downloadable (see Data/raw/manifest.json)
+Data/raw/*
+!Data/raw/manifest.json
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+
+# Power BI local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
