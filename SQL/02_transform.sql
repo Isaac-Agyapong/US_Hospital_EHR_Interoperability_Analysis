@@ -32,7 +32,7 @@ SELECT left(snapshot_date, 4)::smallint                         AS snapshot_year
 FROM raw.general_info
 WHERE facility_id ~ '^[0-9A-Z]{5,6}$';
 
--- the 2020-05 snapshot is the only one that year; 2025 has no general-file flag (moved to its own file)
+-- 2019-2024 snapshots carry the flag; the 2026 snapshot (no flag) supplies the latest type and ownership
 
 -- ---------------------------------------------------------------------
 -- Hospitals: attributes from the latest snapshot they appear in
@@ -55,8 +55,9 @@ FROM raw.pi_hospital p
 WHERE NOT EXISTS (SELECT 1 FROM core.dim_hospital h WHERE h.ccn = lpad(p.facility_id, 6, '0'))
   AND p.facility_id ~ '^[0-9]{6}$';
 
+-- the latest snapshot (2026) only supplies hospital attributes; its status is in core.fact_hospital_ehr
 INSERT INTO core.fact_interop_year
-SELECT ccn, snapshot_year, hospital_type, meets_criteria FROM gi;
+SELECT ccn, snapshot_year, hospital_type, meets_criteria FROM gi WHERE snapshot_year <= 2024;
 
 -- ---------------------------------------------------------------------
 -- EHR technology (ONC CHPL). A CEHRT ID bundles every certified product a hospital uses: its core EHR

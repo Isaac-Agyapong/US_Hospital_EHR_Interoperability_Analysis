@@ -100,7 +100,8 @@ def pick(df, spellings):
 
 
 def load_general(cur):
-    for date in FLAG_YEARS:
+    # the latest snapshot has no flag any more (it moved to its own file) but gives current type and ownership
+    for date in FLAG_YEARS + [LATEST]:
         df = snapshot_csv(date, r"general.?information")
         out = pd.DataFrame({k: pick(df, v) for k, v in GENERAL_COLS.items()})
         out.insert(0, "snapshot_date", date)
