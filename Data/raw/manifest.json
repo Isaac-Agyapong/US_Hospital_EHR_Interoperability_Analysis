@@ -1,0 +1,46 @@
+{
+  "downloaded": "2026-10-02",
+  "files": {
+    "archives/hospitals_2019-10-31.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2019-10-31.zip",
+      "bytes": 17056453,
+      "sha256": "9118772dc7e95068cb6508c7a685cc282e15393bcc3e2214d6761828c65b628d"
+    },
+    "archives/hospitals_2020-05-01.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2020-05-01.zip",
+      "bytes": 16306683,
+      "sha256": "19f7d1e07fa2c248f716dfda6fae054dcfdeedea6e88dce49b32e01920cdd4c1"
+    },
+    "archives/hospitals_2021-10-27.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2021-10-27.zip",
+      "bytes": 14769479,
+      "sha256": "4fcaeea27c81a382b029b4ffb28689590a4192027475dd69112437a01c4bcdae"
+    },
+    "archives/hospitals_2022-10-06.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2022-10-06.zip",
+      "bytes": 14753205,
+      "sha256": "cd258649ad9b0ae9928321a891a6060c85fe90b87f6e7be5b2ad9d81e0359038"
+    },
+    "archives/hospitals_2023-11-06.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2023-11-06.zip",
+      "bytes": 16527213,
+      "sha256": "2a39f58397aeed70bb4281e85b57f41aa84322c9c6eb0c760c2d8d5e62e4534f"
+    },
+    "archives/hospitals_2024-10-30.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2024-10-30.zip",
+      "bytes": 15146617,
+      "sha256": "c0bb9ca111aeec16b9220da52b1aa5b33582284ecfd9cf29f1c3c39f1250ae8b"
+    },
+    "archives/hospitals_2026-08-13.zip": {
+      "url": "https://data.cms.gov/provider-data/sites/default/files/dataset-archives/theme/hospitals/hospitals_2026-08-13.zip",
+      "bytes": 14114406,
+      "sha256": "0a4a8507cab940dbc49b248892f24391a822c7f0c4776cf4e37dddcc48862d77"
+    },
+    "chpl_cehrt.json": {
+      "url": "https://chpl.healthit.gov/rest/certification_ids/{CEHRT ID}",
+      "bytes": 2877703,
+      "sha256": "b92f7aa5f410c433107e75c2207fa923ce525a80a41486233463834ab25284b3",
+      "note": "one CHPL API response per CEHRT ID (free API key required)"
+    }
+  }
+}

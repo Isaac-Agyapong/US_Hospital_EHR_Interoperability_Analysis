@@ -80,7 +80,8 @@ SELECT cehrt_id, found = 'true' AS found, product, cures_update = 'True' AS cure
                                                                          THEN 'Other EHR vendor'
             ELSE NULL END                                                AS core_vendor,
        vendor
-FROM raw.chpl_product;
+FROM raw.chpl_product
+WHERE cehrt_id NOT IN ('', 'Not Available');
 
 INSERT INTO core.dim_ehr
 SELECT c.cehrt_id,
@@ -101,10 +102,13 @@ GROUP BY c.cehrt_id, m.core_vendor;
 -- CEHRT IDs in the hospital file that CHPL did not return at all
 INSERT INTO core.dim_ehr (cehrt_id, found_in_chpl)
 SELECT DISTINCT p.cehrt_id, false FROM raw.pi_hospital p
-WHERE p.cehrt_id <> '' AND NOT EXISTS (SELECT 1 FROM core.dim_ehr e WHERE e.cehrt_id = p.cehrt_id);
+WHERE p.cehrt_id NOT IN ('', 'Not Available') AND NOT EXISTS (SELECT 1 FROM core.dim_ehr e WHERE e.cehrt_id = p.cehrt_id);
 
 INSERT INTO core.fact_hospital_ehr
-SELECT lpad(facility_id, 6, '0'), nullif(cehrt_id, ''), coalesce(meets_criteria = 'Y', false),
+SELECT lpad(facility_id, 6, '0'),
+       -- 'Not Available' means the hospital reported no certified EHR ID (494 hospitals, none met the criteria)
+       CASE WHEN cehrt_id IN ('', 'Not Available') THEN NULL ELSE cehrt_id END,
+       coalesce(meets_criteria = 'Y', false),
        to_date(nullif(start_date, ''), 'MM/DD/YYYY'), to_date(nullif(end_date, ''), 'MM/DD/YYYY')
 FROM raw.pi_hospital
 WHERE facility_id ~ '^[0-9]{6}$';
