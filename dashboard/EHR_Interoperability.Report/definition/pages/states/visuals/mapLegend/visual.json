@@ -1,0 +1,246 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "mapLegend",
+  "position": {
+    "x": 40,
+    "y": 666,
+    "z": 23000,
+    "height": 30,
+    "width": 568,
+    "tabOrder": 23000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Falling short   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "■ ",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "color": "#FDF0EA",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "under 5%   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "■ ",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "color": "#F9CDBB",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "5-10%   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "■ ",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "color": "#F29A78",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "10-15%   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "■ ",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "color": "#E8552B",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "15-25%   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "■ ",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "color": "#B23A1C",
+                      "fontFamily": "Corbel"
+                    }
+                  },
+                  {
+                    "value": "25%+   ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#4F5368",
+                      "fontFamily": "Corbel"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "border": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DCE3EF'"
+                    }
+                  }
+                }
+              }
+            },
+            "foreground": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5E6A80'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

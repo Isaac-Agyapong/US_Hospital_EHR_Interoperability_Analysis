@@ -1,0 +1,57 @@
+state,state_name,tile_x,tile_y,on_map
+AK,Alaska,0,0,1
+AL,Alabama,6,6,1
+AR,Arkansas,4,5,1
+AS,American Samoa,,,0
+AZ,Arizona,1,5,1
+CA,California,0,4,1
+CO,Colorado,2,4,1
+CT,Connecticut,9,3,1
+DC,District of Columbia,8,5,1
+DE,Delaware,9,4,1
+FL,Florida,8,7,1
+GA,Georgia,7,6,1
+GU,Guam,,,0
+HI,Hawaii,0,7,1
+IA,Iowa,4,3,1
+ID,Idaho,1,2,1
+IL,Illinois,5,2,1
+IN,Indiana,5,3,1
+KS,Kansas,3,5,1
+KY,Kentucky,5,4,1
+LA,Louisiana,4,6,1
+MA,Massachusetts,9,2,1
+MD,Maryland,8,4,1
+ME,Maine,10,0,1
+MI,Michigan,6,2,1
+MN,Minnesota,4,2,1
+MO,Missouri,4,4,1
+MP,Northern Mariana Islands,,,0
+MS,Mississippi,5,6,1
+MT,Montana,2,2,1
+NC,North Carolina,6,5,1
+ND,North Dakota,3,2,1
+NE,Nebraska,3,4,1
+NH,New Hampshire,10,1,1
+NJ,New Jersey,8,3,1
+NM,New Mexico,2,5,1
+NV,Nevada,1,3,1
+NY,New York,8,2,1
+OH,Ohio,6,3,1
+OK,Oklahoma,3,6,1
+OR,Oregon,0,3,1
+PA,Pennsylvania,7,3,1
+PR,Puerto Rico,10,7,1
+RI,Rhode Island,10,3,1
+SC,South Carolina,7,5,1
+SD,South Dakota,3,3,1
+TN,Tennessee,5,5,1
+TX,Texas,3,7,1
+UT,Utah,1,4,1
+VA,Virginia,7,4,1
+VI,U.S. Virgin Islands,,,0
+VT,Vermont,9,1,1
+WA,Washington,0,2,1
+WI,Wisconsin,5,1,1
+WV,West Virginia,6,4,1
+WY,Wyoming,2,3,1

@@ -1,0 +1,62 @@
+table states
+	lineageTag: 0e5631d0-87d4-5b06-8bac-aae637783ca7
+
+	column state
+		dataType: string
+		lineageTag: ad6922a6-a6a9-5eac-941e-099f52ea28f2
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column state_name
+		dataType: string
+		lineageTag: 585fbf23-b8be-51b6-9141-4eefdaf36b35
+		summarizeBy: none
+		sourceColumn: state_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column tile_x
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 1b825d75-bb64-5c61-9b80-44d5b6abf170
+		summarizeBy: none
+		sourceColumn: tile_x
+
+		annotation SummarizationSetBy = Automatic
+
+	column tile_y
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 6e0e3d71-2841-5068-96be-1083e4b24e6b
+		summarizeBy: none
+		sourceColumn: tile_y
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_map
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 4760305c-d736-5f1b-8b9f-5c0a5f3fe139
+		summarizeBy: sum
+		sourceColumn: on_map
+
+		annotation SummarizationSetBy = Automatic
+
+	partition states = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "states.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    // empty CSV cells arrive as "" text; make them real blanks so they drop out of charts
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, Table.ColumnNames(Promoted)),
+				    Typed = Table.TransformColumnTypes(Blanks,{{"state", type text}, {"state_name", type text}, {"tile_x", Int64.Type}, {"tile_y", Int64.Type}, {"on_map", Int64.Type}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

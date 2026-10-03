@@ -1,0 +1,777 @@
+table hospital
+	lineageTag: 32f58327-e0f3-587d-a6c8-783c375c36bc
+
+	measure Hospitals = CALCULATE ( COUNTROWS ( hospital ), hospital[in_latest] = 1 )
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: 207c29cb-2d16-586f-900e-625d2689eb51
+
+	measure Short = CALCULATE ( SUM ( hospital[not_met] ), hospital[in_latest] = 1 )
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: d44f20da-ae95-5a69-89dd-e4a48e912cb3
+
+	measure 'Short Share' = DIVIDE ( [Short], [Hospitals] )
+		formatString: 0%
+		displayFolder: Core
+		lineageTag: d28def95-3057-546d-9517-2e4781221f63
+
+	measure 'No EHR Short' = CALCULATE ( [Short], hospital[ehr_status] = "No EHR ID reported" )
+		formatString: #,0
+		displayFolder: Core
+		lineageTag: e7e7ba89-9b6b-5750-90c8-257882bb0b23
+
+	measure 'No EHR Share' = DIVIDE ( [No EHR Short], [Short] )
+		formatString: 0%
+		displayFolder: Core
+		lineageTag: 316fc12a-5f87-5be5-b581-e8411efed3de
+
+	measure 'General Count Text' =
+			FORMAT ( CALCULATE ( [Hospitals], hospital[hospital_type] = "General hospital" ), "#,0" ) & " general, "
+			    & FORMAT ( CALCULATE ( [Hospitals], hospital[hospital_type] = "Small rural (critical access)" ), "#,0" ) & " small rural"
+		displayFolder: KPI
+		lineageTag: 6b022de5-e00b-55c5-b774-47e9d5043401
+
+	measure 'Short Context' = FORMAT ( [Short], "#,0" ) & " of " & FORMAT ( [Hospitals], "#,0" ) & " hospitals"
+		displayFolder: KPI
+		lineageTag: aced89bb-9577-550b-a28f-7a2f76a4b4a3
+
+	measure 'No EHR Context' = FORMAT ( [No EHR Share], "0%" ) & " of those that fell short"
+		displayFolder: KPI
+		lineageTag: 5358482f-a9f4-5d04-b689-539ffc98b1ee
+
+	measure 'Rural Short' = CALCULATE ( [Short Share], hospital[hospital_type] = "Small rural (critical access)" )
+		formatString: 0%
+		displayFolder: KPI
+		lineageTag: 4b696ca6-fc57-5376-8487-055271c1d4e8
+
+	measure 'Rural Context' = "vs " & FORMAT ( CALCULATE ( [Short Share], hospital[hospital_type] = "General hospital" ), "0%" ) & " of general hospitals"
+		displayFolder: KPI
+		lineageTag: 7d3c88d5-aff1-552a-8a75-5c292973728d
+
+	measure 'Donut Title' = FORMAT ( ROUND ( [No EHR Share] * 10, 0 ), "0" ) & " in 10 hospitals that fell short reported no certified EHR at all"
+		displayFolder: Titles
+		lineageTag: fe822240-49ad-5b84-8870-fa2a84e566a6
+
+	measure 'Size Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[size_band] ) ), [Short Share] )
+		formatString: 0%
+		displayFolder: Charts
+		lineageTag: 6e6fe575-66bd-541f-966d-b8b16ddf232d
+
+	measure 'Size Colour' = IF ( SELECTEDVALUE ( hospital[size_order] ) = 1, "#E8552B", "#F6B9A4" )
+		displayFolder: Colours
+		lineageTag: 9732c11d-d2de-53e3-97b7-99a849abdac8
+
+	measure 'Size Title' =
+			VAR _s = CALCULATE ( [Short Share], hospital[size_order] = 1 )
+			VAR _l = CALCULATE ( [Short Share], hospital[size_order] = 5 )
+			RETURN "Hospitals with under 25 beds fall short most: " & FORMAT ( _s, "0%" ) & ", vs " & FORMAT ( _l, "0%" ) & " of the largest"
+		displayFolder: Titles
+		lineageTag: 18aaf1b0-11c6-55d4-b0b7-170a2601e27e
+
+	measure 'Owner Short' = IF ( [Hospitals] >= 50, [Short Share] )
+		formatString: 0%
+		displayFolder: Charts
+		lineageTag: d21f2626-4c56-5404-9f39-7abe102ef60a
+
+	measure 'Owner Colour' = IF ( SELECTEDVALUE ( hospital[ownership] ) = "Nonprofit", "#F6B9A4", "#E8552B" )
+		displayFolder: Colours
+		lineageTag: 0b4410d1-620d-57eb-b835-3633c9e7b618
+
+	measure 'Owner Title' =
+			VAR _n = CALCULATE ( [Short Share], hospital[ownership] = "Nonprofit" )
+			VAR _g = CALCULATE ( [Short Share], hospital[ownership] = "Government" )
+			RETURN "Nonprofits fall short least (" & FORMAT ( _n, "0%" ) & "); government hospitals " & FORMAT ( _g, "0%" )
+		displayFolder: Titles
+		lineageTag: c456515d-543c-5b37-b2ff-96d99a2a2503
+
+	measure 'Market Share' =
+			VAR _d = SELECTEDVALUE ( hospital[main_developer] )
+			RETURN IF ( NOT ISBLANK ( _d ), DIVIDE ( [Hospitals],
+			    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[main_developer] ), NOT ISBLANK ( hospital[main_developer] ) ) ) )
+		formatString: 0%
+		displayFolder: EHR
+		lineageTag: 3f59064c-4c33-5fce-8e00-98344877d903
+
+	measure 'Top3 Share' =
+			DIVIDE ( CALCULATE ( [Hospitals], hospital[main_developer] IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" } ),
+			    CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[main_developer] ) ) )
+		formatString: 0%
+		displayFolder: EHR
+		lineageTag: f04b8045-4df7-5279-ae18-4449a82ed252
+
+	measure 'Top3 Context' =
+			"Epic alone: " & FORMAT ( DIVIDE ( CALCULATE ( [Hospitals], hospital[main_developer] = "Epic" ),
+			    CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[main_developer] ) ) ), "0%" ) & " of hospitals"
+		displayFolder: KPI
+		lineageTag: fee96237-12cc-5766-8602-727407efeeed
+
+	measure 'Market Colour' = IF ( SELECTEDVALUE ( hospital[main_developer] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" }, "#0B1F4D", "#AEB6C4" )
+		displayFolder: Colours
+		lineageTag: 158e1e8c-2214-5040-be28-3fcfdeb2eba7
+
+	measure 'Market Title' = "Epic, Oracle Health and MEDITECH run " & FORMAT ( [Top3 Share], "0%" ) & " of hospitals' EHRs"
+		displayFolder: Titles
+		lineageTag: a0977fb2-10e8-518f-ae14-897e7b816265
+
+	measure 'Epic Short' = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic" )
+		formatString: 0.0%
+		displayFolder: KPI
+		lineageTag: abf529bb-dc72-5b2c-b965-6f8924e73b09
+
+	measure 'Epic Context' = FORMAT ( CALCULATE ( [Short], hospital[ehr_group] = "Epic" ), "#,0" ) & " of " & FORMAT ( CALCULATE ( [Hospitals], hospital[ehr_group] = "Epic" ), "#,0" ) & " hospitals"
+		displayFolder: KPI
+		lineageTag: 5de5d85f-595a-53e7-ada3-32fab558e619
+
+	measure 'TruBridge Short' = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)" )
+		formatString: 0.0%
+		displayFolder: KPI
+		lineageTag: 0ca043e7-3605-58dc-a03b-a0edda1f36a6
+
+	measure 'TruBridge Context' =
+			VAR _n = CALCULATE ( [Hospitals], hospital[ehr_group] = "TruBridge (CPSI)" )
+			VAR _r = CALCULATE ( [Hospitals], hospital[ehr_group] = "TruBridge (CPSI)", hospital[hospital_type] = "Small rural (critical access)" )
+			RETURN FORMAT ( _n, "#,0" ) & " hospitals, " & FORMAT ( DIVIDE ( _r, _n ), "0%" ) & " small rural"
+		displayFolder: KPI
+		lineageTag: 28b157ce-ad1c-5832-ba63-b15fd008e77c
+
+	measure 'No EHR Hospitals' = CALCULATE ( [Hospitals], hospital[ehr_status] = "No EHR ID reported" )
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: fc56f583-0907-5fc9-aa5b-2085fc7fca03
+
+	measure 'No EHR All Context' = FORMAT ( CALCULATE ( [Short Share], hospital[ehr_status] = "No EHR ID reported" ), "0%" ) & " of them fell short"
+		displayFolder: KPI
+		lineageTag: 54acfba1-2314-536e-b8c5-73c1073608e0
+
+	measure 'EHR Short' = IF ( [Hospitals] >= 40 && NOT ISBLANK ( SELECTEDVALUE ( hospital[ehr_group] ) ), [Short Share] )
+		formatString: 0%
+		displayFolder: EHR
+		lineageTag: 7fe60c29-9e4e-5273-af06-987c315008cd
+
+	measure 'EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) = "No EHR ID reported", "#6D28D9", "#E8552B" )
+		displayFolder: Colours
+		lineageTag: a1792baf-ae7d-5f62-8b11-16fe653663fa
+
+	measure 'EHR Title' =
+			VAR _t = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)" )
+			VAR _e = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic" )
+			RETURN "Among hospitals that reported an EHR, TruBridge users fall short most (" & FORMAT ( _t, "0%" ) & "); Epic users " & FORMAT ( _e, "0%" )
+		displayFolder: Titles
+		lineageTag: 2b2c33dd-3519-590e-b6fa-70d8c4c7666d
+
+	measure 'Vendor Type Short' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH", "TruBridge (CPSI)" }, [Short Share] )
+		formatString: 0%
+		displayFolder: EHR
+		lineageTag: 24663b00-a795-581a-81f9-ea5ef8443113
+
+	measure 'Matrix Title' =
+			VAR _t = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)", hospital[hospital_type] = "Small rural (critical access)" )
+			VAR _e = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic", hospital[hospital_type] = "Small rural (critical access)" )
+			RETURN "Small rural hospitals: " & FORMAT ( _t, "0%" ) & " fall short on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic"
+		displayFolder: Titles
+		lineageTag: d2ecf9de-832d-597c-acfe-03aba01e2481
+
+	measure 'Fifth Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[margin_fifth] ) ), [Short Share] )
+		formatString: 0%
+		displayFolder: Money
+		lineageTag: 8a64259c-9aa9-5aec-8e77-2bd636e6141d
+
+	measure 'Fifth Colour' = IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "#E8552B", "#F6B9A4" )
+		displayFolder: Colours
+		lineageTag: a3cfd86e-9563-51b5-99cc-1cf62850d9db
+
+	measure 'Least Profitable Short' = CALCULATE ( [Short Share], hospital[margin_fifth] = 1 )
+		formatString: 0%
+		displayFolder: KPI
+		lineageTag: 8e039ad2-71ce-5503-8187-6f782d32da18
+
+	measure 'Least Profitable Context' = "vs " & FORMAT ( CALCULATE ( [Short Share], hospital[margin_fifth] = 5 ), "0%" ) & " for the most profitable"
+		displayFolder: KPI
+		lineageTag: 7194628e-766f-5fdc-9c24-cec53f907bf9
+
+	measure 'Fifth Title' =
+			VAR _a = CALCULATE ( [Short Share], hospital[margin_fifth] = 1 )
+			VAR _b = CALCULATE ( [Short Share], hospital[margin_fifth] = 5 )
+			RETURN "The least profitable fifth fall short most (" & FORMAT ( _a, "0%" ) & "); the most profitable " & FORMAT ( _b, "0%" )
+		displayFolder: Titles
+		lineageTag: c7e465f3-bd0e-5890-ae48-04c5d8d6d28a
+
+	measure 'Money Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[lost_money] ) ), [Short Share] )
+		formatString: 0%
+		displayFolder: Money
+		lineageTag: 1b1f8872-0bd3-5303-a09a-09197ec791be
+
+	measure 'Losses Short' = CALCULATE ( [Short Share], hospital[lost_money] = "Lost money 2 years in a row", hospital[hospital_type] = "Small rural (critical access)" )
+		formatString: 0%
+		displayFolder: KPI
+		lineageTag: e7242d9f-6224-58a9-8c73-988d6aa1f811
+
+	measure 'Losses Context' = "small rural; " & FORMAT ( CALCULATE ( [Short Share], hospital[lost_money] = "Did not", hospital[hospital_type] = "Small rural (critical access)" ), "0%" ) & " without losses"
+		displayFolder: KPI
+		lineageTag: df9974be-afc8-5ae6-b956-6c9f315367bb
+
+	measure 'Money Title' =
+			VAR _a = CALCULATE ( [Short Share], hospital[lost_money] = "Lost money 2 years in a row" )
+			VAR _b = CALCULATE ( [Short Share], hospital[lost_money] = "Did not" )
+			RETURN "Hospitals that lost money two years in a row fall short about " & FORMAT ( DIVIDE ( _a, _b ), "0" ) & " times as often"
+		displayFolder: Titles
+		lineageTag: 6c22e26a-b369-5098-9d7f-e956aae603b9
+
+	measure 'History Count' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[history] ) ), [Hospitals] )
+		formatString: #,0
+		displayFolder: Money
+		lineageTag: 6748f30f-b5a2-5c18-bb6e-8a68b8f7f722
+
+	measure 'History Colour' =
+			SWITCH ( TRUE (), SELECTEDVALUE ( hospital[history_order] ) = 0, "#2457D6", SELECTEDVALUE ( hospital[history_order] ) <= 2, "#F6B9A4",
+			    SELECTEDVALUE ( hospital[history_order] ) <= 5, "#E8552B", "#B23A1C" )
+		displayFolder: Colours
+		lineageTag: 0191c9f0-8dd2-50db-8bf5-003ec9ac7a06
+
+	measure 'Every Year' = CALCULATE ( [Hospitals], hospital[history_order] = 6 )
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: 29486118-0d51-5266-9104-b8d0c9ab172e
+
+	measure 'Every Year Context' = "hospitals, in all six Medicare files"
+		displayFolder: KPI
+		lineageTag: 0b75d78e-c92b-52ce-944d-4c9ffea0a6a2
+
+	measure Never = CALCULATE ( [Hospitals], hospital[history] = "Never" )
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: 07deb3e9-7fab-577f-8a24-ad01c5b65ebc
+
+	measure 'Never Context' = "of " & FORMAT ( CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[history] ) ), "#,0" ) & " in all six files"
+		displayFolder: KPI
+		lineageTag: 7b49a20e-cd48-56e9-912c-3b69eab0f887
+
+	measure 'History Title' = FORMAT ( [Never], "#,0" ) & " hospitals never fell short; " & FORMAT ( [Every Year], "#,0" ) & " fell short every single year"
+		displayFolder: Titles
+		lineageTag: 2caa2747-b826-59e5-9129-147922a205a4
+
+	measure 'Top 10 Share' =
+			// ranks every state (REMOVEFILTERS, not ALLSELECTED), so a click on the map does not make a state #1;
+			// states with fewer than 10 hospitals in the current selection are not ranked
+			VAR _cur = [Short Share]
+			VAR _n = [Hospitals]
+			VAR _all = CALCULATETABLE ( FILTER ( ADDCOLUMNS ( VALUES ( states[state_name] ), "@r", [Short Share], "@n", [Hospitals] ), [@n] >= 10 ), REMOVEFILTERS ( states ) )
+			RETURN IF ( HASONEVALUE ( states[state_name] ) && _n >= 10 && COUNTROWS ( FILTER ( _all, [@r] > _cur ) ) < 10, _cur )
+		formatString: 0%
+		displayFolder: States
+		lineageTag: 6178c13f-7509-51ba-a38b-1bf7b3023db8
+
+	measure 'Top 10 Hospitals' = IF ( NOT ISBLANK ( [Top 10 Share] ), [Hospitals] )
+		formatString: #,0
+		displayFolder: States
+		lineageTag: 749938ef-a39e-5d71-b5a2-0550efbaa1e4
+
+	measure 'Top 10 Short' = IF ( NOT ISBLANK ( [Top 10 Share] ), [Short] )
+		formatString: #,0
+		displayFolder: States
+		lineageTag: c2fd16f1-597e-53d8-9e2e-779f75611d18
+
+	measure 'Tile Label' = SELECTEDVALUE ( states[state] )
+		displayFolder: Map
+		lineageTag: 980bf1f0-0c38-51a3-9e2e-0d40afe83f76
+
+	measure 'Tile Colour' =
+			VAR _r = [Short Share]
+			RETURN SWITCH ( TRUE (),
+			    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "#FFFFFF",
+			    ISBLANK ( _r ), "#EEF1F6",
+			    _r < 0.05, "#FDF0EA",
+			    _r < 0.10, "#F9CDBB",
+			    _r < 0.15, "#F29A78",
+			    _r < 0.25, "#E8552B",
+			    "#B23A1C" )
+		displayFolder: Map
+		lineageTag: 1ba12b64-6996-586d-909e-37dcc04202f1
+
+	measure 'Tile Font' = IF ( [Short Share] >= 0.15, "#FFFFFF", "#141B2D" )
+		displayFolder: Map
+		lineageTag: 594ee0e2-effb-55fe-af90-cb0e6cb58b9a
+
+	measure 'Fifth States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 && [@r] >= 0.2 ) )
+		formatString: #,0
+		displayFolder: States
+		lineageTag: eeca6a31-d143-5ef7-a136-b4a397546710
+
+	measure 'Zero States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@s", [Short], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 1 && [@s] = 0 ) )
+		formatString: #,0
+		displayFolder: States
+		lineageTag: 6ab6fb3e-77f2-5e2b-8c27-278a37fe0775
+
+	measure 'Map Title' =
+			VAR _t = TOPN ( 1, FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state_name] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 ), [@r], DESC )
+			RETURN MAXX ( _t, states[state_name] ) & " has the highest share falling short: " & FORMAT ( MAXX ( _t, [@r] ), "0%" ) & " of its hospitals"
+		displayFolder: Titles
+		lineageTag: d0558e03-744a-5f63-8909-97665fa09dd3
+
+	measure 'Selected State' = SELECTEDVALUE ( states[state_name], "All states" )
+		displayFolder: Tooltip
+		lineageTag: eac3fece-e636-5520-a82e-ee4fbb15fb71
+
+	measure 'State Rank Text' =
+			VAR _cur = [Short Share]
+			VAR _all = CALCULATETABLE ( FILTER ( ADDCOLUMNS ( VALUES ( states[state_name] ), "@r", [Short Share], "@n", [Hospitals] ), [@n] >= 10 ), REMOVEFILTERS ( states ) )
+			RETURN IF ( HASONEVALUE ( states[state_name] ) && [Hospitals] >= 10, "#" & COUNTROWS ( FILTER ( _all, [@r] > _cur ) ) + 1 & " of "
+			    & COUNTROWS ( _all ) & " for the share falling short", "Too few hospitals to rank" )
+		displayFolder: Tooltip
+		lineageTag: a8ad20cc-11bc-50b2-8062-97076eaddee0
+
+	measure 'State Short Text' = FORMAT ( [Short], "#,0" ) & " of " & FORMAT ( [Hospitals], "#,0" ) & " hospitals"
+		displayFolder: Tooltip
+		lineageTag: dde787c3-3b44-5dca-b748-eaee639de9a4
+
+	measure 'State No EHR' = FORMAT ( [No EHR Short], "#,0" ) & " reported no certified EHR"
+		displayFolder: Tooltip
+		lineageTag: 2025817f-63ad-55ad-8c78-341518be707a
+
+	measure 'ID Count' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[id_quality] ) ), [Hospitals] )
+		formatString: #,0
+		displayFolder: Quality
+		lineageTag: 70043fd6-b4c4-58e2-a093-0c7ef9b31adc
+
+	measure 'ID Colour' =
+			SWITCH ( SELECTEDVALUE ( hospital[id_quality] ),
+			    "Valid ID, found in the federal list", "#AEB6C4",
+			    """Not Available"" typed instead of an ID", "#6D28D9",
+			    "#C98A04" )
+		displayFolder: Colours
+		lineageTag: ad35a331-37a4-52ed-8de4-d11ba50888ee
+
+	measure 'Not Available Count' = CALCULATE ( [Hospitals], hospital[id_quality] = """Not Available"" typed instead of an ID" )
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: b62a0561-b5e6-5558-a56c-d55d9b15f09d
+
+	measure 'Not In List Count' = CALCULATE ( [Hospitals], hospital[id_quality] = "Not found in the federal list" ) + 0
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: bf0126e6-9af7-5737-a967-a698e59fa4e7
+
+	measure 'Bad Format Count' = CALCULATE ( [Hospitals], hospital[id_quality] = "Wrong format (lowercase or wrong length)" ) + 0
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: 1d87c8b9-0b8d-5fbe-9986-916d04408cfb
+
+	measure 'Disagree Count' = CALCULATE ( SUM ( hospital[files_disagree] ), hospital[in_latest] = 1 ) + 0
+		formatString: #,0
+		displayFolder: KPI
+		lineageTag: a95eec4e-69ba-50fd-9e70-639dc5935532
+
+	measure 'Not Available Context' = "hospitals, all of them fell short"
+		displayFolder: KPI
+		lineageTag: 521c2fb8-0ce6-51f6-9a42-64b94aae9bb8
+
+	measure 'Not In List Context' = "not in the federal product list"
+		displayFolder: KPI
+		lineageTag: 50a6317e-c4ac-55a8-9423-c4f543ec2f54
+
+	measure 'Bad Format Context' = "lowercase or wrong length"
+		displayFolder: KPI
+		lineageTag: a84a08c1-aba3-5a09-ba14-63c816d98729
+
+	measure 'Disagree Context' = "hospitals rated differently"
+		displayFolder: KPI
+		lineageTag: 94d19fef-10d2-540b-af39-49eddc1a738c
+
+	measure 'Disagree Count By Type' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[disagree_type] ) ), [Disagree Count] )
+		formatString: #,0
+		displayFolder: Quality
+		lineageTag: 5c084d6f-bcd0-5f5e-9f38-eed5d7340662
+
+	measure 'Files Count' = IF ( SELECTEDVALUE ( hospital[n_files] ) > 0, COUNTROWS ( hospital ) )
+		formatString: #,0
+		displayFolder: Quality
+		lineageTag: 7a0f7e5d-21ea-57c4-a54f-47e175e8f8a6
+
+	measure 'Files Colour' = IF ( SELECTEDVALUE ( hospital[n_files] ) = 6, "#AEB6C4", "#C98A04" )
+		displayFolder: Colours
+		lineageTag: d4af2e87-30d3-50ac-bd00-0ebae1fd004e
+
+	measure 'ID Title' =
+			VAR _p = DIVIDE ( [Hospitals] - CALCULATE ( [Hospitals], hospital[id_quality] = "Valid ID, found in the federal list" ), [Hospitals] )
+			RETURN FORMAT ( ROUND ( _p * 100, 0 ), "0" ) & " in 100 hospitals have a problem in the EHR ID field"
+		displayFolder: Titles
+		lineageTag: b72adf08-51a7-55ac-82e8-f420e763dde9
+
+	measure 'Profile Name' = IF ( HASONEVALUE ( hospital[hospital_label] ), SELECTEDVALUE ( hospital[display_name] ), "Pick a hospital" )
+		displayFolder: Hospital
+		lineageTag: 765a32db-c40e-5514-bbad-0cda3eaf30f8
+
+	measure 'Profile Facts' = IF ( HASONEVALUE ( hospital[hospital_label] ), SELECTEDVALUE ( hospital[hospital_type] ) & "   ·   " & SELECTEDVALUE ( hospital[ownership] ) & "   ·   " & SELECTEDVALUE ( hospital[city] ) & ", " & SELECTEDVALUE ( hospital[state_name] ) & IF ( NOT ISBLANK ( SUM ( hospital[beds] ) ), "   ·   " & FORMAT ( SUM ( hospital[beds] ), "#,0" ) & " beds" ), "Type a hospital name in the search box on the right" )
+		displayFolder: Hospital
+		lineageTag: d61895b8-09eb-5178-b39a-3e6b0b9b2cda
+
+	measure 'Profile Status' = IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( SUM ( hospital[in_latest] ) = 0, "Not in the 2024 file", IF ( SUM ( hospital[not_met] ) = 1, "Fell short", "Met the standards" ) ) )
+		displayFolder: Hospital
+		lineageTag: 74f79ff6-4470-564d-844e-80c64a084f93
+
+	measure 'Profile Status Colour' = IF ( SUM ( hospital[not_met] ) = 1, "#E8552B", "#2457D6" )
+		displayFolder: Hospital
+		lineageTag: 78758bb8-0fdc-5ab0-97ab-e5c7c9f41000
+
+	measure 'Profile Status Context' = IF ( HASONEVALUE ( hospital[hospital_label] ), "in the 2024 reporting year" )
+		displayFolder: Hospital
+		lineageTag: bb09d4ab-5566-5d80-8ff4-389687bf540d
+
+	measure 'Profile EHR' =
+			IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", "None reported",
+			    COALESCE ( SELECTEDVALUE ( hospital[main_developer] ), "Not identified" ) ) )
+		displayFolder: Hospital
+		lineageTag: 117eed58-4ada-5001-a1aa-ce52189b149d
+
+	measure 'Profile EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", "#6D28D9", "#141B2D" )
+		displayFolder: Hospital
+		lineageTag: 910e68f8-59ec-5c3b-a1bc-baab5a49a847
+
+	measure 'Profile EHR Context' =
+			VAR _k = SUM ( hospital[hospitals_sharing_ehr_id] ) - 1
+			RETURN IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", "no certified EHR ID in the 2024 file",
+			    IF ( _k > 0, "same EHR setup as " & _k & " other hospital" & IF ( _k > 1, "s", "" ), "its own EHR setup" ) ) )
+		displayFolder: Hospital
+		lineageTag: 198a2c52-6be2-5bff-9049-705087681e91
+
+	measure 'Profile Years' = IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( COUNTROWS ( hospital_year ) > 0, FORMAT ( SUM ( hospital_year[not_met] ) + 0, "0" ) & " of " & COUNTROWS ( hospital_year ), "No history" ) )
+		displayFolder: Hospital
+		lineageTag: 98ae0c03-5c64-5f79-9de5-0f43f4ef459d
+
+	measure 'Profile Years Colour' = IF ( SUM ( hospital_year[not_met] ) > 0, "#E8552B", "#2457D6" )
+		displayFolder: Hospital
+		lineageTag: 8e9486ab-f3f7-5e58-bee1-28b80c4b87cc
+
+	measure 'Profile Years Context' = IF ( HASONEVALUE ( hospital[hospital_label] ), "yearly Medicare files, 2019-2024" )
+		displayFolder: Hospital
+		lineageTag: e645e2e6-01aa-5145-a07a-0a11181e8326
+
+	measure 'Profile Margin' = IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( ISBLANK ( SUM ( hospital[total_margin] ) ), "No report", FORMAT ( SUM ( hospital[total_margin] ) * 100, "0.0" ) & " cents" ) )
+		displayFolder: Hospital
+		lineageTag: ce7bdfc6-a1eb-50d2-811d-68aff739d168
+
+	measure 'Profile Margin Colour' = IF ( SUM ( hospital[total_margin] ) < 0, "#E8552B", "#141B2D" )
+		displayFolder: Hospital
+		lineageTag: f5249ded-f07a-5425-b3d7-7c1949cf614d
+
+	measure 'Profile Margin Context' =
+			IF ( HASONEVALUE ( hospital[hospital_label] ), IF ( ISBLANK ( SUM ( hospital[total_margin] ) ), "no financial report matched",
+			    "profit kept from each $1" & IF ( SELECTEDVALUE ( hospital[lost_money] ) = "Lost money 2 years in a row", "; lost money 2 years running", "" ) ) )
+		displayFolder: Hospital
+		lineageTag: 43eb3fdb-0ebb-5839-bc5c-4f7eefbd9e4b
+
+	measure 'Profile Sentence' =
+			VAR _t = SELECTEDVALUE ( hospital[hospital_type] )
+			VAR _peer = CALCULATE ( [Short Share], REMOVEFILTERS ( hospital ), REMOVEFILTERS ( states ), hospital[hospital_type] = _t )
+			VAR _short = SUM ( hospital[not_met] ) = 1
+			VAR _y = SUM ( hospital_year[not_met] ) + 0
+			VAR _n = COUNTROWS ( hospital_year )
+			RETURN IF ( HASONEVALUE ( hospital[hospital_label] ) && SUM ( hospital[in_latest] ) = 1,
+			    "In 2024 this hospital " & IF ( _short, "did not meet", "met" ) & " Medicare's standards for sharing health records electronically. "
+			    & FORMAT ( _peer, "0%" ) & IF ( _t = "General hospital", " of general hospitals", " of small rural hospitals" ) & " fell short. "
+			    & IF ( _n > 0, "It fell short in " & _y & " of the " & _n & " yearly files since 2019"
+			        & IF ( _y = 0, ": a steady record.", IF ( _y = _n, ": it has never met them.", "." ) ), "" )
+			    & IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", " It reported no certified EHR, the most common reason hospitals fall short.", "" ),
+			    IF ( HASONEVALUE ( hospital[hospital_label] ), "This hospital is not in the latest Medicare file (it may have closed or merged).", "Pick a hospital to see what its numbers mean." ) )
+		displayFolder: Hospital
+		lineageTag: e0f4041f-0cb1-5f76-9afc-e4e585536705
+
+	measure 'Profile Checks' =
+			IF ( HASONEVALUE ( hospital[hospital_label] ) && SUM ( hospital[in_latest] ) = 1, "EHR ID field: " & SELECTEDVALUE ( hospital[id_quality] ) & ". "
+			    & IF ( SUM ( hospital[files_disagree] ) = 1, "The two Medicare files give different answers for this hospital.",
+			         "The Medicare files agree on its status." ) )
+		displayFolder: Hospital
+		lineageTag: f0e329e6-e502-5984-b922-bc461c15a414
+
+	column ccn
+		dataType: string
+		isHidden
+		lineageTag: dcbe1156-c3c7-5e60-9048-cf1a51f9e935
+		summarizeBy: none
+		sourceColumn: ccn
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_label
+		dataType: string
+		lineageTag: 41c07a3b-166c-5571-ab98-629c12f8a7d8
+		summarizeBy: none
+		sourceColumn: hospital_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		lineageTag: 613bc6fd-2ac7-5266-b625-12009a62ad61
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 9a642472-64f1-58c7-94e6-113849cb1d77
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 025e8e1c-c567-538a-97aa-46272b32a1f0
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column state_name
+		dataType: string
+		lineageTag: 6c4b2296-f8b8-53d2-a5b8-a4a9b8b29d4a
+		summarizeBy: none
+		sourceColumn: state_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospital_type
+		dataType: string
+		lineageTag: aecef6e1-4c4f-5755-af66-1c9dbc4feaaa
+		summarizeBy: none
+		sourceColumn: hospital_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column ownership
+		dataType: string
+		lineageTag: c6fee506-4962-55a9-b2c6-d01f487c226f
+		summarizeBy: none
+		sourceColumn: ownership
+
+		annotation SummarizationSetBy = Automatic
+
+	column rural_urban
+		dataType: string
+		lineageTag: 7a459809-7421-54bb-aa1e-759cbde168e2
+		summarizeBy: none
+		sourceColumn: rural_urban
+
+		annotation SummarizationSetBy = Automatic
+
+	column in_latest
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: f18b8406-58ba-5ce7-9783-e9e1254ccc35
+		summarizeBy: sum
+		sourceColumn: in_latest
+
+		annotation SummarizationSetBy = Automatic
+
+	column not_met
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: e82d7971-23ad-5835-9d2f-64fc4e4a2dd5
+		summarizeBy: none
+		sourceColumn: not_met
+
+		annotation SummarizationSetBy = Automatic
+
+	column ehr_status
+		dataType: string
+		lineageTag: 86d72985-29f4-55e5-926b-40c704d3f20d
+		summarizeBy: none
+		sourceColumn: ehr_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column ehr_group
+		dataType: string
+		lineageTag: c8a538ca-996b-57ec-b59b-41063c216960
+		summarizeBy: none
+		sourceColumn: ehr_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column main_developer
+		dataType: string
+		lineageTag: 4a06af6f-9092-59d7-8897-860984549f95
+		summarizeBy: none
+		sourceColumn: main_developer
+
+		annotation SummarizationSetBy = Automatic
+
+	column beds
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 95bb1d1f-dc89-55a8-8d73-0833bbc41507
+		summarizeBy: none
+		sourceColumn: beds
+
+		annotation SummarizationSetBy = Automatic
+
+	column size_band
+		dataType: string
+		sortByColumn: size_order
+		lineageTag: 46326c91-6b50-51f3-bb18-7db8e77f2436
+		summarizeBy: none
+		sourceColumn: size_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column size_order
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 5db2f717-dd9d-53fc-9295-60bd47288c69
+		summarizeBy: none
+		sourceColumn: size_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_margin
+		dataType: double
+		formatString: #,0.00
+		isHidden
+		lineageTag: 5d42625f-0959-5339-a661-006f8946e86e
+		summarizeBy: sum
+		sourceColumn: total_margin
+
+		annotation SummarizationSetBy = Automatic
+
+	column margin_fifth
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: f64acffb-3f80-5a15-8c27-f973983514a2
+		summarizeBy: none
+		sourceColumn: margin_fifth
+
+		annotation SummarizationSetBy = Automatic
+
+	column margin_fifth_label
+		dataType: string
+		sortByColumn: margin_fifth
+		lineageTag: a4a2cc8f-4cb1-5b59-8e18-57df003d9e3f
+		summarizeBy: none
+		sourceColumn: margin_fifth_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column lost_money
+		dataType: string
+		lineageTag: c2df7615-e391-5491-8261-c85def30a2c4
+		summarizeBy: none
+		sourceColumn: lost_money
+
+		annotation SummarizationSetBy = Automatic
+
+	column years_reported
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: c36799a6-cbfe-5e5c-b8f1-475467830d34
+		summarizeBy: none
+		sourceColumn: years_reported
+
+		annotation SummarizationSetBy = Automatic
+
+	column years_not_met
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: d4df536d-dd2d-56aa-8ae4-27c65987efa4
+		summarizeBy: none
+		sourceColumn: years_not_met
+
+		annotation SummarizationSetBy = Automatic
+
+	column history
+		dataType: string
+		sortByColumn: history_order
+		lineageTag: 4eee3c9c-cb24-5f32-b6f9-7cd94937ef9c
+		summarizeBy: none
+		sourceColumn: history
+
+		annotation SummarizationSetBy = Automatic
+
+	column history_order
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: d981ff34-ec93-57c2-91c6-39cdbcd157bd
+		summarizeBy: none
+		sourceColumn: history_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column hospitals_sharing_ehr_id
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 00ffbb07-560f-577f-b096-0c8fac261822
+		summarizeBy: none
+		sourceColumn: hospitals_sharing_ehr_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_quality
+		dataType: string
+		lineageTag: e7aada9f-e470-52e1-b4c4-b5c8282b0b4d
+		summarizeBy: none
+		sourceColumn: id_quality
+
+		annotation SummarizationSetBy = Automatic
+
+	column files_disagree
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 9611fdca-0b30-5074-ae2b-d56b52b044b0
+		summarizeBy: sum
+		sourceColumn: files_disagree
+
+		annotation SummarizationSetBy = Automatic
+
+	column disagree_type
+		dataType: string
+		lineageTag: fd1f052a-f8fb-5a04-981f-d44443c84361
+		summarizeBy: none
+		sourceColumn: disagree_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_files
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 24a3e560-47f5-518b-8a61-4cd70434ea90
+		summarizeBy: sum
+		sourceColumn: n_files
+
+		annotation SummarizationSetBy = Automatic
+
+	column finance_match
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 97f94375-4046-5e99-a65b-f26755ced767
+		summarizeBy: sum
+		sourceColumn: finance_match
+
+		annotation SummarizationSetBy = Automatic
+
+	partition hospital = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "hospital.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    // empty CSV cells arrive as "" text; make them real blanks so they drop out of charts
+				    Blanks = Table.ReplaceValue(Promoted, "", null, Replacer.ReplaceValue, Table.ColumnNames(Promoted)),
+				    Typed = Table.TransformColumnTypes(Blanks,{{"ccn", type text}, {"hospital_label", type text}, {"display_name", type text}, {"city", type text}, {"state", type text}, {"state_name", type text}, {"hospital_type", type text}, {"ownership", type text}, {"rural_urban", type text}, {"in_latest", Int64.Type}, {"not_met", Int64.Type}, {"ehr_status", type text}, {"ehr_group", type text}, {"main_developer", type text}, {"beds", Int64.Type}, {"size_band", type text}, {"size_order", Int64.Type}, {"total_margin", type number}, {"margin_fifth", Int64.Type}, {"margin_fifth_label", type text}, {"lost_money", type text}, {"years_reported", Int64.Type}, {"years_not_met", Int64.Type}, {"history", type text}, {"history_order", Int64.Type}, {"hospitals_sharing_ehr_id", Int64.Type}, {"id_quality", type text}, {"files_disagree", Int64.Type}, {"disagree_type", type text}, {"n_files", Int64.Type}, {"finance_match", Int64.Type}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

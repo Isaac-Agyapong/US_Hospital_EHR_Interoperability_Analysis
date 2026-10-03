@@ -1,0 +1,36 @@
+{
+  "name": "Blueprint",
+  "dataColors": [
+    "#2457D6",
+    "#E8552B",
+    "#6D28D9",
+    "#0E9384",
+    "#C98A04",
+    "#56627A",
+    "#A9BFF2",
+    "#F6B9A4"
+  ],
+  "foreground": "#141B2D",
+  "foregroundNeutralSecondary": "#4F5368",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F6F8FC",
+  "tableAccent": "#2457D6",
+  "textClasses": {
+    "title": {
+      "fontFace": "Corbel",
+      "color": "#141B2D"
+    },
+    "label": {
+      "fontFace": "Corbel",
+      "color": "#4F5368"
+    },
+    "callout": {
+      "fontFace": "Corbel",
+      "color": "#141B2D"
+    },
+    "header": {
+      "fontFace": "Corbel",
+      "color": "#141B2D"
+    }
+  }
+}

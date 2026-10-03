@@ -1,0 +1,7 @@
+relationship e4961511-06d9-5e57-a4cb-e716b32760f2
+	fromColumn: hospital_year.ccn
+	toColumn: hospital.ccn
+
+relationship bb666ea4-9827-58d8-b7f4-2dd0020aef3c
+	fromColumn: hospital.state
+	toColumn: states.state

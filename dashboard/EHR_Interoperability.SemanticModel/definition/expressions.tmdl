@@ -1,0 +1,4 @@
+expression DataFolder = "D:\Projects\US_Hospital_EHR_Interoperability_Analysis\dashboard\data\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: c078fe33-0edc-50c4-b324-3955ca85f0f1
+
+	annotation PBI_ResultType = Text
