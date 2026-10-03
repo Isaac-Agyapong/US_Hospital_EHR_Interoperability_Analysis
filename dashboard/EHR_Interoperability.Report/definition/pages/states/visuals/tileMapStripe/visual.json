@@ -3,11 +3,11 @@
   "name": "tileMapStripe",
   "position": {
     "x": 34,
-    "y": 84,
-    "z": 22000,
+    "y": 88,
+    "z": 17000,
     "height": 4,
     "width": 580,
-    "tabOrder": 22000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "textbox",

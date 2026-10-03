@@ -3,11 +3,11 @@
   "name": "disagree",
   "position": {
     "x": 538,
-    "y": 196,
-    "z": 47000,
-    "height": 248,
+    "y": 204,
+    "z": 42000,
+    "height": 244,
     "width": 502,
-    "tabOrder": 47000
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -292,8 +292,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'430 hospitals get a different answer in the two Medicare files'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital"
+                    }
+                  },
+                  "Property": "Disagree Title"
                 }
               }
             },

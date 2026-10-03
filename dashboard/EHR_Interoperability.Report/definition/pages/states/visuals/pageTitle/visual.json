@@ -4,10 +4,10 @@
   "position": {
     "x": 20,
     "y": 20,
-    "z": 19000,
-    "height": 34,
+    "z": 14000,
+    "height": 36,
     "width": 1000,
-    "tabOrder": 19000
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "Where hospitals fall short",
                     "textStyle": {
-                      "fontSize": "19pt",
+                      "fontSize": "20pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"

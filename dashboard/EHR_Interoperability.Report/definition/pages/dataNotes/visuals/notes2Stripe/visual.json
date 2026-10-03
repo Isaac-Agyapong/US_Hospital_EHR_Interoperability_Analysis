@@ -3,11 +3,11 @@
   "name": "notes2Stripe",
   "position": {
     "x": 376,
-    "y": 84,
-    "z": 13000,
+    "y": 88,
+    "z": 12000,
     "height": 4,
     "width": 310,
-    "tabOrder": 13000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "textbox",

@@ -3,11 +3,11 @@
   "name": "vendorTypeStripe",
   "position": {
     "x": 34,
-    "y": 498,
-    "z": 50000,
+    "y": 486,
+    "z": 45000,
     "height": 4,
-    "width": 620,
-    "tabOrder": 50000
+    "width": 600,
+    "tabOrder": 45000
   },
   "visual": {
     "visualType": "textbox",
@@ -45,7 +45,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E8552B'"
+                      "Value": "'#0E9384'"
                     }
                   }
                 }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E8552B'"
+                      "Value": "'#0E9384'"
                     }
                   }
                 }

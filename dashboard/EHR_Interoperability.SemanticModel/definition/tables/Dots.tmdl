@@ -1,0 +1,27 @@
+table Dots
+	lineageTag: 67a855d0-1372-5549-af5e-baa34e4765d1
+
+	column row
+		dataType: int64
+		formatString: 0
+		lineageTag: 35b57394-f0e6-585f-8f9f-ff50b4925106
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [row]
+
+		annotation SummarizationSetBy = Automatic
+
+	column col
+		dataType: int64
+		formatString: 0
+		lineageTag: db46c358-cb66-5a10-b8d6-e32a7c965bdb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [col]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dots = calculated
+		mode: import
+		source =
+				SELECTCOLUMNS ( GENERATESERIES ( 0, 99, 1 ), "row", INT ( [Value] / 10 ), "col", MOD ( [Value], 10 ) )

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "ownerStripe",
   "position": {
-    "x": 548,
-    "y": 456,
-    "z": 54000,
+    "x": 34,
+    "y": 494,
+    "z": 34000,
     "height": 4,
-    "width": 482,
-    "tabOrder": 54000
+    "width": 480,
+    "tabOrder": 34000
   },
   "visual": {
     "visualType": "textbox",

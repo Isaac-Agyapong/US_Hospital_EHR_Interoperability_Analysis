@@ -3,11 +3,11 @@
   "name": "kpiTile0Label",
   "position": {
     "x": 74,
-    "y": 100,
-    "z": 24000,
+    "y": 104,
+    "z": 19000,
     "height": 32,
     "width": 189,
-    "tabOrder": 24000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Top 3 EHR companies",
+                    "value": "Top 3 companies' share",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#4F5368",

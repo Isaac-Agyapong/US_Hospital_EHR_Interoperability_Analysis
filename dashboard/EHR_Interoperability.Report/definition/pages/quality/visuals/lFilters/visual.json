@@ -3,11 +3,11 @@
   "name": "lFilters",
   "position": {
     "x": 1076,
-    "y": 340,
-    "z": 6000,
-    "height": 22,
+    "y": 336,
+    "z": 5000,
+    "height": 20,
     "width": 196,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "value": "FILTERS",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#5E6A80",
+                      "color": "#9FB3E0",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }

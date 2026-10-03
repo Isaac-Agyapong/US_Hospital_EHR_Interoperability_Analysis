@@ -3,11 +3,11 @@
   "name": "kpi3",
   "position": {
     "x": 807,
-    "y": 130,
-    "z": 43000,
-    "height": 32,
+    "y": 134,
+    "z": 38000,
+    "height": 34,
     "width": 221,
-    "tabOrder": 43000
+    "tabOrder": 38000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "No EHR Hospitals"
+                  "Property": "No EHR Hospitals Text"
                 }
               },
-              "queryRef": "hospital.No EHR Hospitals",
-              "nativeQueryRef": "No EHR Hospitals",
+              "queryRef": "hospital.No EHR Hospitals Text",
+              "nativeQueryRef": "No EHR Hospitals Text",
               "displayName": " "
             }
           ]
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "26D"
                 }
               }
             },

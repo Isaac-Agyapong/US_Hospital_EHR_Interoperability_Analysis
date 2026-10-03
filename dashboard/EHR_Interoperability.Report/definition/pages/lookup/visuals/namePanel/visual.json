@@ -3,11 +3,11 @@
   "name": "namePanel",
   "position": {
     "x": 24,
-    "y": 84,
-    "z": 14000,
-    "height": 70,
+    "y": 88,
+    "z": 12000,
+    "height": 72,
     "width": 1016,
-    "tabOrder": 14000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "textbox",
@@ -85,7 +85,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             }

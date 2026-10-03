@@ -3,11 +3,11 @@
   "name": "strip",
   "position": {
     "x": 24,
-    "y": 278,
-    "z": 41000,
-    "height": 428,
+    "y": 288,
+    "z": 39000,
+    "height": 418,
     "width": 520,
-    "tabOrder": 41000
+    "tabOrder": 39000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -28,7 +28,7 @@
               },
               "queryRef": "hospital_year.snapshot_year",
               "nativeQueryRef": "snapshot_year",
-              "displayName": "Medicare file year"
+              "displayName": "Yearly file"
             }
           ]
         },

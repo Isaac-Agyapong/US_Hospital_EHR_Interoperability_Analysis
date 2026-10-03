@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "size",
   "position": {
-    "x": 24,
-    "y": 456,
-    "z": 51000,
-    "height": 250,
-    "width": 502,
-    "tabOrder": 51000
+    "x": 536,
+    "y": 272,
+    "z": 31000,
+    "height": 210,
+    "width": 504,
+    "tabOrder": 31000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.Size Short",
-              "nativeQueryRef": "Size Short",
-              "displayName": "Share falling short"
+              "nativeQueryRef": "Size Short"
             }
           ]
         }
@@ -445,6 +444,13 @@
               "expr": {
                 "Literal": {
                   "Value": "30L"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

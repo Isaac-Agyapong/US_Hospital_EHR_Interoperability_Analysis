@@ -3,11 +3,11 @@
   "name": "searchNote",
   "position": {
     "x": 1076,
-    "y": 420,
-    "z": 9000,
+    "y": 410,
+    "z": 7000,
     "height": 70,
     "width": 196,
-    "tabOrder": 9000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,8 +22,8 @@
                   {
                     "value": "Open the box and type part of a name, for example Mayo or Memorial.",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#4F5368",
+                      "fontSize": "10.5pt",
+                      "color": "#E8EEFB",
                       "fontFamily": "Corbel"
                     }
                   }

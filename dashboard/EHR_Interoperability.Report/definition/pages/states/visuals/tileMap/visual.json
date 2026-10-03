@@ -3,11 +3,11 @@
   "name": "tileMap",
   "position": {
     "x": 24,
-    "y": 84,
-    "z": 21000,
-    "height": 622,
+    "y": 88,
+    "z": 16000,
+    "height": 618,
     "width": 600,
-    "tabOrder": 21000
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "pivotTable",

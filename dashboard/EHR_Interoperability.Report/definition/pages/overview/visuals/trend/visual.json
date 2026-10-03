@@ -3,11 +3,11 @@
   "name": "trend",
   "position": {
     "x": 24,
-    "y": 196,
-    "z": 47000,
-    "height": 248,
-    "width": 600,
-    "tabOrder": 47000
+    "y": 272,
+    "z": 29000,
+    "height": 210,
+    "width": 500,
+    "tabOrder": 29000
   },
   "visual": {
     "visualType": "lineChart",
@@ -28,7 +28,7 @@
               },
               "queryRef": "hospital_year.snapshot_year",
               "nativeQueryRef": "snapshot_year",
-              "displayName": "Medicare file year"
+              "displayName": "Yearly file"
             }
           ]
         },
@@ -358,7 +358,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of hospitals that fell short in each yearly Medicare file. Teal = small rural, grey = general hospitals.'"
+                  "Value": "'Share falling short in each yearly Medicare file. Teal = small rural, grey = general hospitals.'"
                 }
               }
             },
@@ -580,7 +580,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },

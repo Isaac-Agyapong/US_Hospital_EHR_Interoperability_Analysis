@@ -3,11 +3,11 @@
   "name": "checksStripe",
   "position": {
     "x": 548,
-    "y": 456,
-    "z": 52000,
+    "y": 460,
+    "z": 47000,
     "height": 4,
     "width": 482,
-    "tabOrder": 52000
+    "tabOrder": 47000
   },
   "visual": {
     "visualType": "textbox",
@@ -45,7 +45,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2457D6'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2457D6'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }

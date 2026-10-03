@@ -3,11 +3,11 @@
   "name": "logo",
   "position": {
     "x": 1078,
-    "y": 16,
-    "z": 1000,
-    "height": 42,
-    "width": 42,
-    "tabOrder": 1000
+    "y": 18,
+    "z": 0,
+    "height": 40,
+    "width": 40,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "image",

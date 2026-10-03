@@ -3,11 +3,11 @@
   "name": "checks",
   "position": {
     "x": 538,
-    "y": 456,
-    "z": 51000,
-    "height": 250,
+    "y": 460,
+    "z": 46000,
+    "height": 246,
     "width": 502,
-    "tabOrder": 51000
+    "tabOrder": 46000
   },
   "visual": {
     "visualType": "textbox",
@@ -44,7 +44,7 @@
                   {
                     "value": "No hospital appears twice in the same file",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -65,7 +65,7 @@
                   {
                     "value": "Hospital types outside the program are never marked as meeting the standards",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -86,7 +86,7 @@
                   {
                     "value": "Every hospital in the latest file reports the same period (calendar year 2024)",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -107,7 +107,7 @@
                   {
                     "value": "96% of hospitals link to their yearly financial report",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -128,7 +128,7 @@
                   {
                     "value": "Hospitals with no financial report fall short far more often (59% vs 11%): missing data is itself a warning sign",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }

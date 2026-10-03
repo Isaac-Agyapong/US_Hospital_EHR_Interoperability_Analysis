@@ -3,11 +3,11 @@
   "name": "trendStripe",
   "position": {
     "x": 34,
-    "y": 196,
-    "z": 48000,
+    "y": 272,
+    "z": 30000,
     "height": 4,
-    "width": 580,
-    "tabOrder": 48000
+    "width": 480,
+    "tabOrder": 30000
   },
   "visual": {
     "visualType": "textbox",

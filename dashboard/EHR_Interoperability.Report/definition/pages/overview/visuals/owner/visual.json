@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "owner",
   "position": {
-    "x": 538,
-    "y": 456,
-    "z": 53000,
-    "height": 250,
-    "width": 502,
-    "tabOrder": 53000
+    "x": 24,
+    "y": 494,
+    "z": 33000,
+    "height": 212,
+    "width": 500,
+    "tabOrder": 33000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.Owner Short",
-              "nativeQueryRef": "Owner Short",
-              "displayName": "Share falling short"
+              "nativeQueryRef": "Owner Short"
             }
           ]
         }
@@ -357,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share that fell short in 2024, by owner (owner groups with 50+ hospitals)'"
+                  "Value": "'Share that fell short in 2024, by owner (groups of 50+ hospitals)'"
                 }
               }
             },
@@ -444,7 +443,7 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "28L"
+                  "Value": "30L"
                 }
               }
             },

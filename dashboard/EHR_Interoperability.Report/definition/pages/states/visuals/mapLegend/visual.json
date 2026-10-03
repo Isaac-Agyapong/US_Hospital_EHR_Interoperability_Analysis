@@ -4,10 +4,10 @@
   "position": {
     "x": 40,
     "y": 666,
-    "z": 23000,
+    "z": 18000,
     "height": 30,
     "width": 568,
-    "tabOrder": 23000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "Falling short   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
@@ -31,7 +31,7 @@
                   {
                     "value": "■ ",
                     "textStyle": {
-                      "fontSize": "13pt",
+                      "fontSize": "14pt",
                       "color": "#FDF0EA",
                       "fontFamily": "Corbel"
                     }
@@ -39,7 +39,7 @@
                   {
                     "value": "under 5%   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }
@@ -47,7 +47,7 @@
                   {
                     "value": "■ ",
                     "textStyle": {
-                      "fontSize": "13pt",
+                      "fontSize": "14pt",
                       "color": "#F9CDBB",
                       "fontFamily": "Corbel"
                     }
@@ -55,7 +55,7 @@
                   {
                     "value": "5-10%   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }
@@ -63,7 +63,7 @@
                   {
                     "value": "■ ",
                     "textStyle": {
-                      "fontSize": "13pt",
+                      "fontSize": "14pt",
                       "color": "#F29A78",
                       "fontFamily": "Corbel"
                     }
@@ -71,7 +71,7 @@
                   {
                     "value": "10-15%   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }
@@ -79,7 +79,7 @@
                   {
                     "value": "■ ",
                     "textStyle": {
-                      "fontSize": "13pt",
+                      "fontSize": "14pt",
                       "color": "#E8552B",
                       "fontFamily": "Corbel"
                     }
@@ -87,7 +87,7 @@
                   {
                     "value": "15-25%   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }
@@ -95,7 +95,7 @@
                   {
                     "value": "■ ",
                     "textStyle": {
-                      "fontSize": "13pt",
+                      "fontSize": "14pt",
                       "color": "#B23A1C",
                       "fontFamily": "Corbel"
                     }
@@ -103,7 +103,7 @@
                   {
                     "value": "25%+   ",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "10.5pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }

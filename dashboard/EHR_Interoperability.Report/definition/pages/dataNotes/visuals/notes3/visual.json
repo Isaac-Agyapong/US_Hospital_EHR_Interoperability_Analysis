@@ -3,11 +3,11 @@
   "name": "notes3",
   "position": {
     "x": 708,
-    "y": 84,
-    "z": 14000,
-    "height": 622,
+    "y": 88,
+    "z": 13000,
+    "height": 618,
     "width": 330,
-    "tabOrder": 14000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "value": "Keep in mind",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#0B1F4D",
+                      "color": "#C98A04",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }

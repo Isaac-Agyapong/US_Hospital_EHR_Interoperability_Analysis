@@ -3,11 +3,11 @@
   "name": "kpi1",
   "position": {
     "x": 293,
-    "y": 130,
-    "z": 31000,
-    "height": 32,
+    "y": 134,
+    "z": 26000,
+    "height": 34,
     "width": 221,
-    "tabOrder": 31000
+    "tabOrder": 26000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Losses Short"
+                  "Property": "Losses Short Text"
                 }
               },
-              "queryRef": "hospital.Losses Short",
-              "nativeQueryRef": "Losses Short",
+              "queryRef": "hospital.Losses Short Text",
+              "nativeQueryRef": "Losses Short Text",
               "displayName": " "
             }
           ]
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "26D"
                 }
               }
             },

@@ -3,11 +3,11 @@
   "name": "kpiContext0",
   "position": {
     "x": 32,
-    "y": 240,
-    "z": 22000,
+    "y": 250,
+    "z": 20000,
     "height": 24,
     "width": 229,
-    "tabOrder": 22000
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "card",
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10.5D"
+                  "Value": "11D"
                 }
               }
             },

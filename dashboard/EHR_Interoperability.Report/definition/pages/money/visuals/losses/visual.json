@@ -3,11 +3,11 @@
   "name": "losses",
   "position": {
     "x": 538,
-    "y": 196,
-    "z": 47000,
-    "height": 248,
+    "y": 204,
+    "z": 42000,
+    "height": 244,
     "width": 502,
-    "tabOrder": 47000
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -358,7 +358,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share that fell short in 2024. Dark red = lost money in its two latest yearly reports.'"
+                  "Value": "'Share that fell short in 2024. Dark red = lost money in both of its two latest yearly reports.'"
                 }
               }
             },
@@ -445,7 +445,7 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "12L"
+                  "Value": "14L"
                 }
               }
             },

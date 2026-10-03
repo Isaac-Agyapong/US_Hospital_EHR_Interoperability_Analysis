@@ -3,11 +3,11 @@
   "name": "kpi2",
   "position": {
     "x": 550,
-    "y": 130,
-    "z": 37000,
-    "height": 32,
+    "y": 134,
+    "z": 32000,
+    "height": 34,
     "width": 221,
-    "tabOrder": 37000
+    "tabOrder": 32000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Every Year"
+                  "Property": "Every Year Text"
                 }
               },
-              "queryRef": "hospital.Every Year",
-              "nativeQueryRef": "Every Year",
+              "queryRef": "hospital.Every Year Text",
+              "nativeQueryRef": "Every Year Text",
               "displayName": " "
             }
           ]
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "26D"
                 }
               }
             },

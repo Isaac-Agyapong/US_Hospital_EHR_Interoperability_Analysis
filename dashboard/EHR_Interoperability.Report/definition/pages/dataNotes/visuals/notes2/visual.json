@@ -3,11 +3,11 @@
   "name": "notes2",
   "position": {
     "x": 366,
-    "y": 84,
-    "z": 12000,
-    "height": 622,
+    "y": 88,
+    "z": 11000,
+    "height": 618,
     "width": 330,
-    "tabOrder": 12000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "textbox",

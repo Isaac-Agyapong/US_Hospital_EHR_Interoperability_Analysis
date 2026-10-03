@@ -3,11 +3,11 @@
   "name": "ehrShort",
   "position": {
     "x": 538,
-    "y": 196,
-    "z": 47000,
-    "height": 290,
+    "y": 204,
+    "z": 42000,
+    "height": 270,
     "width": 502,
-    "tabOrder": 47000
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.EHR Short",
-              "nativeQueryRef": "EHR Short",
-              "displayName": "Share falling short"
+              "nativeQueryRef": "EHR Short"
             }
           ]
         }
@@ -357,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share that fell short in 2024, by EHR company (groups of 40+ hospitals). Purple = no EHR reported.'"
+                  "Value": "'Fell short in 2024 (40+ hospitals). Purple = no certified EHR.'"
                 }
               }
             },

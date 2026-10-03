@@ -3,11 +3,11 @@
   "name": "meaningTitle",
   "position": {
     "x": 570,
-    "y": 290,
-    "z": 45000,
+    "y": 302,
+    "z": 43000,
     "height": 28,
     "width": 456,
-    "tabOrder": 45000
+    "tabOrder": 43000
   },
   "visual": {
     "visualType": "textbox",

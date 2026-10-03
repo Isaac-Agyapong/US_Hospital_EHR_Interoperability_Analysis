@@ -3,11 +3,11 @@
   "name": "lossesStripe",
   "position": {
     "x": 548,
-    "y": 196,
-    "z": 48000,
+    "y": 204,
+    "z": 43000,
     "height": 4,
     "width": 482,
-    "tabOrder": 48000
+    "tabOrder": 43000
   },
   "visual": {
     "visualType": "textbox",

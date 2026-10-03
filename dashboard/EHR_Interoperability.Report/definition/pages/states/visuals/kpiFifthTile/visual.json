@@ -3,11 +3,11 @@
   "name": "kpiFifthTile",
   "position": {
     "x": 636,
-    "y": 536,
-    "z": 26000,
-    "height": 170,
+    "y": 540,
+    "z": 21000,
+    "height": 166,
     "width": 196,
-    "tabOrder": 26000
+    "tabOrder": 21000
   },
   "visual": {
     "visualType": "textbox",

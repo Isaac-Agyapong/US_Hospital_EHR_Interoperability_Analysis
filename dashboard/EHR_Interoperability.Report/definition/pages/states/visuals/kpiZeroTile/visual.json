@@ -3,11 +3,11 @@
   "name": "kpiZeroTile",
   "position": {
     "x": 844,
-    "y": 536,
-    "z": 32000,
-    "height": 170,
+    "y": 540,
+    "z": 27000,
+    "height": 166,
     "width": 196,
-    "tabOrder": 32000
+    "tabOrder": 27000
   },
   "visual": {
     "visualType": "textbox",

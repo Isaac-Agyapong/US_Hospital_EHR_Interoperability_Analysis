@@ -3,11 +3,11 @@
   "name": "marketStripe",
   "position": {
     "x": 34,
-    "y": 196,
-    "z": 46000,
+    "y": 204,
+    "z": 41000,
     "height": 4,
     "width": 482,
-    "tabOrder": 46000
+    "tabOrder": 41000
   },
   "visual": {
     "visualType": "textbox",
@@ -45,7 +45,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2457D6'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2457D6'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }

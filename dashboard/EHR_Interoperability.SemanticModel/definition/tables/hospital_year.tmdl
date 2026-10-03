@@ -6,21 +6,14 @@ table hospital_year
 		displayFolder: Core
 		lineageTag: 09922db0-6e74-5db9-861b-803fab1985bb
 
-	measure 'Rural Year Share' = CALCULATE ( [Year Share], hospital_year[year_type] = "Small rural (critical access)" )
-		formatString: 0%
-		displayFolder: KPI
-		lineageTag: cf395fe4-b46e-5472-8542-2ce7f0f3c220
-
 	measure 'Trend Title' =
-			VAR _a = CALCULATE ( [Year Share], hospital_year[snapshot_year] = 2019 )
-			VAR _b = CALCULATE ( [Year Share], hospital_year[snapshot_year] = 2024 )
-			RETURN "Fewer hospitals fall short than in 2019 (" & FORMAT ( _a, "0%" ) & " then, " & FORMAT ( _b, "0%" ) & " in 2024)"
+			VAR _a = CALCULATE ( [Year Share], KEEPFILTERS ( hospital_year[snapshot_year] = 2019 ) )
+			VAR _b = CALCULATE ( [Year Share], KEEPFILTERS ( hospital_year[snapshot_year] = 2024 ) )
+			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ), "Share falling short in each yearly Medicare file",
+			    IF ( _b < _a, "Fewer hospitals fall short than in 2019: ", "More hospitals fall short than in 2019: " )
+			    & FORMAT ( _a, "0%" ) & " then, " & FORMAT ( _b, "0%" ) & " in 2024" )
 		displayFolder: Titles
 		lineageTag: 25d8e602-6e29-504e-a19d-07d0bad5090c
-
-	measure 'Type Colour' = IF ( SELECTEDVALUE ( hospital_year[year_type] ) = "Small rural (critical access)", "#0E9384", "#56627A" )
-		displayFolder: Colours
-		lineageTag: 8a4b500e-50f5-5476-8b91-02f655455c54
 
 	measure 'Strip Value' = IF ( HASONEVALUE ( hospital[hospital_label] ), COUNTROWS ( hospital_year ) )
 		formatString: 0

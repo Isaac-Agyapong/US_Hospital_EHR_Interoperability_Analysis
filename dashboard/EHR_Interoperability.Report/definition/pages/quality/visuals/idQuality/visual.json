@@ -3,11 +3,11 @@
   "name": "idQuality",
   "position": {
     "x": 24,
-    "y": 196,
-    "z": 45000,
-    "height": 248,
+    "y": 204,
+    "z": 40000,
+    "height": 244,
     "width": 502,
-    "tabOrder": 45000
+    "tabOrder": 40000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.ID Count",
-              "nativeQueryRef": "ID Count",
-              "displayName": "Hospitals"
+              "nativeQueryRef": "ID Count"
             }
           ]
         }

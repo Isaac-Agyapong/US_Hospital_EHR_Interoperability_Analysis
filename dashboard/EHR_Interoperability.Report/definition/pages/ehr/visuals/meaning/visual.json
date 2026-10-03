@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "meaning",
   "position": {
-    "x": 676,
-    "y": 498,
-    "z": 51000,
-    "height": 208,
-    "width": 364,
-    "tabOrder": 51000
+    "x": 656,
+    "y": 486,
+    "z": 46000,
+    "height": 220,
+    "width": 384,
+    "tabOrder": 46000
   },
   "visual": {
     "visualType": "textbox",
@@ -35,7 +35,7 @@
                   {
                     "value": "Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -45,9 +45,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "TruBridge hospitals fall short far more often, even compared with the same kind of hospital.",
+                    "value": "TruBridge hospitals fall short far more often, even next to the same kind of hospital.",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "11.5pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel"
                     }
@@ -57,7 +57,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "A link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
+                    "value": "This is a link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#4F5368",

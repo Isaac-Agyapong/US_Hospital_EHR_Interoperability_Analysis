@@ -1,12 +1,12 @@
 table hospital
 	lineageTag: 32f58327-e0f3-587d-a6c8-783c375c36bc
 
-	measure Hospitals = CALCULATE ( COUNTROWS ( hospital ), hospital[in_latest] = 1 )
+	measure Hospitals = CALCULATE ( COUNTROWS ( hospital ), KEEPFILTERS ( hospital[in_latest] = 1 ) )
 		formatString: #,0
 		displayFolder: Core
 		lineageTag: 207c29cb-2d16-586f-900e-625d2689eb51
 
-	measure Short = CALCULATE ( SUM ( hospital[not_met] ), hospital[in_latest] = 1 )
+	measure Short = CALCULATE ( SUM ( hospital[not_met] ), KEEPFILTERS ( hospital[in_latest] = 1 ) )
 		formatString: #,0
 		displayFolder: Core
 		lineageTag: d44f20da-ae95-5a69-89dd-e4a48e912cb3
@@ -16,7 +16,7 @@ table hospital
 		displayFolder: Core
 		lineageTag: d28def95-3057-546d-9517-2e4781221f63
 
-	measure 'No EHR Short' = CALCULATE ( [Short], hospital[ehr_status] = "No EHR ID reported" )
+	measure 'No EHR Short' = CALCULATE ( [Short], KEEPFILTERS ( hospital[ehr_status] = "No EHR ID reported" ) )
 		formatString: #,0
 		displayFolder: Core
 		lineageTag: e7e7ba89-9b6b-5750-90c8-257882bb0b23
@@ -26,46 +26,59 @@ table hospital
 		displayFolder: Core
 		lineageTag: 316fc12a-5f87-5be5-b581-e8411efed3de
 
-	measure 'General Count Text' =
-			FORMAT ( CALCULATE ( [Hospitals], hospital[hospital_type] = "General hospital" ), "#,0" ) & " general, "
-			    & FORMAT ( CALCULATE ( [Hospitals], hospital[hospital_type] = "Small rural (critical access)" ), "#,0" ) & " small rural"
-		displayFolder: KPI
-		lineageTag: 6b022de5-e00b-55c5-b774-47e9d5043401
+	measure 'Hero Line' =
+			VAR _s = ROUND ( [Short Share] * 100, 0 )
+			VAR _n = ROUND ( [No EHR Share] * 10, 0 )
+			RETURN IF ( ISBLANK ( [Hospitals] ), "No hospitals match these filters.",
+			    _s & " in 100 hospitals fell short in 2024" & IF ( [Short] > 0, "; " & _n & " in 10 of those had no certified EHR.", "." ) )
+		displayFolder: Hero
+		lineageTag: 0cfab191-b7d9-5a67-a0ff-7b6d417b7af1
 
-	measure 'Short Context' = FORMAT ( [Short], "#,0" ) & " of " & FORMAT ( [Hospitals], "#,0" ) & " hospitals"
-		displayFolder: KPI
-		lineageTag: aced89bb-9577-550b-a28f-7a2f76a4b4a3
+	measure 'Hero Hospitals' = FORMAT ( [Hospitals], "#,0" )
+		displayFolder: Hero
+		lineageTag: b0533191-b198-55b2-8390-ce4c35c453bf
 
-	measure 'No EHR Context' = FORMAT ( [No EHR Share], "0%" ) & " of those that fell short"
-		displayFolder: KPI
-		lineageTag: 5358482f-a9f4-5d04-b689-539ffc98b1ee
+	measure 'Hero Short' = FORMAT ( [Short] + 0, "#,0" )
+		displayFolder: Hero
+		lineageTag: f22d4e81-32ee-554d-af24-1c8427f7d956
 
-	measure 'Rural Short' = CALCULATE ( [Short Share], hospital[hospital_type] = "Small rural (critical access)" )
-		formatString: 0%
-		displayFolder: KPI
-		lineageTag: 4b696ca6-fc57-5376-8487-055271c1d4e8
+	measure 'Hero No EHR' = FORMAT ( [No EHR Short] + 0, "#,0" )
+		displayFolder: Hero
+		lineageTag: da995a69-d746-5a8a-9a54-5c1110da0de9
 
-	measure 'Rural Context' = "vs " & FORMAT ( CALCULATE ( [Short Share], hospital[hospital_type] = "General hospital" ), "0%" ) & " of general hospitals"
-		displayFolder: KPI
-		lineageTag: 7d3c88d5-aff1-552a-8a75-5c292973728d
+	measure Dot = "●"
+		displayFolder: Hero
+		lineageTag: b45c345e-3e14-57e2-acf3-9b68fc09d4ce
 
-	measure 'Donut Title' = FORMAT ( ROUND ( [No EHR Share] * 10, 0 ), "0" ) & " in 10 hospitals that fell short reported no certified EHR at all"
-		displayFolder: Titles
-		lineageTag: fe822240-49ad-5b84-8870-fa2a84e566a6
+	measure 'Dot Colour' =
+			VAR _i = SELECTEDVALUE ( Dots[row] ) * 10 + SELECTEDVALUE ( Dots[col] ) + 1
+			VAR _s = ROUND ( [Short Share] * 100, 0 )
+			VAR _n = ROUND ( DIVIDE ( [No EHR Short], [Hospitals] ) * 100, 0 )
+			RETURN SWITCH ( TRUE (), _i > 100 - _n, "#C4A5FF", _i > 100 - _s, "#FF7A59", "#7FA6FF" )
+		displayFolder: Hero
+		lineageTag: 1b1cee93-b64d-59db-9c0b-39ad71ed3d8b
 
-	measure 'Size Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[size_band] ) ), [Short Share] )
+	measure 'Size Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[size_band] ) ) && SELECTEDVALUE ( hospital[size_band] ) <> "" && [Hospitals] >= 20, [Short Share] )
 		formatString: 0%
 		displayFolder: Charts
 		lineageTag: 6e6fe575-66bd-541f-966d-b8b16ddf232d
 
-	measure 'Size Colour' = IF ( SELECTEDVALUE ( hospital[size_order] ) = 1, "#E8552B", "#F6B9A4" )
+	measure 'Size Colour' =
+			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[size_band] ), "@v", [Size Short] ), NOT ISBLANK ( [@v] ) )
+			RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "#E8552B", "#F6B9A4" )
 		displayFolder: Colours
 		lineageTag: 9732c11d-d2de-53e3-97b7-99a849abdac8
 
 	measure 'Size Title' =
-			VAR _s = CALCULATE ( [Short Share], hospital[size_order] = 1 )
-			VAR _l = CALCULATE ( [Short Share], hospital[size_order] = 5 )
-			RETURN "Hospitals with under 25 beds fall short most: " & FORMAT ( _s, "0%" ) & ", vs " & FORMAT ( _l, "0%" ) & " of the largest"
+			VAR _t = FILTER ( ADDCOLUMNS ( VALUES ( hospital[size_band] ), "@v", [Short Share], "@n", [Hospitals] ),
+			    [@n] >= 20 && NOT ISBLANK ( [@v] ) && NOT ISBLANK ( hospital[size_band] ) )
+			VAR _hi = TOPN ( 1, _t, [@v], DESC )
+			VAR _lo = TOPN ( 1, _t, [@v], ASC )
+			VAR _h = MAXX ( _hi, hospital[size_band] )
+			VAR _l = MAXX ( _lo, hospital[size_band] )
+			VAR _hp = FORMAT ( MAXX ( _hi, [@v] ), "0%" )
+			VAR _lp = FORMAT ( MAXX ( _lo, [@v] ), "0%" )
+			RETURN IF ( COUNTROWS ( _t ) < 2, "Share falling short by number of beds", "Hospitals with " & IF ( LEFT ( _h, 5 ) = "Under", LOWER ( _h ), _h & " beds" ) & " fall short most (" & _hp & "), those with " & IF ( LEFT ( _l, 5 ) = "Under", LOWER ( _l ), _l & " beds" ) & " least (" & _lp & ")" )
 		displayFolder: Titles
 		lineageTag: 18aaf1b0-11c6-55d4-b0b7-170a2601e27e
 
@@ -74,35 +87,61 @@ table hospital
 		displayFolder: Charts
 		lineageTag: d21f2626-4c56-5404-9f39-7abe102ef60a
 
-	measure 'Owner Colour' = IF ( SELECTEDVALUE ( hospital[ownership] ) = "Nonprofit", "#F6B9A4", "#E8552B" )
+	measure 'Owner Colour' =
+			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[ownership] ), "@v", [Owner Short] ), NOT ISBLANK ( [@v] ) )
+			RETURN IF ( [Owner Short] = MINX ( _t, [@v] ), "#F6B9A4", "#E8552B" )
 		displayFolder: Colours
 		lineageTag: 0b4410d1-620d-57eb-b835-3633c9e7b618
 
 	measure 'Owner Title' =
-			VAR _n = CALCULATE ( [Short Share], hospital[ownership] = "Nonprofit" )
-			VAR _g = CALCULATE ( [Short Share], hospital[ownership] = "Government" )
-			RETURN "Nonprofits fall short least (" & FORMAT ( _n, "0%" ) & "); government hospitals " & FORMAT ( _g, "0%" )
+			VAR _t = FILTER ( ADDCOLUMNS ( VALUES ( hospital[ownership] ), "@v", [Short Share], "@n", [Hospitals] ),
+			    [@n] >= 50 && NOT ISBLANK ( [@v] ) && NOT ISBLANK ( hospital[ownership] ) )
+			VAR _hi = TOPN ( 1, _t, [@v], DESC )
+			VAR _lo = TOPN ( 1, _t, [@v], ASC )
+			VAR _h = MAXX ( _hi, hospital[ownership] )
+			VAR _l = MAXX ( _lo, hospital[ownership] )
+			VAR _hp = FORMAT ( MAXX ( _hi, [@v] ), "0%" )
+			VAR _lp = FORMAT ( MAXX ( _lo, [@v] ), "0%" )
+			RETURN IF ( COUNTROWS ( _t ) < 2, "Share falling short by owner", _h & " hospitals fall short most (" & _hp & "), " & LOWER ( _l ) & " hospitals least (" & _lp & ")" )
 		displayFolder: Titles
 		lineageTag: c456515d-543c-5b37-b2ff-96d99a2a2503
 
+	measure 'Type Hospitals' = [Hospitals]
+		formatString: #,0
+		displayFolder: Charts
+		lineageTag: f5d52139-7c6b-5861-9856-368133c80ba8
+
+	measure 'Type Short' = [Short]
+		formatString: #,0
+		displayFolder: Charts
+		lineageTag: 2f27e40a-84e7-58eb-b913-4ef2360674c3
+
+	measure 'Pair Title' =
+			VAR _a = DIVIDE ( CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) ), [Hospitals] )
+			VAR _b = DIVIDE ( CALCULATE ( [Short], KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) ), [Short] )
+			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ) || _a = 1, "Who the hospitals that fell short are",
+			    "Small rural: " & FORMAT ( _a, "0%" ) & " of hospitals, but " & FORMAT ( _b, "0%" ) & " of those falling short" )
+		displayFolder: Titles
+		lineageTag: fc0b698f-583f-5ac8-a60a-176450000d6b
+
 	measure 'Market Share' =
 			VAR _d = SELECTEDVALUE ( hospital[main_developer] )
-			RETURN IF ( NOT ISBLANK ( _d ), DIVIDE ( [Hospitals],
-			    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[main_developer] ), NOT ISBLANK ( hospital[main_developer] ) ) ) )
+			VAR _all = CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[main_developer], hospital[ehr_group] ), NOT ISBLANK ( hospital[main_developer] ) )
+			RETURN IF ( NOT ISBLANK ( _d ), DIVIDE ( CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ) ), _all ) )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: 3f59064c-4c33-5fce-8e00-98344877d903
 
 	measure 'Top3 Share' =
-			DIVIDE ( CALCULATE ( [Hospitals], hospital[main_developer] IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" } ),
-			    CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[main_developer] ) ) )
+			DIVIDE ( CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), hospital[main_developer] IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" } ),
+			    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), NOT ISBLANK ( hospital[main_developer] ) ) )
 		formatString: 0%
-		displayFolder: EHR
+		displayFolder: KPI
 		lineageTag: f04b8045-4df7-5279-ae18-4449a82ed252
 
 	measure 'Top3 Context' =
-			"Epic alone: " & FORMAT ( DIVIDE ( CALCULATE ( [Hospitals], hospital[main_developer] = "Epic" ),
-			    CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[main_developer] ) ) ), "0%" ) & " of hospitals"
+			"Epic alone: " & FORMAT ( DIVIDE ( CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), hospital[main_developer] = "Epic" ),
+			    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), NOT ISBLANK ( hospital[main_developer] ) ) ), "0%" ) & " of hospitals"
 		displayFolder: KPI
 		lineageTag: fee96237-12cc-5766-8602-727407efeeed
 
@@ -110,41 +149,42 @@ table hospital
 		displayFolder: Colours
 		lineageTag: 158e1e8c-2214-5040-be28-3fcfdeb2eba7
 
-	measure 'Market Title' = "Epic, Oracle Health and MEDITECH run " & FORMAT ( [Top3 Share], "0%" ) & " of hospitals' EHRs"
+	measure 'Market Title' = "Epic, Oracle Health and MEDITECH run " & FORMAT ( [Top3 Share], "0%" ) & " of the hospitals shown"
 		displayFolder: Titles
 		lineageTag: a0977fb2-10e8-518f-ae14-897e7b816265
 
-	measure 'Epic Short' = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic" )
+	measure 'Epic Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ) )
 		formatString: 0.0%
 		displayFolder: KPI
 		lineageTag: abf529bb-dc72-5b2c-b965-6f8924e73b09
 
-	measure 'Epic Context' = FORMAT ( CALCULATE ( [Short], hospital[ehr_group] = "Epic" ), "#,0" ) & " of " & FORMAT ( CALCULATE ( [Hospitals], hospital[ehr_group] = "Epic" ), "#,0" ) & " hospitals"
+	measure 'Epic Context' =
+			VAR _n = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[ehr_group] = "Epic" ) )
+			RETURN IF ( ISBLANK ( _n ), "no Epic hospitals in this selection", FORMAT ( CALCULATE ( [Short] + 0, KEEPFILTERS ( hospital[ehr_group] = "Epic" ) ), "#,0" ) & " of " & FORMAT ( _n, "#,0" ) & " hospitals" )
 		displayFolder: KPI
 		lineageTag: 5de5d85f-595a-53e7-ada3-32fab558e619
 
-	measure 'TruBridge Short' = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)" )
+	measure 'TruBridge Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ) )
 		formatString: 0.0%
 		displayFolder: KPI
 		lineageTag: 0ca043e7-3605-58dc-a03b-a0edda1f36a6
 
 	measure 'TruBridge Context' =
-			VAR _n = CALCULATE ( [Hospitals], hospital[ehr_group] = "TruBridge (CPSI)" )
-			VAR _r = CALCULATE ( [Hospitals], hospital[ehr_group] = "TruBridge (CPSI)", hospital[hospital_type] = "Small rural (critical access)" )
-			RETURN FORMAT ( _n, "#,0" ) & " hospitals, " & FORMAT ( DIVIDE ( _r, _n ), "0%" ) & " small rural"
+			VAR _n = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ) )
+			RETURN IF ( ISBLANK ( _n ), "no TruBridge hospitals in this selection", FORMAT ( CALCULATE ( [Short] + 0, KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ) ), "#,0" ) & " of " & FORMAT ( _n, "#,0" ) & " hospitals" )
 		displayFolder: KPI
 		lineageTag: 28b157ce-ad1c-5832-ba63-b15fd008e77c
 
-	measure 'No EHR Hospitals' = CALCULATE ( [Hospitals], hospital[ehr_status] = "No EHR ID reported" )
+	measure 'No EHR Hospitals' = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[ehr_status] = "No EHR ID reported" ) )
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: fc56f583-0907-5fc9-aa5b-2085fc7fca03
 
-	measure 'No EHR All Context' = FORMAT ( CALCULATE ( [Short Share], hospital[ehr_status] = "No EHR ID reported" ), "0%" ) & " of them fell short"
+	measure 'No EHR All Context' = "all of them fell short"
 		displayFolder: KPI
 		lineageTag: 54acfba1-2314-536e-b8c5-73c1073608e0
 
-	measure 'EHR Short' = IF ( [Hospitals] >= 40 && NOT ISBLANK ( SELECTEDVALUE ( hospital[ehr_group] ) ), [Short Share] )
+	measure 'EHR Short' = IF ( [Hospitals] >= 40 && NOT ISBLANK ( SELECTEDVALUE ( hospital[ehr_group] ) ) && SELECTEDVALUE ( hospital[ehr_group] ) <> "Other or not identified", [Short Share] )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: 7fe60c29-9e4e-5273-af06-987c315008cd
@@ -154,25 +194,32 @@ table hospital
 		lineageTag: a1792baf-ae7d-5f62-8b11-16fe653663fa
 
 	measure 'EHR Title' =
-			VAR _t = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)" )
-			VAR _e = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic" )
-			RETURN "Among hospitals that reported an EHR, TruBridge users fall short most (" & FORMAT ( _t, "0%" ) & "); Epic users " & FORMAT ( _e, "0%" )
+			VAR _t = FILTER ( ADDCOLUMNS ( VALUES ( hospital[ehr_group] ), "@v", [Short Share], "@n", [Hospitals] ),
+			    [@n] >= 40 && NOT ISBLANK ( [@v] ) && NOT ISBLANK ( hospital[ehr_group] ) && NOT hospital[ehr_group] = "No EHR ID reported" && NOT hospital[ehr_group] = "Other or not identified" )
+			VAR _hi = TOPN ( 1, _t, [@v], DESC )
+			VAR _lo = TOPN ( 1, _t, [@v], ASC )
+			VAR _h = MAXX ( _hi, hospital[ehr_group] )
+			VAR _l = MAXX ( _lo, hospital[ehr_group] )
+			VAR _hp = FORMAT ( MAXX ( _hi, [@v] ), "0%" )
+			VAR _lp = FORMAT ( MAXX ( _lo, [@v] ), "0%" )
+			RETURN IF ( COUNTROWS ( _t ) < 2, "Share falling short by EHR company", _h & " hospitals fall short most (" & _hp & "), " & _l & " least (" & _lp & ")" )
 		displayFolder: Titles
 		lineageTag: 2b2c33dd-3519-590e-b6fa-70d8c4c7666d
 
-	measure 'Vendor Type Short' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH", "TruBridge (CPSI)" }, [Short Share] )
+	measure 'Vendor Type Short' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH", "TruBridge (CPSI)" } && [Hospitals] >= 20, [Short Share] )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: 24663b00-a795-581a-81f9-ea5ef8443113
 
 	measure 'Matrix Title' =
-			VAR _t = CALCULATE ( [Short Share], hospital[ehr_group] = "TruBridge (CPSI)", hospital[hospital_type] = "Small rural (critical access)" )
-			VAR _e = CALCULATE ( [Short Share], hospital[ehr_group] = "Epic", hospital[hospital_type] = "Small rural (critical access)" )
-			RETURN "Small rural hospitals: " & FORMAT ( _t, "0%" ) & " fall short on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic"
+			VAR _t = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+			VAR _e = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+			RETURN IF ( ISBLANK ( _t ) || ISBLANK ( _e ), "Share falling short by EHR company, small rural vs general hospitals",
+			    "Same kind of hospital: small rural ones fall short " & FORMAT ( _t, "0%" ) & " on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic" )
 		displayFolder: Titles
 		lineageTag: d2ecf9de-832d-597c-acfe-03aba01e2481
 
-	measure 'Fifth Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[margin_fifth] ) ), [Short Share] )
+	measure 'Fifth Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[margin_fifth] ) ) && [Hospitals] >= 20, [Short Share] )
 		formatString: 0%
 		displayFolder: Money
 		lineageTag: 8a64259c-9aa9-5aec-8e77-2bd636e6141d
@@ -181,40 +228,46 @@ table hospital
 		displayFolder: Colours
 		lineageTag: a3cfd86e-9563-51b5-99cc-1cf62850d9db
 
-	measure 'Least Profitable Short' = CALCULATE ( [Short Share], hospital[margin_fifth] = 1 )
+	measure 'Least Profitable Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[margin_fifth] = 1 ) )
 		formatString: 0%
 		displayFolder: KPI
 		lineageTag: 8e039ad2-71ce-5503-8187-6f782d32da18
 
-	measure 'Least Profitable Context' = "vs " & FORMAT ( CALCULATE ( [Short Share], hospital[margin_fifth] = 5 ), "0%" ) & " for the most profitable"
+	measure 'Least Profitable Context' =
+			VAR _b = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[margin_fifth] = 5 ) )
+			RETURN IF ( ISBLANK ( _b ), "least profitable fifth of hospitals", "vs " & FORMAT ( _b, "0%" ) & " for the most profitable" )
 		displayFolder: KPI
 		lineageTag: 7194628e-766f-5fdc-9c24-cec53f907bf9
 
 	measure 'Fifth Title' =
-			VAR _a = CALCULATE ( [Short Share], hospital[margin_fifth] = 1 )
-			VAR _b = CALCULATE ( [Short Share], hospital[margin_fifth] = 5 )
-			RETURN "The least profitable fifth fall short most (" & FORMAT ( _a, "0%" ) & "); the most profitable " & FORMAT ( _b, "0%" )
+			VAR _a = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[margin_fifth] = 1 ) )
+			VAR _b = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[margin_fifth] = 5 ) )
+			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ), "Share falling short by profit",
+			    "The least profitable fall short most (" & FORMAT ( _a, "0%" ) & "), the most profitable " & FORMAT ( _b, "0%" ) )
 		displayFolder: Titles
 		lineageTag: c7e465f3-bd0e-5890-ae48-04c5d8d6d28a
 
-	measure 'Money Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[lost_money] ) ), [Short Share] )
+	measure 'Money Short' = IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[lost_money] ) ) && [Hospitals] >= 20, [Short Share] )
 		formatString: 0%
 		displayFolder: Money
 		lineageTag: 1b1f8872-0bd3-5303-a09a-09197ec791be
 
-	measure 'Losses Short' = CALCULATE ( [Short Share], hospital[lost_money] = "Lost money 2 years in a row", hospital[hospital_type] = "Small rural (critical access)" )
+	measure 'Losses Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[lost_money] = "Lost money 2 years in a row" ) )
 		formatString: 0%
 		displayFolder: KPI
 		lineageTag: e7242d9f-6224-58a9-8c73-988d6aa1f811
 
-	measure 'Losses Context' = "small rural; " & FORMAT ( CALCULATE ( [Short Share], hospital[lost_money] = "Did not", hospital[hospital_type] = "Small rural (critical access)" ), "0%" ) & " without losses"
+	measure 'Losses Context' =
+			VAR _b = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[lost_money] = "Did not" ) )
+			RETURN IF ( ISBLANK ( _b ), "of hospitals that lost money", "vs " & FORMAT ( _b, "0%" ) & " of those without losses" )
 		displayFolder: KPI
 		lineageTag: df9974be-afc8-5ae6-b956-6c9f315367bb
 
 	measure 'Money Title' =
-			VAR _a = CALCULATE ( [Short Share], hospital[lost_money] = "Lost money 2 years in a row" )
-			VAR _b = CALCULATE ( [Short Share], hospital[lost_money] = "Did not" )
-			RETURN "Hospitals that lost money two years in a row fall short about " & FORMAT ( DIVIDE ( _a, _b ), "0" ) & " times as often"
+			VAR _a = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[lost_money] = "Lost money 2 years in a row" ) )
+			VAR _b = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[lost_money] = "Did not" ) )
+			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ) || _b = 0, "Share falling short, by whether the hospital lost money",
+			    "Hospitals that lost money two years in a row fall short " & FORMAT ( DIVIDE ( _a, _b ), "0.0" ) & " times as often" )
 		displayFolder: Titles
 		lineageTag: 6c22e26a-b369-5098-9d7f-e956aae603b9
 
@@ -224,36 +277,36 @@ table hospital
 		lineageTag: 6748f30f-b5a2-5c18-bb6e-8a68b8f7f722
 
 	measure 'History Colour' =
-			SWITCH ( TRUE (), SELECTEDVALUE ( hospital[history_order] ) = 0, "#2457D6", SELECTEDVALUE ( hospital[history_order] ) <= 2, "#F6B9A4",
-			    SELECTEDVALUE ( hospital[history_order] ) <= 5, "#E8552B", "#B23A1C" )
+			SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#2457D6", "Every year", "#B23A1C",
+			    "1 of 6 years", "#F6B9A4", "2 of 6 years", "#F6B9A4", "#E8552B" )
 		displayFolder: Colours
 		lineageTag: 0191c9f0-8dd2-50db-8bf5-003ec9ac7a06
 
-	measure 'Every Year' = CALCULATE ( [Hospitals], hospital[history_order] = 6 )
+	measure 'Every Year' = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[history] = "Every year" ) )
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: 29486118-0d51-5266-9104-b8d0c9ab172e
 
-	measure 'Every Year Context' = "hospitals, in all six Medicare files"
+	measure 'Every Year Context' = "hospitals, in all six yearly files"
 		displayFolder: KPI
 		lineageTag: 0b75d78e-c92b-52ce-944d-4c9ffea0a6a2
 
-	measure Never = CALCULATE ( [Hospitals], hospital[history] = "Never" )
+	measure Never = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[history] = "Never" ) )
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: 07deb3e9-7fab-577f-8a24-ad01c5b65ebc
 
-	measure 'Never Context' = "of " & FORMAT ( CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[history] ) ), "#,0" ) & " in all six files"
+	measure 'Never Context' = "of " & FORMAT ( CALCULATE ( [Hospitals], NOT ISBLANK ( hospital[history] ) ), "#,0" ) & " in all six yearly files"
 		displayFolder: KPI
 		lineageTag: 7b49a20e-cd48-56e9-912c-3b69eab0f887
 
-	measure 'History Title' = FORMAT ( [Never], "#,0" ) & " hospitals never fell short; " & FORMAT ( [Every Year], "#,0" ) & " fell short every single year"
+	measure 'History Title' =
+			IF ( ISBLANK ( [Never] ) && ISBLANK ( [Every Year] ), "How many of the six years hospitals fell short",
+			    FORMAT ( [Never] + 0, "#,0" ) & " hospitals never fell short; " & FORMAT ( [Every Year] + 0, "#,0" ) & " fell short every single year" )
 		displayFolder: Titles
 		lineageTag: 2caa2747-b826-59e5-9129-147922a205a4
 
 	measure 'Top 10 Share' =
-			// ranks every state (REMOVEFILTERS, not ALLSELECTED), so a click on the map does not make a state #1;
-			// states with fewer than 10 hospitals in the current selection are not ranked
 			VAR _cur = [Short Share]
 			VAR _n = [Hospitals]
 			VAR _all = CALCULATETABLE ( FILTER ( ADDCOLUMNS ( VALUES ( states[state_name] ), "@r", [Short Share], "@n", [Hospitals] ), [@n] >= 10 ), REMOVEFILTERS ( states ) )
@@ -293,19 +346,20 @@ table hospital
 		displayFolder: Map
 		lineageTag: 594ee0e2-effb-55fe-af90-cb0e6cb58b9a
 
-	measure 'Fifth States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 && [@r] >= 0.2 ) )
+	measure 'Fifth States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 && [@r] >= 0.2 ) ) + 0
 		formatString: #,0
-		displayFolder: States
+		displayFolder: KPI
 		lineageTag: eeca6a31-d143-5ef7-a136-b4a397546710
 
-	measure 'Zero States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@s", [Short], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 1 && [@s] = 0 ) )
+	measure 'Zero States' = COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@s", [Short] + 0, "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 && [@s] = 0 ) ) + 0
 		formatString: #,0
-		displayFolder: States
+		displayFolder: KPI
 		lineageTag: 6ab6fb3e-77f2-5e2b-8c27-278a37fe0775
 
 	measure 'Map Title' =
 			VAR _t = TOPN ( 1, FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state_name] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 ), [@r], DESC )
-			RETURN MAXX ( _t, states[state_name] ) & " has the highest share falling short: " & FORMAT ( MAXX ( _t, [@r] ), "0%" ) & " of its hospitals"
+			RETURN IF ( ISBLANK ( MAXX ( _t, [@r] ) ), "Share of hospitals falling short, by state",
+			    MAXX ( _t, states[state_name] ) & " has the highest share falling short: " & FORMAT ( MAXX ( _t, [@r] ), "0%" ) & " of its hospitals" )
 		displayFolder: Titles
 		lineageTag: d0558e03-744a-5f63-8909-97665fa09dd3
 
@@ -321,11 +375,11 @@ table hospital
 		displayFolder: Tooltip
 		lineageTag: a8ad20cc-11bc-50b2-8062-97076eaddee0
 
-	measure 'State Short Text' = FORMAT ( [Short], "#,0" ) & " of " & FORMAT ( [Hospitals], "#,0" ) & " hospitals"
+	measure 'State Short Text' = FORMAT ( [Short] + 0, "#,0" ) & " of " & FORMAT ( [Hospitals], "#,0" ) & " hospitals"
 		displayFolder: Tooltip
 		lineageTag: dde787c3-3b44-5dca-b748-eaee639de9a4
 
-	measure 'State No EHR' = FORMAT ( [No EHR Short], "#,0" ) & " reported no certified EHR"
+	measure 'State No EHR' = FORMAT ( [No EHR Short] + 0, "#,0" ) & " had no certified EHR"
 		displayFolder: Tooltip
 		lineageTag: 2025817f-63ad-55ad-8c78-341518be707a
 
@@ -342,31 +396,31 @@ table hospital
 		displayFolder: Colours
 		lineageTag: ad35a331-37a4-52ed-8de4-d11ba50888ee
 
-	measure 'Not Available Count' = CALCULATE ( [Hospitals], hospital[id_quality] = """Not Available"" typed instead of an ID" )
+	measure 'Not Available Count' = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[id_quality] = """Not Available"" typed instead of an ID" ) ) + 0
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: b62a0561-b5e6-5558-a56c-d55d9b15f09d
 
-	measure 'Not In List Count' = CALCULATE ( [Hospitals], hospital[id_quality] = "Not found in the federal list" ) + 0
+	measure 'Not In List Count' = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[id_quality] = "Not found in the federal list" ) ) + 0
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: bf0126e6-9af7-5737-a967-a698e59fa4e7
 
-	measure 'Bad Format Count' = CALCULATE ( [Hospitals], hospital[id_quality] = "Wrong format (lowercase or wrong length)" ) + 0
+	measure 'Bad Format Count' = CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[id_quality] = "Wrong format (lowercase or wrong length)" ) ) + 0
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: 1d87c8b9-0b8d-5fbe-9986-916d04408cfb
 
-	measure 'Disagree Count' = CALCULATE ( SUM ( hospital[files_disagree] ), hospital[in_latest] = 1 ) + 0
+	measure 'Disagree Count' = CALCULATE ( SUM ( hospital[files_disagree] ), KEEPFILTERS ( hospital[in_latest] = 1 ) ) + 0
 		formatString: #,0
 		displayFolder: KPI
 		lineageTag: a95eec4e-69ba-50fd-9e70-639dc5935532
 
-	measure 'Not Available Context' = "hospitals, all of them fell short"
+	measure 'Not Available Context' = "hospitals, and every one fell short"
 		displayFolder: KPI
 		lineageTag: 521c2fb8-0ce6-51f6-9a42-64b94aae9bb8
 
-	measure 'Not In List Context' = "not in the federal product list"
+	measure 'Not In List Context' = "IDs missing from the federal list"
 		displayFolder: KPI
 		lineageTag: 50a6317e-c4ac-55a8-9423-c4f543ec2f54
 
@@ -393,10 +447,105 @@ table hospital
 		lineageTag: d4af2e87-30d3-50ac-bd00-0ebae1fd004e
 
 	measure 'ID Title' =
-			VAR _p = DIVIDE ( [Hospitals] - CALCULATE ( [Hospitals], hospital[id_quality] = "Valid ID, found in the federal list" ), [Hospitals] )
-			RETURN FORMAT ( ROUND ( _p * 100, 0 ), "0" ) & " in 100 hospitals have a problem in the EHR ID field"
+			VAR _p = DIVIDE ( [Hospitals] - CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[id_quality] = "Valid ID, found in the federal list" ) ), [Hospitals] )
+			RETURN IF ( ISBLANK ( _p ), "What hospitals put in the EHR ID field", FORMAT ( ROUND ( _p * 100, 0 ), "0" ) & " in 100 hospitals have a problem in the EHR ID field" )
 		displayFolder: Titles
 		lineageTag: b72adf08-51a7-55ac-82e8-f420e763dde9
+
+	measure 'Disagree Title' = FORMAT ( [Disagree Count], "#,0" ) & " hospitals get a different answer in the two Medicare files"
+		displayFolder: Titles
+		lineageTag: 88576335-2f60-59b3-aac3-f5616fb46893
+
+	measure 'Files Title' =
+			VAR _a = CALCULATE ( COUNTROWS ( hospital ), KEEPFILTERS ( hospital[n_files] = 6 ) )
+			VAR _b = CALCULATE ( COUNTROWS ( hospital ), KEEPFILTERS ( hospital[n_files] > 0 ) )
+			RETURN FORMAT ( _a + 0, "#,0" ) & " of " & FORMAT ( _b + 0, "#,0" ) & " hospitals appear in all six yearly files"
+		displayFolder: Titles
+		lineageTag: 4317619c-01c1-58df-9ab8-51fe966677be
+
+	measure 'Top3 Share Text' =
+			VAR _v = [Top3 Share]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "0%" ) )
+		displayFolder: KPI text
+		lineageTag: 28e143d7-72bd-5299-9753-1d21afd0ecdd
+
+	measure 'Epic Short Text' =
+			VAR _v = [Epic Short]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "0.0%" ) )
+		displayFolder: KPI text
+		lineageTag: 73920a46-d1f5-54dd-840d-864d28269d16
+
+	measure 'TruBridge Short Text' =
+			VAR _v = [TruBridge Short]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "0.0%" ) )
+		displayFolder: KPI text
+		lineageTag: 3b13cc02-7900-53fe-9a13-0d36a2023b8e
+
+	measure 'No EHR Hospitals Text' =
+			VAR _v = [No EHR Hospitals]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 9bf7843d-4434-5575-98a2-9fc945ad665c
+
+	measure 'Least Profitable Short Text' =
+			VAR _v = [Least Profitable Short]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "0%" ) )
+		displayFolder: KPI text
+		lineageTag: dcd2cc68-4cb7-5ad0-874b-e77e56dc7d8f
+
+	measure 'Losses Short Text' =
+			VAR _v = [Losses Short]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "0%" ) )
+		displayFolder: KPI text
+		lineageTag: 6ab1bb3e-d77a-5cf6-b6d7-d8150158b4a6
+
+	measure 'Every Year Text' =
+			VAR _v = [Every Year]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: bf291e59-674f-5e78-9d11-c197cfdca761
+
+	measure 'Never Text' =
+			VAR _v = [Never]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 26f6b8c9-8199-5376-acbc-7d799d942f6c
+
+	measure 'Fifth States Text' =
+			VAR _v = [Fifth States]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: f87e6ce1-1edd-5193-bb2f-ba877dd1849c
+
+	measure 'Zero States Text' =
+			VAR _v = [Zero States]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 12999251-573b-552e-af02-016b88e183b1
+
+	measure 'Not Available Count Text' =
+			VAR _v = [Not Available Count]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 16cfff49-37f8-5d41-8dea-b82f369b353a
+
+	measure 'Not In List Count Text' =
+			VAR _v = [Not In List Count]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 0da9606d-f54f-5d88-b39c-f240c2889f8e
+
+	measure 'Bad Format Count Text' =
+			VAR _v = [Bad Format Count]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: f66e8a43-8c36-56b1-8872-27c0b9ca4592
+
+	measure 'Disagree Count Text' =
+			VAR _v = [Disagree Count]
+			RETURN IF ( ISBLANK ( _v ), "–", FORMAT ( _v, "#,0" ) )
+		displayFolder: KPI text
+		lineageTag: 8c934f4a-cd1d-58d9-8d14-cb67c9af183e
 
 	measure 'Profile Name' = IF ( HASONEVALUE ( hospital[hospital_label] ), SELECTEDVALUE ( hospital[display_name] ), "Pick a hospital" )
 		displayFolder: Hospital

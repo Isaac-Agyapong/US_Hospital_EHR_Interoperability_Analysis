@@ -3,11 +3,11 @@
   "name": "notes1",
   "position": {
     "x": 24,
-    "y": 84,
-    "z": 10000,
-    "height": 622,
+    "y": 88,
+    "z": 9000,
+    "height": 618,
     "width": 330,
-    "tabOrder": 10000
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "value": "Words used here",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#0B1F4D",
+                      "color": "#2457D6",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }

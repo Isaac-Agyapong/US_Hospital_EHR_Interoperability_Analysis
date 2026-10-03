@@ -11,3 +11,4 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 ref table hospital
 ref table hospital_year
 ref table states
+ref table Dots

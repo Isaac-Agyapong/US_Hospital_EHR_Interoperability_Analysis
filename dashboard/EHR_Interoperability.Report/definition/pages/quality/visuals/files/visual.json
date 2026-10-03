@@ -3,11 +3,11 @@
   "name": "files",
   "position": {
     "x": 24,
-    "y": 456,
-    "z": 49000,
-    "height": 250,
+    "y": 460,
+    "z": 44000,
+    "height": 246,
     "width": 502,
-    "tabOrder": 49000
+    "tabOrder": 44000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.Files Count",
-              "nativeQueryRef": "Files Count",
-              "displayName": "Hospitals"
+              "nativeQueryRef": "Files Count"
             }
           ]
         }
@@ -292,8 +291,13 @@
             },
             "text": {
               "expr": {
-                "Literal": {
-                  "Value": "'4,381 of 4,813 hospitals appear in all six yearly files'"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital"
+                    }
+                  },
+                  "Property": "Files Title"
                 }
               }
             },
@@ -352,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Hospitals by the number of yearly Medicare files (2019-2024) they appear in. Openings, closures and mergers explain the rest.'"
+                  "Value": "'Hospitals by how many of the six yearly Medicare files (2019-2024) they appear in. Openings, closures and mergers explain the rest.'"
                 }
               }
             },
@@ -425,7 +429,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "11D"
                 }
               }
             },

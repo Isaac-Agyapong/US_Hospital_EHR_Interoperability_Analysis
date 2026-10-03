@@ -3,11 +3,11 @@
   "name": "pageSub",
   "position": {
     "x": 20,
-    "y": 52,
-    "z": 20000,
-    "height": 26,
+    "y": 54,
+    "z": 15000,
+    "height": 28,
     "width": 1000,
-    "tabOrder": 20000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,9 +20,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Profit comes from each hospital's yearly cost report to Medicare. History covers the six Medicare files, 2019-2024.",
+                    "value": "Profit comes from each hospital's yearly cost report to Medicare. History covers the six yearly files, 2019-2024.",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "12pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }

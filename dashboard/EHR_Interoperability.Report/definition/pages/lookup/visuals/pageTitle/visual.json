@@ -4,10 +4,10 @@
   "position": {
     "x": 20,
     "y": 20,
-    "z": 12000,
-    "height": 34,
+    "z": 10000,
+    "height": 36,
     "width": 1000,
-    "tabOrder": 12000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "Find a hospital",
                     "textStyle": {
-                      "fontSize": "19pt",
+                      "fontSize": "20pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"

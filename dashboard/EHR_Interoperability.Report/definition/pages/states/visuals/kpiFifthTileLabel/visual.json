@@ -3,11 +3,11 @@
   "name": "kpiFifthTileLabel",
   "position": {
     "x": 686,
-    "y": 552,
-    "z": 29000,
+    "y": 556,
+    "z": 24000,
     "height": 32,
     "width": 140,
-    "tabOrder": 29000
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "textbox",

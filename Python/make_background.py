@@ -1,7 +1,7 @@
 """Draw the artwork for the Power BI report (written to dashboard/assets/, colours from layout.json, which
 06_build_powerbi_project.py writes):
 
-    page_bg.png  the page background: cool paper with a fine "blueprint" grid and the white rail on the right
+    page_bg.png  the page background: cool paper with a fine "blueprint" grid and the navy rail on the right
     logo.png     the rail logo: two health records (nodes) joined by a link
 
 Only things that do not depend on exact vertical position are drawn here. Power BI Desktop stretches a page image
@@ -39,8 +39,7 @@ def page(c):
     im = Image.alpha_composite(im, grid)
     d = ImageDraw.Draw(im)
     x0 = c["rail_x"] * S
-    d.rectangle([x0, 0, W, H], fill=rgb(c["card"]))
-    d.line([x0, 0, x0, H], fill=rgb(c["line"]), width=S)
+    d.rectangle([x0, 0, W, H], fill=rgb(c["rail"]))
     return im
 
 

@@ -4,10 +4,10 @@
   "position": {
     "x": 20,
     "y": 20,
-    "z": 8000,
-    "height": 34,
+    "z": 7000,
+    "height": 36,
     "width": 1000,
-    "tabOrder": 8000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "Data notes",
                     "textStyle": {
-                      "fontSize": "19pt",
+                      "fontSize": "20pt",
                       "color": "#141B2D",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"

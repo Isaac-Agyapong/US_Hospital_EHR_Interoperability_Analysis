@@ -3,11 +3,11 @@
   "name": "pageSub",
   "position": {
     "x": 20,
-    "y": 52,
-    "z": 20000,
-    "height": 26,
+    "y": 54,
+    "z": 15000,
+    "height": 28,
     "width": 1000,
-    "tabOrder": 20000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "I looked up each hospital's certified EHR ID in the federal product list to find the company behind it.",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "12pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }

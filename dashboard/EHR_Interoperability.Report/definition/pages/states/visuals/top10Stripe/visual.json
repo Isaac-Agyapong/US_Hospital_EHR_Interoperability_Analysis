@@ -3,11 +3,11 @@
   "name": "top10Stripe",
   "position": {
     "x": 646,
-    "y": 84,
-    "z": 25000,
+    "y": 88,
+    "z": 20000,
     "height": 4,
     "width": 384,
-    "tabOrder": 25000
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "textbox",

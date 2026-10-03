@@ -3,11 +3,11 @@
   "name": "kpiZeroTileIcon",
   "position": {
     "x": 858,
-    "y": 552,
-    "z": 34000,
+    "y": 556,
+    "z": 29000,
     "height": 30,
     "width": 30,
-    "tabOrder": 34000
+    "tabOrder": 29000
   },
   "visual": {
     "visualType": "textbox",

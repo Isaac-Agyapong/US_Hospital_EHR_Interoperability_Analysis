@@ -3,11 +3,11 @@
   "name": "credit",
   "position": {
     "x": 1076,
-    "y": 640,
-    "z": 6000,
-    "height": 76,
-    "width": 196,
-    "tabOrder": 6000
+    "y": 662,
+    "z": 5000,
+    "height": 54,
+    "width": 200,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Data: Medicare (CMS) 2019-2024 and the federal EHR product list (ONC)",
+                    "value": "Data: Medicare (CMS) 2019-2024, federal EHR product list (ONC)",
                     "textStyle": {
-                      "fontSize": "10pt",
-                      "color": "#5E6A80",
+                      "fontSize": "9.5pt",
+                      "color": "#9FB3E0",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -35,7 +35,7 @@
                     "value": "Built by Isaac Agyapong",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }

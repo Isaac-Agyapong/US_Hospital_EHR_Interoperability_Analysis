@@ -3,11 +3,11 @@
   "name": "stripStripe",
   "position": {
     "x": 34,
-    "y": 278,
-    "z": 42000,
+    "y": 288,
+    "z": 40000,
     "height": 4,
     "width": 500,
-    "tabOrder": 42000
+    "tabOrder": 40000
   },
   "visual": {
     "visualType": "textbox",

@@ -3,11 +3,11 @@
   "name": "vendorType",
   "position": {
     "x": 24,
-    "y": 498,
-    "z": 49000,
-    "height": 208,
-    "width": 640,
-    "tabOrder": 49000
+    "y": 486,
+    "z": 44000,
+    "height": 220,
+    "width": 620,
+    "tabOrder": 44000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -693,7 +693,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#56627A'"
+                      "Value": "'#AEB6C4'"
                     }
                   }
                 }

@@ -3,11 +3,11 @@
   "name": "top10",
   "position": {
     "x": 636,
-    "y": 84,
-    "z": 24000,
+    "y": 88,
+    "z": 19000,
     "height": 440,
     "width": 404,
-    "tabOrder": 24000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "tableEx",
@@ -378,7 +378,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'States with 10 or more hospitals'"
+                  "Value": "'States with 10 or more hospitals in the selection'"
                 }
               }
             },

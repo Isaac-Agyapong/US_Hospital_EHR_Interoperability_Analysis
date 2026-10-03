@@ -3,11 +3,11 @@
   "name": "market",
   "position": {
     "x": 24,
-    "y": 196,
-    "z": 45000,
-    "height": 290,
+    "y": 204,
+    "z": 40000,
+    "height": 270,
     "width": 502,
-    "tabOrder": 45000
+    "tabOrder": 40000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.Market Share",
-              "nativeQueryRef": "Market Share",
-              "displayName": "Share of hospitals"
+              "nativeQueryRef": "Market Share"
             }
           ]
         }
@@ -357,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of hospitals by the company behind their main EHR'"
+                  "Value": "'Share of hospitals by EHR company. Navy = the 3 biggest.'"
                 }
               }
             },
@@ -430,7 +429,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "10D"
                 }
               }
             },
@@ -444,7 +443,7 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "18L"
+                  "Value": "10L"
                 }
               }
             },

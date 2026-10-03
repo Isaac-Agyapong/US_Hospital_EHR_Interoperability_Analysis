@@ -3,11 +3,11 @@
   "name": "kpiFifthCtx",
   "position": {
     "x": 648,
-    "y": 640,
-    "z": 31000,
-    "height": 40,
+    "y": 646,
+    "z": 26000,
+    "height": 44,
     "width": 172,
-    "tabOrder": 31000
+    "tabOrder": 26000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,9 +20,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "states and territories (10+ hospitals)",
+                    "value": "states and territories with 10+ hospitals",
                     "textStyle": {
-                      "fontSize": "10.5pt",
+                      "fontSize": "11pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }

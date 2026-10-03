@@ -3,11 +3,11 @@
   "name": "railCaption",
   "position": {
     "x": 1076,
-    "y": 66,
-    "z": 3000,
+    "y": 68,
+    "z": 2000,
     "height": 22,
     "width": 200,
-    "tabOrder": 3000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "value": "4,489 HOSPITALS  ·  2019-2024",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#AFC0E6",
+                      "color": "#9FB3E0",
                       "fontFamily": "Corbel"
                     }
                   }

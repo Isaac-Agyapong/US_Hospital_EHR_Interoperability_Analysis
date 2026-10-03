@@ -3,11 +3,11 @@
   "name": "checksText",
   "position": {
     "x": 566,
-    "y": 474,
-    "z": 48000,
+    "y": 486,
+    "z": 46000,
     "height": 70,
     "width": 464,
-    "tabOrder": 48000
+    "tabOrder": 46000
   },
   "visual": {
     "visualType": "card",
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "11.5D"
                 }
               }
             },

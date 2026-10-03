@@ -3,11 +3,11 @@
   "name": "meaningText",
   "position": {
     "x": 566,
-    "y": 320,
-    "z": 46000,
-    "height": 120,
+    "y": 332,
+    "z": 44000,
+    "height": 124,
     "width": 464,
-    "tabOrder": 46000
+    "tabOrder": 44000
   },
   "visual": {
     "visualType": "card",

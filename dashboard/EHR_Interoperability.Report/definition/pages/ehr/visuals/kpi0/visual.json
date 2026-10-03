@@ -3,11 +3,11 @@
   "name": "kpi0",
   "position": {
     "x": 36,
-    "y": 130,
-    "z": 25000,
-    "height": 32,
+    "y": 134,
+    "z": 20000,
+    "height": 34,
     "width": 221,
-    "tabOrder": 25000
+    "tabOrder": 20000
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Top3 Share"
+                  "Property": "Top3 Share Text"
                 }
               },
-              "queryRef": "hospital.Top3 Share",
-              "nativeQueryRef": "Top3 Share",
+              "queryRef": "hospital.Top3 Share Text",
+              "nativeQueryRef": "Top3 Share Text",
               "displayName": " "
             }
           ]
@@ -52,7 +52,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "24D"
+                  "Value": "26D"
                 }
               }
             },

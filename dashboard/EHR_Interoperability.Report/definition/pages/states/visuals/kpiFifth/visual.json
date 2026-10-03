@@ -3,11 +3,11 @@
   "name": "kpiFifth",
   "position": {
     "x": 648,
-    "y": 588,
-    "z": 30000,
+    "y": 594,
+    "z": 25000,
     "height": 50,
     "width": 172,
-    "tabOrder": 30000
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "card",

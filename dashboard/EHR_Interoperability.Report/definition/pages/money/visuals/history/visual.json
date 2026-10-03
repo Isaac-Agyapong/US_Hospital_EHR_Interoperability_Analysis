@@ -3,11 +3,11 @@
   "name": "history",
   "position": {
     "x": 24,
-    "y": 456,
-    "z": 49000,
-    "height": 250,
+    "y": 460,
+    "z": 44000,
+    "height": 246,
     "width": 1016,
-    "tabOrder": 49000
+    "tabOrder": 44000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -46,8 +46,7 @@
                 }
               },
               "queryRef": "hospital.History Count",
-              "nativeQueryRef": "History Count",
-              "displayName": "Hospitals"
+              "nativeQueryRef": "History Count"
             }
           ]
         }
@@ -445,6 +444,13 @@
               "expr": {
                 "Literal": {
                   "Value": "34L"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

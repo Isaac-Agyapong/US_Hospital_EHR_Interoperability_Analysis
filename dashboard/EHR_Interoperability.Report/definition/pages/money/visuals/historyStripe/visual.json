@@ -3,11 +3,11 @@
   "name": "historyStripe",
   "position": {
     "x": 34,
-    "y": 456,
-    "z": 50000,
+    "y": 460,
+    "z": 45000,
     "height": 4,
     "width": 996,
-    "tabOrder": 50000
+    "tabOrder": 45000
   },
   "visual": {
     "visualType": "textbox",

@@ -3,11 +3,11 @@
   "name": "pageSub",
   "position": {
     "x": 20,
-    "y": 52,
-    "z": 13000,
-    "height": 26,
+    "y": 54,
+    "z": 11000,
+    "height": 28,
     "width": 1000,
-    "tabOrder": 13000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "Did it meet Medicare's standards for sharing records, which EHR does it use, and how has it done since 2019?",
                     "textStyle": {
-                      "fontSize": "11pt",
+                      "fontSize": "12pt",
                       "color": "#4F5368",
                       "fontFamily": "Corbel"
                     }
