@@ -65,7 +65,7 @@ table hospital
 
 	measure 'Size Colour' =
 			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[size_band] ), "@v", [Size Short] ), NOT ISBLANK ( [@v] ) )
-			RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "#E8552B", "#F6B9A4" )
+			RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "#FF6B47", "#FFB199" )
 		displayFolder: Colours
 		lineageTag: 9732c11d-d2de-53e3-97b7-99a849abdac8
 
@@ -89,7 +89,7 @@ table hospital
 
 	measure 'Owner Colour' =
 			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[ownership] ), "@v", [Owner Short] ), NOT ISBLANK ( [@v] ) )
-			RETURN IF ( [Owner Short] = MINX ( _t, [@v] ), "#F6B9A4", "#E8552B" )
+			RETURN IF ( [Owner Short] = MINX ( _t, [@v] ), "#FFB199", "#FF6B47" )
 		displayFolder: Colours
 		lineageTag: 0b4410d1-620d-57eb-b835-3633c9e7b618
 
@@ -145,7 +145,7 @@ table hospital
 		displayFolder: KPI
 		lineageTag: fee96237-12cc-5766-8602-727407efeeed
 
-	measure 'Market Colour' = IF ( SELECTEDVALUE ( hospital[main_developer] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" }, "#0B1F4D", "#AEB6C4" )
+	measure 'Market Colour' = IF ( SELECTEDVALUE ( hospital[main_developer] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" }, "#5CC8FF", "#6E7FA3" )
 		displayFolder: Colours
 		lineageTag: 158e1e8c-2214-5040-be28-3fcfdeb2eba7
 
@@ -189,7 +189,7 @@ table hospital
 		displayFolder: EHR
 		lineageTag: 7fe60c29-9e4e-5273-af06-987c315008cd
 
-	measure 'EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) = "No EHR ID reported", "#6D28D9", "#E8552B" )
+	measure 'EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) = "No EHR ID reported", "#A78BFA", "#FF6B47" )
 		displayFolder: Colours
 		lineageTag: a1792baf-ae7d-5f62-8b11-16fe653663fa
 
@@ -224,7 +224,7 @@ table hospital
 		displayFolder: Money
 		lineageTag: 8a64259c-9aa9-5aec-8e77-2bd636e6141d
 
-	measure 'Fifth Colour' = IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "#E8552B", "#F6B9A4" )
+	measure 'Fifth Colour' = IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "#FF6B47", "#FFB199" )
 		displayFolder: Colours
 		lineageTag: a3cfd86e-9563-51b5-99cc-1cf62850d9db
 
@@ -277,8 +277,8 @@ table hospital
 		lineageTag: 6748f30f-b5a2-5c18-bb6e-8a68b8f7f722
 
 	measure 'History Colour' =
-			SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#2457D6", "Every year", "#B23A1C",
-			    "1 of 6 years", "#F6B9A4", "2 of 6 years", "#F6B9A4", "#E8552B" )
+			SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#5B8DEF", "Every year", "#C2321A",
+			    "1 of 6 years", "#FFB199", "2 of 6 years", "#FFB199", "#FF6B47" )
 		displayFolder: Colours
 		lineageTag: 0191c9f0-8dd2-50db-8bf5-003ec9ac7a06
 
@@ -332,17 +332,17 @@ table hospital
 	measure 'Tile Colour' =
 			VAR _r = [Short Share]
 			RETURN SWITCH ( TRUE (),
-			    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "#FFFFFF",
-			    ISBLANK ( _r ), "#EEF1F6",
+			    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "#0E2259",
+			    ISBLANK ( _r ), "#2A3E78",
 			    _r < 0.05, "#FDF0EA",
 			    _r < 0.10, "#F9CDBB",
 			    _r < 0.15, "#F29A78",
-			    _r < 0.25, "#E8552B",
-			    "#B23A1C" )
+			    _r < 0.25, "#FF6B47",
+			    "#C2321A" )
 		displayFolder: Map
 		lineageTag: 1ba12b64-6996-586d-909e-37dcc04202f1
 
-	measure 'Tile Font' = IF ( [Short Share] >= 0.15, "#FFFFFF", "#141B2D" )
+	measure 'Tile Font' = IF ( [Short Share] >= 0.15 || ISBLANK ( [Short Share] ), "#FFFFFF", "#141B2D" )
 		displayFolder: Map
 		lineageTag: 594ee0e2-effb-55fe-af90-cb0e6cb58b9a
 
@@ -390,9 +390,9 @@ table hospital
 
 	measure 'ID Colour' =
 			SWITCH ( SELECTEDVALUE ( hospital[id_quality] ),
-			    "Valid ID, found in the federal list", "#AEB6C4",
-			    """Not Available"" typed instead of an ID", "#6D28D9",
-			    "#C98A04" )
+			    "Valid ID, found in the federal list", "#6E7FA3",
+			    """Not Available"" typed instead of an ID", "#A78BFA",
+			    "#FBBF24" )
 		displayFolder: Colours
 		lineageTag: ad35a331-37a4-52ed-8de4-d11ba50888ee
 
@@ -442,7 +442,7 @@ table hospital
 		displayFolder: Quality
 		lineageTag: 7a0f7e5d-21ea-57c4-a54f-47e175e8f8a6
 
-	measure 'Files Colour' = IF ( SELECTEDVALUE ( hospital[n_files] ) = 6, "#AEB6C4", "#C98A04" )
+	measure 'Files Colour' = IF ( SELECTEDVALUE ( hospital[n_files] ) = 6, "#6E7FA3", "#FBBF24" )
 		displayFolder: Colours
 		lineageTag: d4af2e87-30d3-50ac-bd00-0ebae1fd004e
 
@@ -559,7 +559,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: 74f79ff6-4470-564d-844e-80c64a084f93
 
-	measure 'Profile Status Colour' = IF ( SUM ( hospital[not_met] ) = 1, "#E8552B", "#2457D6" )
+	measure 'Profile Status Colour' = IF ( SUM ( hospital[not_met] ) = 1, "#FF6B47", "#5B8DEF" )
 		displayFolder: Hospital
 		lineageTag: 78758bb8-0fdc-5ab0-97ab-e5c7c9f41000
 
@@ -573,7 +573,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: 117eed58-4ada-5001-a1aa-ce52189b149d
 
-	measure 'Profile EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", "#6D28D9", "#141B2D" )
+	measure 'Profile EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_status] ) = "No EHR ID reported", "#A78BFA", "#FFFFFF" )
 		displayFolder: Hospital
 		lineageTag: 910e68f8-59ec-5c3b-a1bc-baab5a49a847
 
@@ -588,7 +588,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: 98ae0c03-5c64-5f79-9de5-0f43f4ef459d
 
-	measure 'Profile Years Colour' = IF ( SUM ( hospital_year[not_met] ) > 0, "#E8552B", "#2457D6" )
+	measure 'Profile Years Colour' = IF ( SUM ( hospital_year[not_met] ) > 0, "#FF6B47", "#5B8DEF" )
 		displayFolder: Hospital
 		lineageTag: 8e9486ab-f3f7-5e58-bee1-28b80c4b87cc
 
@@ -600,7 +600,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: ce7bdfc6-a1eb-50d2-811d-68aff739d168
 
-	measure 'Profile Margin Colour' = IF ( SUM ( hospital[total_margin] ) < 0, "#E8552B", "#141B2D" )
+	measure 'Profile Margin Colour' = IF ( SUM ( hospital[total_margin] ) < 0, "#FF6B47", "#FFFFFF" )
 		displayFolder: Hospital
 		lineageTag: f5249ded-f07a-5425-b3d7-7c1949cf614d
 

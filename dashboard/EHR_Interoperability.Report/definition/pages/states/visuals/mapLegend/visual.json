@@ -23,7 +23,7 @@
                     "value": "Falling short   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -40,7 +40,7 @@
                     "value": "under 5%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -56,7 +56,7 @@
                     "value": "5-10%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -72,7 +72,7 @@
                     "value": "10-15%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -80,7 +80,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#E8552B",
+                      "color": "#FF6B47",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -88,7 +88,7 @@
                     "value": "15-25%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -96,7 +96,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#B23A1C",
+                      "color": "#C2321A",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -104,7 +104,7 @@
                     "value": "25%+   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -163,7 +163,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -174,7 +174,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

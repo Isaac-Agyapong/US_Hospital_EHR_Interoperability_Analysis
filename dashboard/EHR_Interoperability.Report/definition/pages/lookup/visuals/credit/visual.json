@@ -3,10 +3,10 @@
   "name": "credit",
   "position": {
     "x": 1076,
-    "y": 662,
+    "y": 672,
     "z": 8000,
-    "height": 54,
-    "width": 200,
+    "height": 48,
+    "width": 204,
     "tabOrder": 8000
   },
   "visual": {
@@ -20,9 +20,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Data: Medicare (CMS) 2019-2024, federal EHR product list (ONC)",
+                    "value": "Data: Medicare (CMS), ONC",
                     "textStyle": {
-                      "fontSize": "9.5pt",
+                      "fontSize": "9pt",
                       "color": "#9FB3E0",
                       "fontFamily": "Corbel"
                     }
@@ -95,7 +95,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -106,7 +106,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -117,7 +117,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

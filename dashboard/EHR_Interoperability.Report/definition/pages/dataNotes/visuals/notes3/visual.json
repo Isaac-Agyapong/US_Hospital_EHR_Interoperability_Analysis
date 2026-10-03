@@ -23,7 +23,7 @@
                     "value": "Keep in mind",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#C98A04",
+                      "color": "#FBBF24",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "•  Only general and small rural hospitals are in the program; psychiatric, children's, VA and military hospitals are left out because they are never rated",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -48,7 +48,7 @@
                     "value": "•  The yearly files and the latest file cover different reporting years, so a few hospitals differ",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -60,7 +60,7 @@
                     "value": "•  Main EHR company = the company with the most certified products in the hospital's EHR setup",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -72,7 +72,7 @@
                     "value": "•  Links between money, size, software and falling short are associations, not proof of cause",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -84,7 +84,7 @@
                     "value": "•  Puerto Rico and four small territories are included; only Puerto Rico is drawn on the map",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -120,7 +120,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "89D"
                 }
               }
             }
@@ -142,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -151,7 +151,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             }
@@ -173,7 +173,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0B1F4D'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -196,7 +196,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "70D"
                 }
               }
             },
@@ -239,7 +239,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -250,7 +250,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -261,7 +261,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

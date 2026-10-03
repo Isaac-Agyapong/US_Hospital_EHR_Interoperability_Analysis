@@ -1,36 +1,36 @@
 {
-  "name": "Blueprint",
+  "name": "Deep Blue Glass",
   "dataColors": [
-    "#2457D6",
-    "#E8552B",
-    "#6D28D9",
-    "#0E9384",
-    "#C98A04",
-    "#56627A",
+    "#5B8DEF",
+    "#FF6B47",
+    "#A78BFA",
+    "#2DD4BF",
+    "#FBBF24",
+    "#B8C3D9",
     "#A9BFF2",
-    "#F6B9A4"
+    "#FFB199"
   ],
-  "foreground": "#141B2D",
-  "foregroundNeutralSecondary": "#4F5368",
-  "background": "#FFFFFF",
-  "backgroundLight": "#F6F8FC",
-  "tableAccent": "#2457D6",
+  "foreground": "#FFFFFF",
+  "foregroundNeutralSecondary": "#C9D6F5",
+  "background": "#0E2259",
+  "backgroundLight": "#13296A",
+  "tableAccent": "#5B8DEF",
   "textClasses": {
     "title": {
       "fontFace": "Corbel",
-      "color": "#141B2D"
+      "color": "#FFFFFF"
     },
     "label": {
       "fontFace": "Corbel",
-      "color": "#4F5368"
+      "color": "#C9D6F5"
     },
     "callout": {
       "fontFace": "Corbel",
-      "color": "#141B2D"
+      "color": "#FFFFFF"
     },
     "header": {
       "fontFace": "Corbel",
-      "color": "#141B2D"
+      "color": "#FFFFFF"
     }
   }
 }

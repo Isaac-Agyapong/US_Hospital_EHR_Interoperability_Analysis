@@ -23,7 +23,7 @@
                     "value": "Checked the way EHR data-quality research does: filled in, right format, consistent across files, linked to other data.",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -82,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

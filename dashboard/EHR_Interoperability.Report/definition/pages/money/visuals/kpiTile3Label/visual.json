@@ -23,7 +23,7 @@
                     "value": "Never fell short",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -94,7 +94,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -105,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

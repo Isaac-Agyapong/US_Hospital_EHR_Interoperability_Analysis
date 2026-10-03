@@ -23,7 +23,7 @@
                     "value": "Aa",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C98A04",
+                      "color": "#FBBF24",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -52,7 +52,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F9F1E1'"
+                      "Value": "'#FFF7E5'"
                     }
                   }
                 }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C98A04'"
+                      "Value": "'#FBBF24'"
                     }
                   }
                 }

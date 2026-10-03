@@ -23,7 +23,7 @@
                     "value": "How I checked the data",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "✓  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#2457D6",
+                      "color": "#5B8DEF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -45,7 +45,7 @@
                     "value": "No hospital appears twice in the same file",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -57,7 +57,7 @@
                     "value": "✓  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#2457D6",
+                      "color": "#5B8DEF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -66,7 +66,7 @@
                     "value": "Hospital types outside the program are never marked as meeting the standards",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -78,7 +78,7 @@
                     "value": "✓  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#2457D6",
+                      "color": "#5B8DEF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -87,7 +87,7 @@
                     "value": "Every hospital in the latest file reports the same period (calendar year 2024)",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -99,7 +99,7 @@
                     "value": "✓  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#2457D6",
+                      "color": "#5B8DEF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -108,7 +108,7 @@
                     "value": "96% of hospitals link to their yearly financial report",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -120,7 +120,7 @@
                     "value": "!  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#C98A04",
+                      "color": "#FBBF24",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -129,7 +129,7 @@
                     "value": "Hospitals with no financial report fall short far more often (59% vs 11%): missing data is itself a warning sign",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -165,7 +165,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "89D"
                 }
               }
             }
@@ -187,7 +187,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -196,7 +196,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             }
@@ -218,7 +218,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0B1F4D'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -241,7 +241,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "70D"
                 }
               }
             },
@@ -284,7 +284,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -295,7 +295,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -306,7 +306,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

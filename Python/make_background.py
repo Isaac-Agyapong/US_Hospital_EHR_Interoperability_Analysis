@@ -1,7 +1,7 @@
 """Draw the artwork for the Power BI report (written to dashboard/assets/, colours from layout.json, which
 06_build_powerbi_project.py writes):
 
-    page_bg.png  the page background: cool paper with a fine "blueprint" grid and the navy rail on the right
+    page_bg.png  the page background: deep blue to indigo gradient with soft glows and the dark rail on the right
     logo.png     the rail logo: two health records (nodes) joined by a link
 
 Only things that do not depend on exact vertical position are drawn here. Power BI Desktop stretches a page image
@@ -26,20 +26,26 @@ def rgb(h, a=255):
 
 
 def page(c):
-    """Paper fading from light at the top, a fine grid (minor every 16 px, major every 80 px), white rail."""
-    yy = np.linspace(0, 1, H)[:, None, None]
-    top, bottom = np.array(rgb(c["paper_top"])[:3], float), np.array(rgb(c["paper"])[:3], float)
-    im = Image.fromarray((top * (1 - yy) + bottom * yy).repeat(W, axis=1).astype(np.uint8)).convert("RGBA")
-    grid = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(grid)
-    for i, x in enumerate(range(0, W, 16 * S)):
-        d.line([x, 0, x, H], fill=rgb(c["grid"], 150 if i % 5 == 0 else 70), width=1)
-    for i, y in enumerate(range(0, H, 16 * S)):
-        d.line([0, y, W, y], fill=rgb(c["grid"], 150 if i % 5 == 0 else 70), width=1)
-    im = Image.alpha_composite(im, grid)
+    """Deep blue to indigo diagonal gradient, two soft glows (sky blue lower left, violet upper right),
+    a faint dot texture, and the dark rail on the right."""
+    yy, xx = np.mgrid[0:H, 0:W].astype(float)
+    t = ((xx / W) * 0.55 + (yy / H) * 0.45)[..., None]
+    a, b = np.array(rgb(c["paper"])[:3], float), np.array(rgb(c["paper_top"])[:3], float)
+    img = a * (1 - t) + b * t
+    for (cx, cy, rx, ry, col, k) in [(0.10, 0.95, 0.45, 0.55, c["grid"], 0.22), (0.72, 0.05, 0.40, 0.45, c["violet"], 0.25)]:
+        g = np.exp(-(((xx - W * cx) / (W * rx)) ** 2 + ((yy - H * cy) / (H * ry)) ** 2))[..., None]
+        img = img + g * (np.array(rgb(col)[:3], float) - img) * k
+    im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).convert("RGBA")
+    dots = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(dots)
+    for y in range(12 * S, H, 24 * S):
+        for x in range(12 * S, W, 24 * S):
+            d.ellipse([x, y, x + S, y + S], fill=(255, 255, 255, 18))
+    im = Image.alpha_composite(im, dots)
     d = ImageDraw.Draw(im)
     x0 = c["rail_x"] * S
     d.rectangle([x0, 0, W, H], fill=rgb(c["rail"]))
+    d.line([x0, 0, x0, H], fill=rgb(c["line"]), width=S)
     return im
 
 

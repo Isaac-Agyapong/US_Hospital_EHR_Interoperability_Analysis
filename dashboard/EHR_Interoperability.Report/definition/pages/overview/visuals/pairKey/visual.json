@@ -23,7 +23,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#0E9384",
+                      "color": "#2DD4BF",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -31,7 +31,7 @@
                     "value": "small rural hospitals (25 beds or fewer)     ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -39,7 +39,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#AEB6C4",
+                      "color": "#B8C3D9",
                       "fontFamily": "Corbel"
                     }
                   },
@@ -47,7 +47,7 @@
                     "value": "general hospitals",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -129,7 +129,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

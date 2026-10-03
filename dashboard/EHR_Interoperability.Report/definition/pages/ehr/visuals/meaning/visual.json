@@ -23,7 +23,7 @@
                     "value": "What this means",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -48,7 +48,7 @@
                     "value": "TruBridge hospitals fall short far more often, even next to the same kind of hospital.",
                     "textStyle": {
                       "fontSize": "11.5pt",
-                      "color": "#141B2D",
+                      "color": "#FFFFFF",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -60,7 +60,7 @@
                     "value": "This is a link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#4F5368",
+                      "color": "#C9D6F5",
                       "fontFamily": "Corbel"
                     }
                   }
@@ -96,7 +96,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "89D"
                 }
               }
             }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -127,7 +127,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             }
@@ -149,7 +149,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0B1F4D'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -172,7 +172,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "70D"
                 }
               }
             },
@@ -215,7 +215,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0E2259'"
                     }
                   }
                 }
@@ -226,7 +226,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE3EF'"
+                      "Value": "'#3E5AA0'"
                     }
                   }
                 }
@@ -237,7 +237,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5E6A80'"
+                      "Value": "'#C9D6F5'"
                     }
                   }
                 }

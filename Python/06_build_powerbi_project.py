@@ -60,14 +60,17 @@ BASE_THEME = "CY24SU10"
 CUSTOM_THEME = "BlueprintTheme.json"
 
 # palette
-COBALT, COBALT_L, NAVY = "#2457D6", "#A9BFF2", "#0B1F4D"
-RED, RED_L, RED_D = "#E8552B", "#F6B9A4", "#B23A1C"
-PURPLE, AMBER, TEAL, SLATE, GREY = "#6D28D9", "#C98A04", "#0E9384", "#56627A", "#AEB6C4"
-GREY_D = "#7C8597"
+# deep blue gradient page, frosted-glass cards, solid deep-blue panels; colours brightened to read on dark
+COBALT, COBALT_L, NAVY, SKY = "#5B8DEF", "#A9BFF2", "#0A1A45", "#5CC8FF"
+RED, RED_L, RED_D = "#FF6B47", "#FFB199", "#C2321A"
+PURPLE, AMBER, TEAL, SLATE, GREY = "#A78BFA", "#FBBF24", "#2DD4BF", "#B8C3D9", "#6E7FA3"
+GREY_D = "#B8C3D9"
+PANEL, PANEL_2, DARK = "#0E2259", "#13296A", "#141B2D"
 DOT_BLUE, DOT_RED, DOT_PURPLE = "#7FA6FF", "#FF7A59", "#C4A5FF"    # brighter tints for the navy hero
 RAIL_TEXT, RAIL_MUTED = "#E8EEFB", "#9FB3E0"          # neutral accent for "all hospitals" cards (grey = everything else)
-INK, INK_2, MUTED, LINE, CARD = "#141B2D", "#4F5368", "#5E6A80", "#DCE3EF", "#FFFFFF"
-PAPER, PAPER_TOP, GRIDC, MINT = "#EEF2F8", "#F7F9FC", "#D9E1EE", "#5EEAD4"
+INK, INK_2, MUTED, LINE, CARD = "#FFFFFF", "#C9D6F5", "#9FB3E0", "#3E5AA0", "#FFFFFF"
+PAPER, PAPER_TOP, GRIDC, MINT = "#0B1F4D", "#2B1A6B", "#5CC8FF", "#5EEAD4"
+GLASS_T = 89                # card transparency (%): white glass over the gradient
 FONT = "Corbel"
 PCT, PCT1, INT = "0%", "0.0%", "#,0"
 GENERAL, RURAL = "General hospital", "Small rural (critical access)"
@@ -228,7 +231,7 @@ MEASURES = [
      f'"{TOP3[0]} alone: " & FORMAT ( DIVIDE ( CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), hospital[main_developer] = "{TOP3[0]}" ),\n'
      '    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), NOT ISBLANK ( hospital[main_developer] ) ) ), "0%" ) & " of hospitals"',
      None, "KPI"),
-    ("hospital", "Market Colour", f'IF ( SELECTEDVALUE ( hospital[main_developer] ) IN {TOP3_DAX}, "{NAVY}", "{GREY}" )',
+    ("hospital", "Market Colour", f'IF ( SELECTEDVALUE ( hospital[main_developer] ) IN {TOP3_DAX}, "{SKY}", "{GREY}" )',
      None, "Colours"),
     ("hospital", "Market Title",
      f'"{TOP3[0]}, {TOP3[1].split(" (")[0]} and {TOP3[2]} run " & FORMAT ( [Top3 Share], "0%" ) & " of the hospitals shown"',
@@ -313,10 +316,10 @@ MEASURES = [
     ("hospital", "Tile Label", "SELECTEDVALUE ( states[state] )", None, "Map"),
     ("hospital", "Tile Colour",
      "VAR _r = [Short Share]\nRETURN SWITCH ( TRUE (),\n"
-     f'    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "{CARD}",\n'
-     '    ISBLANK ( _r ), "#EEF1F6",\n    _r < 0.05, "#FDF0EA",\n    _r < 0.10, "#F9CDBB",\n    _r < 0.15, "#F29A78",\n'
+     f'    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "{PANEL}",\n'
+     '    ISBLANK ( _r ), "#2A3E78",\n    _r < 0.05, "#FDF0EA",\n    _r < 0.10, "#F9CDBB",\n    _r < 0.15, "#F29A78",\n'
      f'    _r < 0.25, "{RED}",\n    "{RED_D}" )', None, "Map"),
-    ("hospital", "Tile Font", f'IF ( [Short Share] >= 0.15, "#FFFFFF", "{INK}" )', None, "Map"),
+    ("hospital", "Tile Font", f'IF ( [Short Share] >= 0.15 || ISBLANK ( [Short Share] ), "#FFFFFF", "{DARK}" )', None, "Map"),
     ("hospital", "Fifth States",
      'COUNTROWS ( FILTER ( CALCULATETABLE ( ADDCOLUMNS ( VALUES ( states[state] ), "@r", [Short Share], "@n", [Hospitals] ), REMOVEFILTERS ( states ) ), [@n] >= 10 && [@r] >= 0.2 ) ) + 0',
      INT, "KPI"),
@@ -595,10 +598,10 @@ def container(title=None, subtitle=None, tooltip_page=None, pad=(12, 6, 12, 12),
         "border": [{"properties": {"show": lit("true" if background else "false"),
                                    **({"color": solid(border or background), "radius": lit(f"{radius}D")} if background else {})}}],
         "dropShadow": [{"properties": {
-            "show": lit("true"), "color": solid(NAVY), "position": s("Outer"), "preset": s("Custom"),
-            "transparency": lit("90D"), "shadowBlur": lit("10D"), "shadowSpread": lit("0D"),
+            "show": lit("true"), "color": solid("#000000"), "position": s("Outer"), "preset": s("Custom"),
+            "transparency": lit("70D"), "shadowBlur": lit("10D"), "shadowSpread": lit("0D"),
             "shadowDistance": lit("2D"), "angle": lit("90D")}}] if shadow else [{"properties": {"show": lit("false")}}],
-        "visualHeader": [{"properties": {"background": solid(CARD), "border": solid(LINE), "foreground": solid(MUTED)}}],
+        "visualHeader": [{"properties": {"background": solid(PANEL), "border": solid(LINE), "foreground": solid(INK_2)}}],
         "padding": [{"properties": {"top": lit(f"{pad[0]}D"), "bottom": lit(f"{pad[1]}D"),
                                     "left": lit(f"{pad[2]}D"), "right": lit(f"{pad[3]}D")}}],
         "title": [{"properties": {"show": lit("false")}}],
@@ -627,7 +630,7 @@ def axes(show_value=False, cat_size=11, inner_padding=None, label_area=None, cat
         cat["axisType"] = s("Categorical")
     val = {"show": lit("true" if show_value else "false"), "showAxisTitle": lit("false"), "labelColor": solid(INK_2),
            "fontSize": lit("10D"), "fontFamily": s(FONT), "gridlineShow": lit("true" if show_value else "false"),
-           "gridlineColor": solid("#E6EBF3")}
+           "gridlineColor": solid("#2C4485")}
     if value_start is not None:
         val["start"] = lit(f"{value_start}D")
     if value_end is not None:
@@ -691,8 +694,9 @@ def textbox(paragraphs, align=None, pad=(0, 0, 4, 4), background=None, radius=0,
     return {"visual": v}
 
 
-def shape(colour, radius=0, border=None, shadow=False):
-    return textbox([], background=colour, radius=radius, border=border, shadow=shadow, pad=(0, 0, 0, 0))
+def shape(colour, radius=0, border=None, shadow=False, transparency=0):
+    return textbox([], background=colour, radius=radius, border=border, shadow=shadow, pad=(0, 0, 0, 0),
+                   transparency=transparency)
 
 
 def image(item_name):
@@ -729,7 +733,7 @@ def slicer(entity, prop, group, title, default=None, search=False, filters=None)
                      "header": [{"properties": {"show": lit("true"), "text": s(title), "fontColor": solid(RAIL_TEXT),
                                                 "fontSize": lit("11D"), "fontFamily": s(FONT), "bold": lit("true"),
                                                 "outline": s("None")}}],
-                     "items": [{"properties": {"fontColor": solid(INK), "background": solid(CARD),
+                     "items": [{"properties": {"fontColor": solid(DARK), "background": solid(CARD),
                                                "fontSize": lit("11D"), "fontFamily": s(FONT)}}]},
          "visualContainerObjects": {**container(pad=(0, 0, 0, 0)),
                                     "visualHeader": [{"properties": {"show": lit("false")}}]},
@@ -784,18 +788,20 @@ class Page:
                              "position": {"x": x, "y": y, "z": n * 1000, "height": h, "width": w, "tabOrder": n * 1000},
                              **item})
 
-    def tile(self, vid, x, y, w, h, item, stripe=COBALT, icon=None, label=None, accent=None):
+    def tile(self, vid, x, y, w, h, item, stripe=COBALT, icon=None, label=None, accent=None, panel=False):
         """A white rounded card with a thin coloured stripe along its top. With a visual, the visual itself is the
         card (its own background, border and shadow); without one, a plain card shape is added for what follows."""
         if item:
             vco = item["visual"]["visualContainerObjects"]
-            vco.update({k: v for k, v in container(background=CARD, radius=8, border=LINE, shadow=True).items()
-                        if k in ("background", "border", "dropShadow")})
+            look = (dict(background=PANEL, radius=10, border=LINE, shadow=True) if panel else
+                    dict(background=CARD, radius=10, border=LINE, shadow=True, transparency=GLASS_T))
+            vco.update({k: v for k, v in container(**look).items() if k in ("background", "border", "dropShadow")})
             pad = vco["padding"][0]["properties"]
             pad["top"] = lit(f"{max(int(pad['top']['expr']['Literal']['Value'][:-1]), 14)}D")
             self.add(vid, x, y, w, h, item)
         else:
-            self.add(vid, x, y, w, h, shape(CARD, radius=8, border=LINE, shadow=True))
+            self.add(vid, x, y, w, h, shape(PANEL, radius=10, border=LINE, shadow=True) if panel else
+                     shape(CARD, radius=10, border=LINE, shadow=True, transparency=GLASS_T))
         self.add(vid + "Stripe", x + 10, y, w - 20, 4, shape(stripe, radius=2))
         if icon:
             self.add(vid + "Icon", x + 14, y + 16, 30, 30, textbox(
@@ -819,7 +825,7 @@ class Page:
         if self.kind == "Tooltip":
             page.update({"displayOption": "ActualSize", "visibility": "HiddenInViewMode", "type": "Tooltip",
                          "pageBinding": {"name": f"{self.name}Binding", "type": "Tooltip", "parameters": []}})
-            page["objects"] = {"background": [{"properties": {"color": solid(CARD), "transparency": lit("0D")}}]}
+            page["objects"] = {"background": [{"properties": {"color": solid(PANEL), "transparency": lit("0D")}}]}
         return page
 
 
@@ -866,26 +872,26 @@ def rail(page, filters="all"):
         page.add(vid, RAIL_X + 12, y, 196, 20, textbox([(text, 10, True, RAIL_MUTED)]))
 
     heading("lPages", 100, "PAGES")
-    page.add("navigator", RAIL_X + 8, 120, 200, 210, navigator())
+    page.add("navigator", RAIL_X + 8, 118, 200, 196, navigator())
     if filters == "all":
-        heading("lFilters", 336, "FILTERS")
+        heading("lFilters", 318, "FILTERS")
         for k, (vid, text, item) in enumerate([
                 ("fType", "Hospital type", slicer("hospital", "hospital_type", "type", "Hospital type")),
                 ("fOwner", "Owner", slicer("hospital", "ownership", "owner", "Owner")),
                 ("fArea", "Rural or urban", slicer("hospital", "rural_urban", "area", "Rural or urban")),
                 ("fState", "State", slicer("states", "state_name", "state", "State", search=True)),
                 ("fEhr", "EHR company", slicer("hospital", "ehr_group", "ehr", "EHR company"))]):
-            page.add(vid, RAIL_X + 14, 354 + 54 * k, 188, 52, item)
-        page.add("clearAll", RAIL_X + 14, 628, 188, 28, clear_button())
+            page.add(vid, RAIL_X + 14, 336 + 61 * k, 188, 60, item)      # 60 tall: the dropdown box is drawn low in its frame
+        page.add("clearAll", RAIL_X + 14, 644, 188, 26, clear_button())
     if filters == "hospital":
-        heading("lLookup", 336, "LOOK UP")
-        page.add("search", RAIL_X + 14, 354, 188, 52,
+        heading("lLookup", 318, "LOOK UP")
+        page.add("search", RAIL_X + 14, 336, 188, 60,
                  slicer("hospital", "hospital_label", "hospital", "Hospital name", default=F["default_hospital"],
                         search=True, filters=[in_filter("hospital", "in_latest", 1, "inLatest")]))
-        page.add("searchNote", RAIL_X + 12, 410, 196, 70, textbox(
+        page.add("searchNote", RAIL_X + 12, 404, 196, 70, textbox(
             [("Open the box and type part of a name, for example Mayo or Memorial.", 10.5, False, RAIL_TEXT)]))
-    page.add("credit", RAIL_X + 12, 662, 200, 54, textbox(
-        [("Data: Medicare (CMS) 2019-2024, federal EHR product list (ONC)", 9.5, False, RAIL_MUTED),
+    page.add("credit", RAIL_X + 12, 672, 204, 48, textbox(
+        [("Data: Medicare (CMS), ONC", 9, False, RAIL_MUTED),
          ("Built by Isaac Agyapong", 11, True, CARD)]))
 
 
@@ -940,7 +946,7 @@ def bars(category, measure, title, subtitle, colour_measure=None, sort_by_value=
 def hero(page):
     """Dark banner: question, plain-language headline from the data, three glass stat tiles and the 100-dot grid."""
     hx, hy, hw, hh = X0, 14, W, 246
-    page.add("hero", hx, hy, hw, hh, shape(NAVY, radius=12, shadow=True))
+    page.add("hero", hx, hy, hw, hh, shape(PANEL, radius=12, border=LINE, shadow=True))
     page.add("heroKicker", hx + 22, hy + 14, 640, 22, textbox(
         [("MEDICARE PROMOTING INTEROPERABILITY PROGRAM  ·  2024 REPORTING YEAR", 10, True, MINT)]))
     page.add("heroTitle", hx + 22, hy + 34, 650, 40, textbox([("Can U.S. hospitals share health records electronically?", 19, True, CARD)]))
@@ -960,18 +966,18 @@ def hero(page):
         page.add(f"glassLabel{k}", x + 10, hy + 206, tw - 20, 24, textbox([(label, 10.5, False, "#C9D6F5")], align="center"))
     # 100-dot grid: one dot per 1 in 100 hospitals shown, coloured by result
     every_cell = {"data": [{"dataViewWildcard": {"matchingOption": 1}}], "metadata": "hospital.Dot"}
-    hidden = {"fontColor": solid(NAVY), "backColor": solid(NAVY), "fontSize": lit("6D"), "outline": s("None")}
+    hidden = {"fontColor": solid(PANEL), "backColor": solid(PANEL), "fontSize": lit("6D"), "outline": s("None")}
     grid = {"visualType": "pivotTable",
             "query": {"queryState": {"Rows": projections([C("Dots", "row")]), "Columns": projections([C("Dots", "col")]),
                                      "Values": projections([M("Dot", " ")])}},
             "objects": {
                 "values": [{"properties": {"fontSize": lit("9D"), "fontFamily": s("Segoe UI Symbol"),
-                                           "backColorPrimary": solid(NAVY), "backColorSecondary": solid(NAVY)}},
+                                           "backColorPrimary": solid(PANEL), "backColorSecondary": solid(PANEL)}},
                            {"properties": {"fontColor": by_measure("Dot Colour")}, "selector": every_cell}],
                 "columnHeaders": [{"properties": hidden}], "rowHeaders": [{"properties": hidden}],
                 "subTotals": [{"properties": {"rowSubtotals": lit("false"), "columnSubtotals": lit("false")}}],
                 "grid": [{"properties": {"gridVertical": lit("false"), "gridHorizontal": lit("false"),
-                                         "outlineColor": solid(NAVY), "rowPadding": lit("0D")}}]},
+                                         "outlineColor": solid(PANEL), "rowPadding": lit("0D")}}]},
             "visualContainerObjects": {**container(pad=(0, 0, 0, 0)),
                                        "visualHeader": [{"properties": {"show": lit("false")}}]},
             "drillFilterOtherVisuals": True}
@@ -980,7 +986,7 @@ def hero(page):
         [("● ", 13, False, DOT_BLUE), ("met the standards", 10.5, False, "#E8EEFB")],
         [("● ", 13, False, DOT_RED), ("fell short", 10.5, False, "#E8EEFB")],
         [("● ", 13, False, DOT_PURPLE), ("fell short, no certified EHR", 10.5, False, "#E8EEFB")],
-        ("", 6, False, NAVY),
+        ("", 6, False, PANEL),
         ("Each dot is 1 in every 100 hospitals shown. The filters on the right change it.", 9.5, False, RAIL_MUTED)]))
 
 
@@ -1018,7 +1024,7 @@ def build_pages():
                                             "fontSize": lit("12D"), "fontFamily": s(FONT), "bold": lit("true"),
                                             "percentageLabelPrecision": lit("0L")}}],
                  **legend(show=False), "slices": [{"properties": {"innerRadiusRatio": lit("55L")}}],
-                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: GREY})}
+                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: SLATE})}
     for k, (measure, lab) in enumerate([("Type Hospitals", "All hospitals"), ("Type Short", "Hospitals that fell short")]):
         x = dx + 10 + k * (dw - 20) // 2
         p1.add(f"pairLabel{k}", x, rb + 56, (dw - 20) // 2, 22, textbox([(lab, 11, True, INK_2)], align="center"))
@@ -1027,7 +1033,7 @@ def build_pages():
             objects=donut_obj, pad=(0, 0, 0, 0)))
     p1.add("pairKey", dx + 10, rb + rbh - 28, dw - 20, 22, textbox(
         [[("● ", 12, False, TEAL), ("small rural hospitals (25 beds or fewer)     ", 10.5, False, INK_2),
-          ("● ", 12, False, GREY), ("general hospitals", 10.5, False, INK_2)]], align="center"))
+          ("● ", 12, False, SLATE), ("general hospitals", 10.5, False, INK_2)]], align="center"))
 
     # ---------------------------------------------------------------- 2. EHR companies
     p2 = Page("ehr", "EHR Companies")
@@ -1035,7 +1041,7 @@ def build_pages():
     header(p2, "The EHR company matters, even for the same kind of hospital",
            "I looked up each hospital's certified EHR ID in the federal product list to find the company behind it.")
     kpi_row(p2, [
-        ("◆", "Top 3 companies' share", NAVY, "Top3 Share", "Top3 Context"),
+        ("◆", "Top 3 companies' share", SKY, "Top3 Share", "Top3 Context"),
         ("✓", "Epic: fell short", RED, "Epic Short", "Epic Context"),
         ("✕", "TruBridge: fell short", RED, "TruBridge Short", "TruBridge Context"),
         ("∅", "No certified EHR", PURPLE, "No EHR Hospitals", "No EHR All Context"),
@@ -1044,8 +1050,8 @@ def build_pages():
     r2 = R1 + r1h + GAP
     p2.tile("market", X0, R1, half, r1h, bars(
         ("hospital", "main_developer", "EHR company"), "Market Share", "=Market Title",
-        "Share of hospitals by EHR company. Navy = the 3 biggest.", colour_measure="Market Colour",
-        inner=10, cat_size=10), stripe=NAVY)
+        "Share of hospitals by EHR company. Blue = the 3 biggest.", colour_measure="Market Colour",
+        inner=10, cat_size=10), stripe=SKY)
     p2.tile("ehrShort", X0 + half + GAP, R1, W - half - GAP, r1h, bars(
         ("hospital", "ehr_group", "EHR company"), "EHR Short", "=EHR Title",
         "Fell short in 2024 (40+ hospitals). Purple = no certified EHR.",
@@ -1058,7 +1064,7 @@ def build_pages():
         "=Matrix Title", "Share that fell short in 2024. Teal = small rural, grey = general hospitals.",
         sort=(M("Vendor Type Short"), "Descending"),
         objects={**axes(inner_padding=10, label_area=30), **labels(11), **legend(show=False),
-                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: GREY})}),
+                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: SLATE})}),
         stripe=TEAL)
     ex = X0 + mw + GAP
     p2.tile("meaning", ex, r2, W - mw - GAP, BOTTOM - r2, textbox([
@@ -1066,7 +1072,7 @@ def build_pages():
         ("Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.", 11.5, False, INK),
         ("TruBridge hospitals fall short far more often, even next to the same kind of hospital.", 11.5, False, INK),
         ("This is a link, not proof of cause: small budgets and few IT staff often come with cheaper systems.", 11, False, INK_2)],
-        pad=(12, 6, 14, 14)), stripe=NAVY)
+        pad=(12, 6, 14, 14)), stripe=SKY)
 
     # ---------------------------------------------------------------- 3. Money and history
     p3 = Page("money", "Money and History")
@@ -1076,7 +1082,7 @@ def build_pages():
     kpi_row(p3, [
         ("$", "Least profitable fifth", RED, "Least Profitable Short", "Least Profitable Context"),
         ("↘", "After 2 years of losses", RED, "Losses Short", "Losses Context"),
-        ("⟳", "Fell short every year", RED_D, "Every Year", "Every Year Context"),
+        ("⟳", "Fell short every year", RED, "Every Year", "Every Year Context"),
         ("✓", "Never fell short", COBALT, "Never", "Never Context"),
     ])
     p3.tile("fifths", X0, R1, half, RH, bars(
@@ -1101,24 +1107,24 @@ def build_pages():
     header(p4, "Where hospitals fall short",
            "Share of hospitals in each state that did not meet the standards in 2024. Hover over a state for details.")
     every_cell = {"data": [{"dataViewWildcard": {"matchingOption": 1}}], "metadata": "hospital.Tile Label"}
-    hidden_header = {"fontColor": solid(CARD), "backColor": solid(CARD), "fontSize": lit("6D")}
+    hidden_header = {"fontColor": solid(PANEL), "backColor": solid(PANEL), "fontSize": lit("6D")}
     tile_map = chart(
         "pivotTable", {"Rows": [C("states", "tile_y")], "Columns": [C("states", "tile_x")], "Values": [M("Tile Label", " ")]},
         "=Map Title", "Darker red = a bigger share of hospitals falling short", tooltip_page="stateTooltip",
         filters=[in_filter("states", "on_map", 1, "onMap")],
         objects={
             "values": [{"properties": {"fontSize": lit("13D"), "bold": lit("true"), "fontFamily": s(FONT),
-                                       "backColorPrimary": solid(CARD), "backColorSecondary": solid(CARD)}},
+                                       "backColorPrimary": solid(PANEL), "backColorSecondary": solid(PANEL)}},
                        {"properties": {"backColor": by_measure("Tile Colour"), "fontColor": by_measure("Tile Font")},
                         "selector": every_cell}],
             "columnHeaders": [{"properties": hidden_header}], "rowHeaders": [{"properties": hidden_header}],
             "subTotals": [{"properties": {"rowSubtotals": lit("false"), "columnSubtotals": lit("false")}}],
-            "grid": [{"properties": {"gridVertical": lit("true"), "gridVerticalColor": solid(CARD),
+            "grid": [{"properties": {"gridVertical": lit("true"), "gridVerticalColor": solid(PANEL),
                                      "gridVerticalWeight": lit("4D"), "gridHorizontal": lit("true"),
-                                     "gridHorizontalColor": solid(CARD), "gridHorizontalWeight": lit("4D"),
-                                     "outlineColor": solid(CARD), "rowPadding": lit("10D")}}]})
+                                     "gridHorizontalColor": solid(PANEL), "gridHorizontalWeight": lit("4D"),
+                                     "outlineColor": solid(PANEL), "rowPadding": lit("10D")}}]})
     mapw = 600
-    p4.tile("tileMap", X0, KPI_Y, mapw, BOTTOM - KPI_Y, tile_map, stripe=RED)
+    p4.tile("tileMap", X0, KPI_Y, mapw, BOTTOM - KPI_Y, tile_map, stripe=RED, panel=True)
     leg = [("Falling short   ", 10.5, True, INK_2)]
     for colr, lab in [("#FDF0EA", "under 5%"), ("#F9CDBB", "5-10%"), ("#F29A78", "10-15%"), (RED, "15-25%"), (RED_D, "25%+")]:
         leg += [("■ ", 14, False, colr), (lab + "   ", 10.5, False, INK_2)]
@@ -1132,19 +1138,19 @@ def build_pages():
         "The 10 states with the biggest share falling short", "States with 10 or more hospitals in the selection",
         tooltip_page="stateTooltip", sort=(M("Top 10 Share"), "Descending"),
         objects={"values": [{"properties": {"fontSize": lit("11D"), "fontFamily": s(FONT), "fontColor": solid(INK),
-                                            "backColorPrimary": solid(CARD), "backColorSecondary": solid("#F6F8FC")}}],
+                                            "backColorPrimary": solid(PANEL), "backColorSecondary": solid(PANEL_2)}}],
                  "columnHeaders": [{"properties": {"fontSize": lit("11D"), "fontFamily": s(FONT), "bold": lit("true"),
-                                                   "fontColor": solid(INK_2), "backColor": solid(CARD)}}],
+                                                   "fontColor": solid(INK_2), "backColor": solid(PANEL)}}],
                  "grid": [{"properties": {"rowPadding": lit("3D"), "gridHorizontalColor": solid(LINE),
-                                          "gridVerticalColor": solid(CARD), "outlineColor": solid(LINE)}}],
+                                          "gridVerticalColor": solid(PANEL), "outlineColor": solid(LINE)}}],
                  "total": [{"properties": {"totals": lit("false")}}],
                  "columnFormatting": [{"properties": {"dataBars": {"positiveColor": solid(RED_L), "negativeColor": solid(RED_L),
-                                                                   "axisColor": solid(CARD), "reverseDirection": lit("false"),
+                                                                   "axisColor": solid(PANEL), "reverseDirection": lit("false"),
                                                                    "hideText": lit("false")}},
                                        "selector": {"metadata": "hospital.Top 10 Share"}}],
                  "columnWidth": [{"properties": {"value": lit(f"{w}D")}, "selector": {"metadata": k}} for k, w in {
                      "states.state_name": 108, "hospital.Top 10 Hospitals": 70, "hospital.Top 10 Short": 70,
-                     "hospital.Top 10 Share": 92}.items()]}), stripe=RED)
+                     "hospital.Top 10 Share": 92}.items()]}), stripe=RED, panel=True)
     ky = KPI_Y + th + GAP
     kw = (tw - GAP) // 2
     kh = BOTTOM - ky
@@ -1160,14 +1166,14 @@ def build_pages():
     rail(p5, filters="hospital")
     header(p5, "Find a hospital",
            "Did it meet Medicare's standards for sharing records, which EHR does it use, and how has it done since 2019?")
-    p5.add("namePanel", X0, KPI_Y, W, 72, shape(NAVY, radius=10, shadow=True))     # dark panel for the key result
+    p5.add("namePanel", X0, KPI_Y, W, 72, shape(PANEL, radius=10, border=LINE, shadow=True))     # dark panel for the key result
     p5.add("nameTitle", X0 + 16, KPI_Y + 8, W - 32, 36, card("Profile Name", colour=CARD, size=20))
     p5.add("nameFacts", X0 + 16, KPI_Y + 42, W - 32, 24, card("Profile Facts", colour="#C9D6F5", size=11, bold=False))
     ky = KPI_Y + 72 + GAP
     w4 = (W - 3 * GAP) // 4
     for i, (glyph, label, accent, value, ctx, vcol) in enumerate([
             ("◉", "Status in 2024", COBALT, "Profile Status", "Profile Status Context", "Profile Status Colour"),
-            ("▣", "Main EHR company", NAVY, "Profile EHR", "Profile EHR Context", "Profile EHR Colour"),
+            ("▣", "Main EHR company", SKY, "Profile EHR", "Profile EHR Context", "Profile EHR Colour"),
             ("⟳", "Years it fell short", RED, "Profile Years", "Profile Years Context", "Profile Years Colour"),
             ("$", "Profit, latest report", GREY_D, "Profile Margin", "Profile Margin Context", "Profile Margin Colour")]):
         kpi(p5, i, X0 + i * (w4 + GAP), ky, w4, glyph, label, accent, value, ctx, value_measure=vcol, size=20)
@@ -1182,7 +1188,7 @@ def build_pages():
                  "dataPoint": fill_by("Strip Colour")}))
     mx = X0 + sw + GAP
     mw2 = W - sw - GAP
-    p5.tile("meaning", mx, ry, mw2, rh, None, stripe=NAVY)
+    p5.tile("meaning", mx, ry, mw2, rh, None, stripe=SKY)
     p5.add("meaningTitle", mx + 14, ry + 14, mw2 - 28, 28, textbox([("What this means", 14, True, INK)]))
     p5.add("meaningText", mx + 10, ry + 44, mw2 - 20, 124, card("Profile Sentence", colour=INK, size=12, bold=False, wrap=True))
     p5.add("checksTitle", mx + 14, ry + 172, mw2 - 28, 26, textbox([("Data checks for this hospital", 12, True, AMBER)]))
@@ -1222,7 +1228,7 @@ def build_pages():
         [("✓  ", 12, True, COBALT), (f"{F['finance_match']:.0%} of hospitals link to their yearly financial report", 11.5, False, INK)],
         [("!  ", 12, True, AMBER), (f"Hospitals with no financial report fall short far more often ({F['no_finance_short']:.0%} vs "
                                      f"{F['finance_short']:.0%}): missing data is itself a warning sign", 11.5, False, INK)],
-    ], pad=(12, 6, 14, 14)), stripe=NAVY)
+    ], pad=(12, 6, 14, 14)), stripe=SKY)
 
     # ---------------------------------------------------------------- 7. Data notes
     p7 = Page("dataNotes", "Data Notes")
@@ -1238,7 +1244,7 @@ def build_pages():
             "Fell short: did not meet them, which cuts the hospital's Medicare payments",
             "Small rural (critical access) hospital: 25 beds or fewer, far from other hospitals",
             "Certified EHR ID: the code that names the certified software a hospital used"]),
-        ("Where the data comes from", NAVY, [
+        ("Where the data comes from", SKY, [
             "CMS Hospital General Information, six yearly files 2019-2024 (status of every hospital)",
             "CMS Promoting Interoperability file, latest release (2024 reporting year, with EHR IDs)",
             "ONC Certified Health IT Product List: each EHR ID looked up to find the company behind it",
@@ -1284,7 +1290,8 @@ def find_base_theme():
 def build_report():
     shutil.rmtree(RPT, ignore_errors=True)
     pages = build_pages()
-    colours = {"paper": PAPER, "paper_top": PAPER_TOP, "grid": GRIDC, "card": CARD, "line": LINE, "rail": NAVY,
+    colours = {"paper": PAPER, "paper_top": PAPER_TOP, "grid": GRIDC, "card": CARD, "line": LINE, "rail": "#06122F",
+               "violet": "#8B5CF6",
                "cobalt": COBALT, "mint": MINT, "rail_x": RAIL_X}
     ASSETS.mkdir(parents=True, exist_ok=True)
     for old in ASSETS.glob("bg_*.png"):
@@ -1316,9 +1323,9 @@ def build_report():
     for im in images:
         shutil.copy(ASSETS / im, static / "RegisteredResources" / im)
     write_json(static / "RegisteredResources" / CUSTOM_THEME, {
-        "name": "Blueprint",
+        "name": "Deep Blue Glass",
         "dataColors": [COBALT, RED, PURPLE, TEAL, AMBER, SLATE, COBALT_L, RED_L],
-        "foreground": INK, "foregroundNeutralSecondary": INK_2, "background": CARD, "backgroundLight": "#F6F8FC",
+        "foreground": INK, "foregroundNeutralSecondary": INK_2, "background": PANEL, "backgroundLight": PANEL_2,
         "tableAccent": COBALT,
         "textClasses": {"title": {"fontFace": FONT, "color": INK}, "label": {"fontFace": FONT, "color": INK_2},
                         "callout": {"fontFace": FONT, "color": INK}, "header": {"fontFace": FONT, "color": INK}}})
