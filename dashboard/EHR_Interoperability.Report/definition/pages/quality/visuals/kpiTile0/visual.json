@@ -3,7 +3,7 @@
   "name": "kpiTile0",
   "position": {
     "x": 24,
-    "y": 88,
+    "y": 78,
     "z": 16000,
     "height": 104,
     "width": 245,
@@ -54,7 +54,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -130,7 +130,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },

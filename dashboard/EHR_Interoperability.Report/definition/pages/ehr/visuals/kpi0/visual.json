@@ -3,11 +3,11 @@
   "name": "kpi0",
   "position": {
     "x": 36,
-    "y": 134,
-    "z": 20000,
-    "height": 34,
+    "y": 122,
+    "z": 19000,
+    "height": 38,
     "width": 221,
-    "tabOrder": 20000
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "card",
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5CC8FF'"
+                      "Value": "'#2563EB'"
                     }
                   }
                 }
@@ -59,7 +59,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -142,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -153,7 +153,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -164,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

@@ -3,11 +3,11 @@
   "name": "meaningTitle",
   "position": {
     "x": 570,
-    "y": 302,
-    "z": 43000,
+    "y": 292,
+    "z": 37000,
     "height": 28,
     "width": 456,
-    "tabOrder": 43000
+    "tabOrder": 37000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "What this means",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel",
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -94,7 +94,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -105,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

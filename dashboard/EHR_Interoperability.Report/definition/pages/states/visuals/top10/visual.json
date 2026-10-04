@@ -3,11 +3,11 @@
   "name": "top10",
   "position": {
     "x": 636,
-    "y": 88,
-    "z": 19000,
+    "y": 78,
+    "z": 18000,
     "height": 440,
     "width": 404,
-    "tabOrder": 19000
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "tableEx",
@@ -113,7 +113,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -144,7 +144,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -175,7 +175,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -198,7 +198,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },
@@ -241,7 +241,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -252,7 +252,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -263,7 +263,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }
@@ -328,7 +328,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -337,21 +337,21 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "13D"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI Semibold'"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -387,7 +387,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }
@@ -396,14 +396,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "10D"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -453,7 +453,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -462,7 +462,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -473,7 +473,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -484,7 +484,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#13296A'"
+                      "Value": "'#F4F6FA'"
                     }
                   }
                 }
@@ -506,7 +506,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -522,7 +522,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }
@@ -533,7 +533,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -557,7 +557,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -568,7 +568,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -579,7 +579,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -610,7 +610,7 @@
                   "color": {
                     "expr": {
                       "Literal": {
-                        "Value": "'#FFB199'"
+                        "Value": "'#F0A8A8'"
                       }
                     }
                   }
@@ -621,7 +621,7 @@
                   "color": {
                     "expr": {
                       "Literal": {
-                        "Value": "'#FFB199'"
+                        "Value": "'#F0A8A8'"
                       }
                     }
                   }
@@ -632,7 +632,7 @@
                   "color": {
                     "expr": {
                       "Literal": {
-                        "Value": "'#0E2259'"
+                        "Value": "'#FFFFFF'"
                       }
                     }
                   }
@@ -665,7 +665,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "108D"
+                  "Value": "100D"
                 }
               }
             }
@@ -679,7 +679,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "80D"
                 }
               }
             }
@@ -693,7 +693,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "74D"
                 }
               }
             }
@@ -707,7 +707,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "92D"
+                  "Value": "86D"
                 }
               }
             }

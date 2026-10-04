@@ -3,11 +3,11 @@
   "name": "clearAll",
   "position": {
     "x": 1078,
-    "y": 644,
-    "z": 11000,
+    "y": 616,
+    "z": 8000,
     "height": 26,
     "width": 188,
-    "tabOrder": 11000
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "actionButton",
@@ -100,7 +100,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },

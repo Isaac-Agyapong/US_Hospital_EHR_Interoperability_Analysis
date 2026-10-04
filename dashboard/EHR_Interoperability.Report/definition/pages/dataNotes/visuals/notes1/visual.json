@@ -3,9 +3,9 @@
   "name": "notes1",
   "position": {
     "x": 24,
-    "y": 88,
+    "y": 78,
     "z": 9000,
-    "height": 618,
+    "height": 628,
     "width": 330,
     "tabOrder": 9000
   },
@@ -23,8 +23,8 @@
                     "value": "Words used here",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#5B8DEF",
-                      "fontFamily": "Corbel",
+                      "color": "#1F4E9E",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -36,8 +36,8 @@
                     "value": "•  EHR: electronic health record, the software a hospital keeps patient records in",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -48,8 +48,8 @@
                     "value": "•  Interoperability: records that can move safely between hospitals, doctors, labs and patients",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -60,8 +60,8 @@
                     "value": "•  Met the standards: met Medicare's Promoting Interoperability program for the year (certified EHR, sharing records, e-prescribing, patient online access, reporting to public health)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -72,8 +72,8 @@
                     "value": "•  Fell short: did not meet them, which cuts the hospital's Medicare payments",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -84,8 +84,8 @@
                     "value": "•  Small rural (critical access) hospital: 25 beds or fewer, far from other hospitals",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -96,8 +96,8 @@
                     "value": "•  Certified EHR ID: the code that names the certified software a hospital used",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -132,7 +132,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -154,7 +154,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -208,7 +208,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },
@@ -251,7 +251,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -262,7 +262,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

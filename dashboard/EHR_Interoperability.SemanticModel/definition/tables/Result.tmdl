@@ -1,0 +1,16 @@
+table Result
+	lineageTag: 1ccee87e-b427-57a4-89d8-26a3b3fe6abf
+
+	column result
+		dataType: string
+		lineageTag: 64349a6d-aada-5433-8ef8-d3ddfa496055
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [result]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Result = calculated
+		mode: import
+		source =
+				DATATABLE ( "result", STRING, { { "Fell short" }, { "Met the standards" } } )

@@ -3,11 +3,11 @@
   "name": "kpiTile1Label",
   "position": {
     "x": 331,
-    "y": 188,
-    "z": 24000,
-    "height": 32,
+    "y": 180,
+    "z": 22000,
+    "height": 30,
     "width": 189,
-    "tabOrder": 24000
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,10 +22,9 @@
                   {
                     "value": "Main EHR company",
                     "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel",
-                      "fontWeight": "bold"
+                      "fontSize": "10.5pt",
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -83,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -94,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -105,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

@@ -3,11 +3,11 @@
   "name": "lLookup",
   "position": {
     "x": 1076,
-    "y": 318,
-    "z": 5000,
+    "y": 288,
+    "z": 2000,
     "height": 20,
     "width": 196,
-    "tabOrder": 5000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,9 +22,9 @@
                   {
                     "value": "LOOK UP",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9.5pt",
                       "color": "#9FB3E0",
-                      "fontFamily": "Corbel",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -94,7 +94,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -105,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

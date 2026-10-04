@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pairKey",
   "position": {
-    "x": 546,
-    "y": 678,
-    "z": 42000,
-    "height": 22,
-    "width": 484,
-    "tabOrder": 42000
+    "x": 30,
+    "y": 676,
+    "z": 53000,
+    "height": 24,
+    "width": 318,
+    "tabOrder": 53000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,32 +23,32 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#2DD4BF",
-                      "fontFamily": "Corbel"
+                      "color": "#0D9488",
+                      "fontFamily": "Segoe UI"
                     }
                   },
                   {
-                    "value": "small rural hospitals (25 beds or fewer)     ",
+                    "value": "small rural   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel"
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI"
                     }
                   },
                   {
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#B8C3D9",
-                      "fontFamily": "Corbel"
+                      "color": "#94A3B8",
+                      "fontFamily": "Segoe UI"
                     }
                   },
                   {
-                    "value": "general hospitals",
+                    "value": "general",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel"
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ],
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -129,7 +129,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

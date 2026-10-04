@@ -3,11 +3,11 @@
   "name": "meaning",
   "position": {
     "x": 556,
-    "y": 288,
-    "z": 41000,
-    "height": 418,
+    "y": 278,
+    "z": 36000,
+    "height": 428,
     "width": 484,
-    "tabOrder": 41000
+    "tabOrder": 36000
   },
   "visual": {
     "visualType": "textbox",
@@ -54,7 +54,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -130,7 +130,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },

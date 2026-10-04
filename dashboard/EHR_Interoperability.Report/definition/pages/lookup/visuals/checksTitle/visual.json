@@ -3,11 +3,11 @@
   "name": "checksTitle",
   "position": {
     "x": 570,
-    "y": 460,
-    "z": 45000,
+    "y": 450,
+    "z": 39000,
     "height": 26,
     "width": 456,
-    "tabOrder": 45000
+    "tabOrder": 39000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "Data checks for this hospital",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#FBBF24",
-                      "fontFamily": "Corbel",
+                      "color": "#D97706",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -94,7 +94,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -105,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

@@ -3,11 +3,11 @@
   "name": "credit",
   "position": {
     "x": 1076,
-    "y": 672,
-    "z": 5000,
-    "height": 48,
+    "y": 660,
+    "z": 2000,
+    "height": 56,
     "width": 204,
-    "tabOrder": 5000
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Data: Medicare (CMS), ONC",
+                    "value": "4,489 Hospitals  ·  2019-2024",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#9FB3E0",
-                      "fontFamily": "Corbel"
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -32,12 +32,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Built by Isaac Agyapong",
+                    "value": "Data: Medicare (CMS) and the ONC certified EHR list",
                     "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel",
-                      "fontWeight": "bold"
+                      "fontSize": "9pt",
+                      "color": "#9FB3E0",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -95,7 +94,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -106,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -117,7 +116,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

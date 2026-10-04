@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pairLabel0",
   "position": {
-    "x": 546,
-    "y": 550,
-    "z": 38000,
+    "x": 30,
+    "y": 522,
+    "z": 49000,
     "height": 22,
-    "width": 242,
-    "tabOrder": 38000
+    "width": 159,
+    "tabOrder": 49000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "All hospitals",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel",
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -84,7 +84,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -95,7 +95,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -106,7 +106,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

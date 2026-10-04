@@ -3,11 +3,11 @@
   "name": "kpiTile3Icon",
   "position": {
     "x": 809,
-    "y": 188,
-    "z": 35000,
+    "y": 178,
+    "z": 31000,
     "height": 30,
     "width": 30,
-    "tabOrder": 35000
+    "tabOrder": 31000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "$",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#B8C3D9",
-                      "fontFamily": "Corbel",
+                      "color": "#64748B",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -52,7 +52,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F6F8FA'"
+                      "Value": "'#ECEEF1'"
                     }
                   }
                 }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#B8C3D9'"
+                      "Value": "'#64748B'"
                     }
                   }
                 }

@@ -23,8 +23,8 @@
                     "value": "Fell short in 2024",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel"
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -82,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

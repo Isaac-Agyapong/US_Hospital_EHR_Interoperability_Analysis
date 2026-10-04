@@ -59,19 +59,20 @@ S_VISUAL = f"{SCHEMA}/item/report/definition/visualContainer/1.4.0/schema.json"
 BASE_THEME = "CY24SU10"
 CUSTOM_THEME = "BlueprintTheme.json"
 
-# palette
-# deep blue gradient page, frosted-glass cards, solid deep-blue panels; colours brightened to read on dark
-COBALT, COBALT_L, NAVY, SKY = "#5B8DEF", "#A9BFF2", "#0A1A45", "#5CC8FF"
-RED, RED_L, RED_D = "#FF6B47", "#FFB199", "#C2321A"
-PURPLE, AMBER, TEAL, SLATE, GREY = "#A78BFA", "#FBBF24", "#2DD4BF", "#B8C3D9", "#6E7FA3"
-GREY_D = "#B8C3D9"
-PANEL, PANEL_2, DARK = "#0E2259", "#13296A", "#141B2D"
-DOT_BLUE, DOT_RED, DOT_PURPLE = "#7FA6FF", "#FF7A59", "#C4A5FF"    # brighter tints for the navy hero
-RAIL_TEXT, RAIL_MUTED = "#E8EEFB", "#9FB3E0"          # neutral accent for "all hospitals" cards (grey = everything else)
-INK, INK_2, MUTED, LINE, CARD = "#FFFFFF", "#C9D6F5", "#9FB3E0", "#3E5AA0", "#FFFFFF"
-PAPER, PAPER_TOP, GRIDC, MINT = "#0B1F4D", "#2B1A6B", "#5CC8FF", "#5EEAD4"
-GLASS_T = 89                # card transparency (%): white glass over the gradient
-FONT = "Corbel"
+# palette: light grey page, white cards, navy title banner and rail; navy = main colour, red = fell short,
+# purple = no certified EHR, teal = small rural, grey = everything else, amber = data problems
+COBALT, COBALT_L, NAVY, SKY = "#1F4E9E", "#9DB4E0", "#0B1F4D", "#2563EB"
+RED, RED_L, RED_D = "#D64545", "#F0A8A8", "#9F1D1D"
+PURPLE, AMBER, TEAL, SLATE, GREY = "#7C3AED", "#D97706", "#0D9488", "#94A3B8", "#B8C1CF"
+GREY_D = "#64748B"
+PANEL, PANEL_2, DARK = "#FFFFFF", "#F4F6FA", "#1E293B"
+CARD_D, REST = "#FFFFFF", "#B8C1CF"
+DOT_BLUE, DOT_RED, DOT_PURPLE = "#1F4E9E", "#D64545", "#7C3AED"
+RAIL_TEXT, RAIL_MUTED = "#E8EEFB", "#9FB3E0"
+INK, INK_2, MUTED, LINE, CARD = "#1E293B", "#475569", "#64748B", "#DDE3EC", "#FFFFFF"
+PAPER, PAPER_TOP, GRIDC, MINT = "#E9EDF3", "#F1F4F8", "#E9EDF3", "#5EEAD4"
+GLASS_T = 0
+FONT = "Segoe UI"
 PCT, PCT1, INT = "0%", "0.0%", "#,0"
 GENERAL, RURAL = "General hospital", "Small rural (critical access)"
 NO_EHR = "No EHR ID reported"
@@ -195,19 +196,19 @@ MEASURES = [
      PCT, "Charts"),
     ("hospital", "Size Colour",
      "VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[size_band] ), \"@v\", [Size Short] ), NOT ISBLANK ( [@v] ) )\n"
-     f'RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "{RED}", "{RED_L}" )', None, "Colours"),
+     f'RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "{RED}", "{REST}" )', None, "Colours"),
     ("hospital", "Size Title",
      top_bottom("hospital[size_band]", 20,
-                '"Hospitals with " & IF ( LEFT ( _h, 5 ) = "Under", LOWER ( _h ), _h & " beds" ) & " fall short most ("'
-                ' & _hp & "), those with " & IF ( LEFT ( _l, 5 ) = "Under", LOWER ( _l ), _l & " beds" ) & " least (" & _lp & ")"',
+                'IF ( LEFT ( _h, 5 ) = "Under", _h, _h & " beds" ) & ": " & _hp & " fall short; "'
+                ' & IF ( LEFT ( _l, 5 ) = "Under", LOWER ( _l ), _l & " beds" ) & ": " & _lp',
                 "Share falling short by number of beds"), None, "Titles"),
     ("hospital", "Owner Short", "IF ( [Hospitals] >= 50, [Short Share] )", PCT, "Charts"),
     ("hospital", "Owner Colour",
      "VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[ownership] ), \"@v\", [Owner Short] ), NOT ISBLANK ( [@v] ) )\n"
-     f'RETURN IF ( [Owner Short] = MINX ( _t, [@v] ), "{RED_L}", "{RED}" )', None, "Colours"),
+     f'RETURN IF ( [Owner Short] = MAXX ( _t, [@v] ), "{RED}", "{REST}" )', None, "Colours"),
     ("hospital", "Owner Title",
      top_bottom("hospital[ownership]", 50,
-                '_h & " hospitals fall short most (" & _hp & "), " & LOWER ( _l ) & " hospitals least (" & _lp & ")"',
+                '_h & " fall short most (" & _hp & "), " & LOWER ( _l ) & " least (" & _lp & ")"',
                 "Share falling short by owner"), None, "Titles"),
     ("hospital", "Type Hospitals", "[Hospitals]", INT, "Charts"),
     ("hospital", "Type Short", "[Short]", INT, "Charts"),
@@ -215,7 +216,7 @@ MEASURES = [
      f"VAR _a = DIVIDE ( CALCULATE ( [Hospitals], {kf(eq('hospital[hospital_type]', RURAL))} ), [Hospitals] )\n"
      f"VAR _b = DIVIDE ( CALCULATE ( [Short], {kf(eq('hospital[hospital_type]', RURAL))} ), [Short] )\n"
      'RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ) || _a = 1, "Who the hospitals that fell short are",\n'
-     '    "Small rural: " & FORMAT ( _a, "0%" ) & " of hospitals, but " & FORMAT ( _b, "0%" ) & " of those falling short" )',
+     '    "Small rural: " & FORMAT ( _a, "0%" ) & " of all, " & FORMAT ( _b, "0%" ) & " of shortfalls" )',
      None, "Titles"),
 
     # ---- EHR companies (market share ignores the EHR company filter: it describes the whole market)
@@ -263,7 +264,7 @@ MEASURES = [
      f'VAR _t = CALCULATE ( [Short Share], {kf(eq("hospital[ehr_group]", "TruBridge (CPSI)"), eq("hospital[hospital_type]", RURAL))} )\n'
      f'VAR _e = CALCULATE ( [Short Share], {kf(eq("hospital[ehr_group]", "Epic"), eq("hospital[hospital_type]", RURAL))} )\n'
      'RETURN IF ( ISBLANK ( _t ) || ISBLANK ( _e ), "Share falling short by EHR company, small rural vs general hospitals",\n'
-     '    "Same kind of hospital: small rural ones fall short " & FORMAT ( _t, "0%" ) & " on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic" )',
+     '    "Small rural hospitals: " & FORMAT ( _t, "0%" ) & " fall short on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic" )',
      None, "Titles"),
 
     # ---- money, size and history
@@ -288,7 +289,7 @@ MEASURES = [
     ("hospital", "Money Title",
      f'VAR _a = {share_for(eq("hospital[lost_money]", SHORT_LBL))}\nVAR _b = {share_for(eq("hospital[lost_money]", "Did not"))}\n'
      'RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ) || _b = 0, "Share falling short, by whether the hospital lost money",\n'
-     '    "Hospitals that lost money two years in a row fall short " & FORMAT ( DIVIDE ( _a, _b ), "0.0" ) & " times as often" )',
+     '    "Losing money: " & FORMAT ( DIVIDE ( _a, _b ), "0.0" ) & " times as likely to fall short" )',
      None, "Titles"),
     ("hospital", "History Count", "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[history] ) ), [Hospitals] )", INT, "Money"),
     ("hospital", "History Colour",
@@ -317,7 +318,7 @@ MEASURES = [
     ("hospital", "Tile Colour",
      "VAR _r = [Short Share]\nRETURN SWITCH ( TRUE (),\n"
      f'    ISBLANK ( SELECTEDVALUE ( states[state] ) ), "{PANEL}",\n'
-     '    ISBLANK ( _r ), "#2A3E78",\n    _r < 0.05, "#FDF0EA",\n    _r < 0.10, "#F9CDBB",\n    _r < 0.15, "#F29A78",\n'
+     '    ISBLANK ( _r ), "#E2E8F0",\n    _r < 0.05, "#FDF0EA",\n    _r < 0.10, "#F9CDBB",\n    _r < 0.15, "#F29A78",\n'
      f'    _r < 0.25, "{RED}",\n    "{RED_D}" )', None, "Map"),
     ("hospital", "Tile Font", f'IF ( [Short Share] >= 0.15 || ISBLANK ( [Short Share] ), "#FFFFFF", "{DARK}" )', None, "Map"),
     ("hospital", "Fifth States",
@@ -357,17 +358,63 @@ MEASURES = [
     ("hospital", "Disagree Context", '"hospitals rated differently"', None, "KPI"),
     ("hospital", "Disagree Count By Type", "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[disagree_type] ) ), [Disagree Count] )", INT, "Quality"),
     ("hospital", "Files Count", "IF ( SELECTEDVALUE ( hospital[n_files] ) > 0, COUNTROWS ( hospital ) )", INT, "Quality"),
-    ("hospital", "Files Colour", f'IF ( SELECTEDVALUE ( hospital[n_files] ) = 6, "{GREY}", "{AMBER}" )', None, "Colours"),
+    ("hospital", "Files Colour", f'IF ( SELECTEDVALUE ( hospital[n_files] ) = 6, "{REST}", "{AMBER}" )', None, "Colours"),
     ("hospital", "ID Title",
      f'VAR _p = DIVIDE ( [Hospitals] - CALCULATE ( [Hospitals], {kf(eq("hospital[id_quality]", "Valid ID, found in the federal list"))} ), [Hospitals] )\n'
      'RETURN IF ( ISBLANK ( _p ), "What hospitals put in the EHR ID field", FORMAT ( ROUND ( _p * 100, 0 ), "0" ) & " in 100 hospitals have a problem in the EHR ID field" )',
      None, "Titles"),
     ("hospital", "Disagree Title",
-     'FORMAT ( [Disagree Count], "#,0" ) & " hospitals get a different answer in the two Medicare files"', None, "Titles"),
+     'FORMAT ( [Disagree Count], "#,0" ) & " hospitals rated differently by the two files"', None, "Titles"),
     ("hospital", "Files Title",
      'VAR _a = CALCULATE ( COUNTROWS ( hospital ), KEEPFILTERS ( hospital[n_files] = 6 ) )\n'
      'VAR _b = CALCULATE ( COUNTROWS ( hospital ), KEEPFILTERS ( hospital[n_files] > 0 ) )\n'
      'RETURN FORMAT ( _a + 0, "#,0" ) & " of " & FORMAT ( _b + 0, "#,0" ) & " hospitals appear in all six yearly files"', None, "Titles"),
+]
+
+RURAL_EQ = eq("hospital[hospital_type]", RURAL)
+MEASURES += [
+    ("hospital_year", "Rural Year Share", f"CALCULATE ( [Year Share], {kf(eq('hospital_year[year_type]', RURAL))} )", PCT, "Spark"),
+    ("hospital", "Short 2019 Context",
+     f"VAR _a = CALCULATE ( [Year Share], {kf('hospital_year[snapshot_year] = 2019')} )\n"
+     'RETURN FORMAT ( [Short] + 0, "#,0" ) & " hospitals" & IF ( ISBLANK ( _a ), "", "  ·  " & FORMAT ( _a, "0%" ) & " in 2019" )',
+     None, "KPI"),
+    ("hospital", "No EHR Pct", "[No EHR Share]", PCT, "KPI"),
+    ("hospital", "No EHR Context", 'FORMAT ( [No EHR Short] + 0, "#,0" ) & " of the " & FORMAT ( [Short] + 0, "#,0" ) & " that fell short"', None, "KPI"),
+    ("hospital", "Rural Short", share_for(RURAL_EQ), PCT, "KPI"),
+    ("hospital", "Rural Context",
+     f'VAR _g = {share_for(eq("hospital[hospital_type]", GENERAL))}\n'
+     'RETURN IF ( ISBLANK ( _g ), "small rural hospitals shown", "vs " & FORMAT ( _g, "0%" ) & " of general hospitals" )', None, "KPI"),
+    ("hospital", "Dots Met", 'IF ( ISBLANK ( [Hospitals] ), "–", FORMAT ( 100 - ROUND ( [Short Share] * 100, 0 ), "0" ) )', None, "Hero"),
+    ("hospital", "Dots Short",
+     'IF ( ISBLANK ( [Hospitals] ), "–", FORMAT ( ROUND ( [Short Share] * 100, 0 ) - ROUND ( DIVIDE ( [No EHR Short], [Hospitals] ) * 100, 0 ), "0" ) )',
+     None, "Hero"),
+    ("hospital", "Dots No EHR", 'IF ( ISBLANK ( [Hospitals] ), "–", FORMAT ( ROUND ( DIVIDE ( [No EHR Short], [Hospitals] ) * 100, 0 ), "0" ) )',
+     None, "Hero"),
+    ("hospital", "Owner Tree Title",
+     'VAR _t = TOPN ( 1, FILTER ( ADDCOLUMNS ( VALUES ( hospital[ownership] ), "@s", [Short] ), NOT ISBLANK ( [@s] ) ), [@s], DESC )\n'
+     'RETURN IF ( ISBLANK ( [Short] ), "Who owns the hospitals that fell short",\n'
+     '    MAXX ( _t, hospital[ownership] ) & ": " & FORMAT ( MAXX ( _t, [@s] ), "#,0" ) & " of the " & FORMAT ( [Short], "#,0" ) & " that fell short" )',
+     None, "Titles"),
+    ("hospital", "Market Count",
+     "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[main_developer] ) ), CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ) ) )",
+     INT, "EHR"),
+    ("hospital", "EHR Hospitals", "IF ( NOT ISBLANK ( [EHR Short] ), [Hospitals] )", INT, "EHR"),
+    ("hospital", "EHR Short Count", "IF ( NOT ISBLANK ( [EHR Short] ), [Short] + 0 )", INT, "EHR"),
+    ("hospital", "Gauge Min", "0", PCT, "EHR"),
+    ("hospital", "Gauge Max", "0.3", PCT, "EHR"),
+    ("hospital", "Rural TruBridge", share_for(eq("hospital[ehr_group]", "TruBridge (CPSI)"), RURAL_EQ), PCT, "EHR"),
+    ("hospital", "Rural MEDITECH", share_for(eq("hospital[ehr_group]", "MEDITECH"), RURAL_EQ), PCT, "EHR"),
+    ("hospital", "Rural Epic", share_for(eq("hospital[ehr_group]", "Epic"), RURAL_EQ), PCT, "EHR"),
+    ("hospital", "Ring Lost",
+     f'VAR _s = CALCULATE ( [Short] + 0, {kf(eq("hospital[lost_money]", SHORT_LBL))} )\n'
+     f'VAR _n = CALCULATE ( [Hospitals], {kf(eq("hospital[lost_money]", SHORT_LBL))} )\n'
+     'RETURN SWITCH ( SELECTEDVALUE ( Result[result] ), "Fell short", _s, "Met the standards", _n - _s )', INT, "Money"),
+    ("hospital", "Ring Not",
+     f'VAR _s = CALCULATE ( [Short] + 0, {kf(eq("hospital[lost_money]", "Did not"))} )\n'
+     f'VAR _n = CALCULATE ( [Hospitals], {kf(eq("hospital[lost_money]", "Did not"))} )\n'
+     'RETURN SWITCH ( SELECTEDVALUE ( Result[result] ), "Fell short", _s, "Met the standards", _n - _s )', INT, "Money"),
+    ("hospital", "Disagree Up", f'FORMAT ( CALCULATE ( [Disagree Count], {kf(eq("hospital[disagree_type]", "Short in Oct 2024 file, met in latest"))} ), "#,0" )', None, "Quality"),
+    ("hospital", "Disagree Down", f'FORMAT ( CALCULATE ( [Disagree Count], {kf(eq("hospital[disagree_type]", "Met in Oct 2024 file, short in latest"))} ), "#,0" )', None, "Quality"),
 ]
 
 # every KPI number also gets a text version, so a card shows "–" instead of "(Blank)" when a filter leaves no hospitals
@@ -485,7 +532,7 @@ def table_tmdl(table, columns):
 
 def check_names():
     """Power BI rejects a measure whose name matches any column (case-insensitive) or another measure."""
-    cols = {c.lower() for t in TABLES for c, *_ in csv_columns(t)} | {"row", "col"}
+    cols = {c.lower() for t in TABLES for c, *_ in csv_columns(t)} | {"row", "col", "result"}
     names = [n.lower() for _, n, *_ in MEASURES]
     clash = sorted({n for n in names if n in cols} | {n for n in names if names.count(n) > 1})
     if clash:
@@ -496,7 +543,8 @@ def calc_table(name, cols, dax):
     """Small DAX table. cols: (column, dataType)."""
     out = [f"table {name}", f"\tlineageTag: {tag(name)}", ""]
     for col, dtype in cols:
-        out += [f"\tcolumn {col}", f"\t\tdataType: {dtype}", "\t\tformatString: 0", f"\t\tlineageTag: {tag(name, col)}",
+        out += [f"\tcolumn {col}", f"\t\tdataType: {dtype}", *(["\t\tformatString: 0"] if dtype == "int64" else []),
+                f"\t\tlineageTag: {tag(name, col)}",
                 "\t\tsummarizeBy: none", "\t\tisNameInferred", f"\t\tsourceColumn: [{col}]", "",
                 "\t\tannotation SummarizationSetBy = Automatic", ""]
     out += [f"\tpartition {name} = calculated", "\t\tmode: import", "\t\tsource =", indent(dax, 4), ""]
@@ -513,7 +561,7 @@ def build_model():
         "model Model", "\tculture: en-US", "\tdefaultPowerBIDataSourceVersion: powerBI_V3",
         "\tsourceQueryCulture: en-US", "\tdataAccessOptions", "\t\tlegacyRedirects", "\t\treturnErrorValuesAsNull",
         "", "annotation __PBI_TimeIntelligenceEnabled = 0", "",
-        *[f"ref table {t}" for t in TABLES + ["Dots"]], ""]))
+        *[f"ref table {t}" for t in TABLES + ["Dots", "Result"]], ""]))
     folder = str(DATA) + "\\"
     write(d / "expressions.tmdl", "\n".join([
         f'expression DataFolder = "{folder}" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]',
@@ -523,6 +571,8 @@ def build_model():
     write(d / "tables" / "Dots.tmdl", calc_table(      # 10 x 10 grid for the hero dot chart, not related to anything
         "Dots", [("row", "int64"), ("col", "int64")],
         'SELECTCOLUMNS ( GENERATESERIES ( 0, 99, 1 ), "row", INT ( [Value] / 10 ), "col", MOD ( [Value], 10 ) )'))
+    write(d / "tables" / "Result.tmdl", calc_table(    # two slices for the "fell short / met" rings
+        "Result", [("result", "string")], 'DATATABLE ( "result", STRING, { { "Fell short" }, { "Met the standards" } } )'))
     write(d / "relationships.tmdl", "\n".join([
         f"relationship {tag('rel', 'year')}", "\tfromColumn: hospital_year.ccn", "\ttoColumn: hospital.ccn", "",
         f"relationship {tag('rel', 'states')}", "\tfromColumn: hospital.state", "\ttoColumn: states.state", ""]))
@@ -598,8 +648,8 @@ def container(title=None, subtitle=None, tooltip_page=None, pad=(12, 6, 12, 12),
         "border": [{"properties": {"show": lit("true" if background else "false"),
                                    **({"color": solid(border or background), "radius": lit(f"{radius}D")} if background else {})}}],
         "dropShadow": [{"properties": {
-            "show": lit("true"), "color": solid("#000000"), "position": s("Outer"), "preset": s("Custom"),
-            "transparency": lit("70D"), "shadowBlur": lit("10D"), "shadowSpread": lit("0D"),
+            "show": lit("true"), "color": solid("#1E293B"), "position": s("Outer"), "preset": s("Custom"),
+            "transparency": lit("90D"), "shadowBlur": lit("10D"), "shadowSpread": lit("0D"),
             "shadowDistance": lit("2D"), "angle": lit("90D")}}] if shadow else [{"properties": {"show": lit("false")}}],
         "visualHeader": [{"properties": {"background": solid(PANEL), "border": solid(LINE), "foreground": solid(INK_2)}}],
         "padding": [{"properties": {"top": lit(f"{pad[0]}D"), "bottom": lit(f"{pad[1]}D"),
@@ -608,11 +658,11 @@ def container(title=None, subtitle=None, tooltip_page=None, pad=(12, 6, 12, 12),
     }
     if title:
         text = mexpr(title[1:]) if title.startswith("=") else s(title)
-        objs["title"] = [{"properties": {"show": lit("true"), "text": text, "fontColor": solid(INK), "fontSize": lit("14D"),
-                                         "fontFamily": s(FONT), "bold": lit("true"), "titleWrap": lit("true")}}]
+        objs["title"] = [{"properties": {"show": lit("true"), "text": text, "fontColor": solid(INK), "fontSize": lit("13D"),
+                                         "fontFamily": s("Segoe UI Semibold"), "bold": lit("false"), "titleWrap": lit("true")}}]
     if subtitle:
         objs["subTitle"] = [{"properties": {"show": lit("true"), "text": s(subtitle), "fontColor": solid(INK_2),
-                                            "fontSize": lit("11D"), "fontFamily": s(FONT), "titleWrap": lit("true")}}]
+                                            "fontSize": lit("10D"), "fontFamily": s(FONT), "titleWrap": lit("true")}}]
     if tooltip_page:
         objs["visualTooltip"] = [{"properties": {"type": s("ReportPage"), "section": s(tooltip_page)}}]
     return objs
@@ -630,7 +680,7 @@ def axes(show_value=False, cat_size=11, inner_padding=None, label_area=None, cat
         cat["axisType"] = s("Categorical")
     val = {"show": lit("true" if show_value else "false"), "showAxisTitle": lit("false"), "labelColor": solid(INK_2),
            "fontSize": lit("10D"), "fontFamily": s(FONT), "gridlineShow": lit("true" if show_value else "false"),
-           "gridlineColor": solid("#2C4485")}
+           "gridlineColor": solid("#E2E8F0")}
     if value_start is not None:
         val["start"] = lit(f"{value_start}D")
     if value_end is not None:
@@ -640,7 +690,7 @@ def axes(show_value=False, cat_size=11, inner_padding=None, label_area=None, cat
 
 def labels(size=12, colour=INK, show=True):
     return {"labels": [{"properties": {"show": lit("true" if show else "false"), "color": solid(colour),
-                                       "fontSize": lit(f"{size}D"), "bold": lit("true"), "fontFamily": s(FONT),
+                                       "fontSize": lit(f"{min(size, 11)}D"), "bold": lit("false"), "fontFamily": s(FONT),
                                        "labelDisplayUnits": lit("1D")}}]}
 
 
@@ -794,20 +844,20 @@ class Page:
         if item:
             vco = item["visual"]["visualContainerObjects"]
             look = (dict(background=PANEL, radius=10, border=LINE, shadow=True) if panel else
-                    dict(background=CARD, radius=10, border=LINE, shadow=True, transparency=GLASS_T))
+                    dict(background=CARD_D, radius=10, border=LINE, shadow=True))
             vco.update({k: v for k, v in container(**look).items() if k in ("background", "border", "dropShadow")})
             pad = vco["padding"][0]["properties"]
             pad["top"] = lit(f"{max(int(pad['top']['expr']['Literal']['Value'][:-1]), 14)}D")
             self.add(vid, x, y, w, h, item)
         else:
             self.add(vid, x, y, w, h, shape(PANEL, radius=10, border=LINE, shadow=True) if panel else
-                     shape(CARD, radius=10, border=LINE, shadow=True, transparency=GLASS_T))
-        self.add(vid + "Stripe", x + 10, y, w - 20, 4, shape(stripe, radius=2))
+                     shape(CARD_D, radius=10, border=LINE, shadow=True))
+        pass                                                  # no stripe: plain white cards
         if icon:
             self.add(vid + "Icon", x + 14, y + 16, 30, 30, textbox(
                 [(icon, 13 if len(icon) == 1 else 11, True, accent)], align="center", pad=(2, 0, 0, 0),
                 background=tint(accent), radius=7, border=accent))
-            self.add(vid + "Label", x + 50, y + 16, w - 56, 32, textbox([(label, 11, True, INK_2)]))
+            self.add(vid + "Label", x + 50, y + 18, w - 56, 30, textbox([(label, 10.5, False, INK_2)]))
 
     def json(self):
         page = {"$schema": S_PAGE, "name": self.name, "displayName": self.display, "displayOption": "FitToPage",
@@ -832,8 +882,8 @@ class Page:
 RAIL_X = 1064
 X0, W = 24, 1016            # content area (x 24 to 1040)
 GAP = 12
-KPI_Y, KPI_H = 88, 104
-R1, RH = 204, 244
+KPI_Y, KPI_H = 78, 104
+R1, RH = 194, 244
 R2 = R1 + RH + GAP
 BOTTOM = 706
 
@@ -860,45 +910,50 @@ def clear_button():
                 "visualHeader": [{"properties": {"show": lit("false")}}]}}}
 
 
+TITLE = "U.S. Hospital EHR Interoperability Scorecard 2019-2024"
+BANNER_H = 64
+
+
 def rail(page, filters="all"):
-    """Right-hand navy rail (the panel itself is in the page image; it is full height, so the image stretch does not
-    matter): logo and name, page links, filters with a clear button, data credit."""
-    page.add("logo", RAIL_X + 14, 18, 40, 40, image("logo.png"))
-    page.add("railName", RAIL_X + 60, 14, 152, 52, textbox([("Hospital EHR", 15, True, CARD),
-                                                            ("Interoperability", 15, True, MINT)], pad=(0, 0, 0, 0)))
-    page.add("railCaption", RAIL_X + 12, 68, 200, 22, textbox([(F["rail_caption"], 10, False, RAIL_MUTED)]))
-
+    """Navy rail on the right, under the banner: page links, filters with a clear button, data credit.
+    (The rail panel itself is in the page image; it is full height, so the image stretch does not matter.)"""
     def heading(vid, y, text):
-        page.add(vid, RAIL_X + 12, y, 196, 20, textbox([(text, 10, True, RAIL_MUTED)]))
+        page.add(vid, RAIL_X + 12, y, 196, 20, textbox([(text, 9.5, True, RAIL_MUTED)]))
 
-    heading("lPages", 100, "PAGES")
-    page.add("navigator", RAIL_X + 8, 118, 200, 196, navigator())
+    heading("lPages", BANNER_H + 12, "PAGES")
+    page.add("navigator", RAIL_X + 8, BANNER_H + 30, 200, 186, navigator())
     if filters == "all":
-        heading("lFilters", 318, "FILTERS")
+        heading("lFilters", 288, "FILTERS")
         for k, (vid, text, item) in enumerate([
                 ("fType", "Hospital type", slicer("hospital", "hospital_type", "type", "Hospital type")),
                 ("fOwner", "Owner", slicer("hospital", "ownership", "owner", "Owner")),
                 ("fArea", "Rural or urban", slicer("hospital", "rural_urban", "area", "Rural or urban")),
                 ("fState", "State", slicer("states", "state_name", "state", "State", search=True)),
                 ("fEhr", "EHR company", slicer("hospital", "ehr_group", "ehr", "EHR company"))]):
-            page.add(vid, RAIL_X + 14, 336 + 61 * k, 188, 60, item)      # 60 tall: the dropdown box is drawn low in its frame
-        page.add("clearAll", RAIL_X + 14, 644, 188, 26, clear_button())
+            page.add(vid, RAIL_X + 14, 306 + 61 * k, 188, 60, item)      # 60 tall: the dropdown box is drawn low in its frame
+        page.add("clearAll", RAIL_X + 14, 616, 188, 26, clear_button())
     if filters == "hospital":
-        heading("lLookup", 318, "LOOK UP")
-        page.add("search", RAIL_X + 14, 336, 188, 60,
+        heading("lLookup", 288, "LOOK UP")
+        page.add("search", RAIL_X + 14, 306, 188, 60,
                  slicer("hospital", "hospital_label", "hospital", "Hospital name", default=F["default_hospital"],
                         search=True, filters=[in_filter("hospital", "in_latest", 1, "inLatest")]))
-        page.add("searchNote", RAIL_X + 12, 404, 196, 70, textbox(
-            [("Open the box and type part of a name, for example Mayo or Memorial.", 10.5, False, RAIL_TEXT)]))
-    page.add("credit", RAIL_X + 12, 672, 204, 48, textbox(
-        [("Data: Medicare (CMS), ONC", 9, False, RAIL_MUTED),
-         ("Built by Isaac Agyapong", 11, True, CARD)]))
+        page.add("searchNote", RAIL_X + 12, 374, 196, 70, textbox(
+            [("Open the box and type part of a name, for example Mayo or Memorial.", 10, False, RAIL_TEXT)]))
+    page.add("credit", RAIL_X + 12, 660, 204, 56, textbox(
+        [(F["rail_caption"].title().replace("·", "·"), 9, False, RAIL_MUTED),
+         ("Data: Medicare (CMS) and the ONC certified EHR list", 9, False, RAIL_MUTED)]))
 
 
-def header(page, title, sub):
-    page.add("titleLine", X0, 14, 40, 4, shape(COBALT, radius=2))
-    page.add("pageTitle", X0 - 4, 20, 1000, 36, textbox([(title, 20, True, INK)]))
-    page.add("pageSub", X0 - 4, 54, 1000, 28, textbox([(sub, 12, False, INK_2)]))
+def header(page, finding, sub=None):
+    """Title banner across the whole top of the page: logo, report title, page name + its finding, author badge."""
+    page.add("banner", 0, 0, 1280, BANNER_H, shape(NAVY))
+    page.add("bannerLine", 0, BANNER_H - 3, 1280, 3, shape(MINT))
+    page.add("logo", 16, 12, 38, 38, image("logo.png"))
+    page.add("reportTitle", 62, 6, 900, 30, textbox([(TITLE, 17, True, CARD)], pad=(0, 0, 4, 4)))
+    page.add("pageLine", 62, 34, 980, 24, textbox(
+        [[(page.display.upper() + "   ", 9.5, True, MINT), (finding, 10.5, False, "#D6E0F5")]], pad=(0, 0, 4, 4)))
+    page.add("badge", 1088, 17, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, NAVY)], align="center",
+                                                    background=MINT, radius=14, pad=(4, 0, 4, 4)))
 
 
 def sparkline(measure, colour):
@@ -918,7 +973,7 @@ def kpi(page, i, x, y, w, glyph, label, accent, value, context, value_colour=Non
         spark=None):
     page.tile(f"kpiTile{i}", x, y, w, KPI_H, None, stripe=accent, icon=glyph, label=label, accent=accent)
     vw = int(w * 0.5) if spark else w - 24
-    page.add(f"kpi{i}", x + 12, y + 46, vw, 34,
+    page.add(f"kpi{i}", x + 12, y + 44, vw, 38,
              card(text_of(value), colour=value_colour or accent, colour_measure=value_measure, size=size))
     if spark:
         page.add(f"kpiSpark{i}", x + 12 + vw, y + 26, w - vw - 20, 54, sparkline(spark, accent))
@@ -990,50 +1045,93 @@ def hero(page):
         ("Each dot is 1 in every 100 hospitals shown. The filters on the right change it.", 9.5, False, RAIL_MUTED)]))
 
 
+def donut(category, measure, colours, label_style="Percent of total", size=11, inner=58):
+    return chart("donutChart", {"Category": [C(*category)], "Y": [M(measure)]}, pad=(0, 0, 0, 0), objects={
+        "labels": [{"properties": {"show": lit("true"), "labelStyle": s(label_style), "color": solid(INK),
+                                   "fontSize": lit(f"{size}D"), "fontFamily": s(FONT), "bold": lit("true"),
+                                   "percentageLabelPrecision": lit("0L")}}],
+        **legend(show=False), "slices": [{"properties": {"innerRadiusRatio": lit(f"{inner}L")}}],
+        "dataPoint": fill_by_value(category[0], category[1], colours)})
+
+
+def treemap(category, measure, title, subtitle, colours):
+    return chart("treemap", {"Group": [C(*category)], "Values": [M(measure)]}, title, subtitle, objects={
+        "labels": [{"properties": {"show": lit("true"), "color": solid("#FFFFFF"), "fontSize": lit("12D"), "fontFamily": s(FONT),
+                                   "bold": lit("true"), "labelDisplayUnits": lit("1D")}}],
+        "categoryLabels": [{"properties": {"show": lit("true"), "color": solid("#FFFFFF"), "fontSize": lit("11D"),
+                                           "fontFamily": s(FONT)}}],
+        **legend(show=False), "dataPoint": fill_by_value(category[0], category[1], colours)})
+
+
+def gauge(value, target, colour):
+    return chart("gauge", {"Y": [M(value)], "MinValue": [M("Gauge Min")], "MaxValue": [M("Gauge Max")],
+                           "TargetValue": [M(target)]}, pad=(0, 0, 0, 0), objects={
+        "dataPoint": [{"properties": {"fill": solid(colour), "target": solid(INK)}}],
+        "calloutValue": [{"properties": {"color": solid(colour), "fontSize": lit("26D"), "fontFamily": s(FONT),
+                                         "labelPrecision": lit("0L")}}],
+        "labels": [{"properties": {"show": lit("false")}}],
+        "target": [{"properties": {"show": lit("false")}}]})
+
+
+def big_number(page, vid, x, y, w, measure, colour, text, size=30):
+    page.add(vid, x, y, w, 46, card(measure, colour=colour, size=size))
+    page.add(vid + "Txt", x, y + 46, w, 44, textbox([(text, 11, False, INK_2)], align="center"))
+
+
 def build_pages():
     half = (W - GAP) // 2
+    third = (W - 2 * GAP) // 3
 
     # ---------------------------------------------------------------- 1. Overview
     p1 = Page("overview", "Overview")
     rail(p1)
-    hero(p1)
-    ra, rah = 272, 210
-    rb = ra + rah + GAP
+    header(p1, "Can U.S. hospitals share health records electronically?",
+           "Medicare's yearly check of certified electronic health records (EHRs): sharing records, e-prescribing, "
+           "patient online access. 2024 reporting year.")
+    kpi_row(p1, [
+        ("✕", "Fell short of the standards", RED, "Short Share", "Short 2019 Context", None, None, 30, "Year Share"),
+        ("∅", "Of those: no certified EHR", PURPLE, "No EHR Pct", "No EHR Context", None, None, 30),
+        ("▲", "Small rural: fell short", TEAL, "Rural Short", "Rural Context", None, None, 30, "Rural Year Share"),
+        ("◆", "Top 3 EHR companies", SKY, "Top3 Share", "Top3 Context", None, None, 30),
+    ])
+    rah = 262
+    rb = R1 + rah + GAP
     rbh = BOTTOM - rb
-    lw = 500
-    p1.tile("trend", X0, ra, lw, rah, chart(
-        "lineChart", {"Category": [C("hospital_year", "snapshot_year", "Yearly file")],
-                      "Series": [C("hospital_year", "year_type", "Hospital type")],
-                      "Y": [M("Year Share", "Share falling short")]},
+    tw_ = 604
+    p1.tile("trend", X0, R1, tw_, rah, chart(
+        "clusteredColumnChart", {"Category": [C("hospital_year", "snapshot_year", "Yearly file")],
+                                 "Series": [C("hospital_year", "year_type", "Hospital type")],
+                                 "Y": [M("Year Share", "Share falling short")]},
         "=Trend Title", "Share falling short in each yearly Medicare file. Teal = small rural, grey = general hospitals.",
-        objects={**axes(show_value=True, categorical=True, value_start=0), **labels(11), **legend(show=False),
-                 "dataPoint": fill_by_value("hospital_year", "year_type", {RURAL: TEAL, GENERAL: SLATE}),
-                 "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true"), "markerSize": lit("5D")}}]}),
-        stripe=RED)
-    p1.tile("size", X0 + lw + GAP, ra, W - lw - GAP, rah, bars(
-        ("hospital", "size_band", "Beds"), "Size Short", "=Size Title", "Share that fell short in 2024, by number of beds",
-        colour_measure="Size Colour", sort_by_value=False, column=True, inner=30), stripe=RED)
-    p1.tile("owner", X0, rb, lw, rbh, bars(
-        ("hospital", "ownership", "Owner"), "Owner Short", "=Owner Title",
-        "Share that fell short in 2024, by owner (groups of 50+ hospitals)", colour_measure="Owner Colour", area=30, inner=30),
-        stripe=RED)
-    dx, dw = X0 + lw + GAP, W - lw - GAP
-    p1.tile("pair", dx, rb, dw, rbh, None, stripe=TEAL)
-    p1.add("pairTitle", dx + 8, rb + 10, dw - 16, 40, card("Pair Title", colour=INK, size=13))
-    donut_obj = {"labels": [{"properties": {"show": lit("true"), "labelStyle": s("Percent of total"), "color": solid(INK),
-                                            "fontSize": lit("12D"), "fontFamily": s(FONT), "bold": lit("true"),
-                                            "percentageLabelPrecision": lit("0L")}}],
-                 **legend(show=False), "slices": [{"properties": {"innerRadiusRatio": lit("55L")}}],
-                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: SLATE})}
-    for k, (measure, lab) in enumerate([("Type Hospitals", "All hospitals"), ("Type Short", "Hospitals that fell short")]):
-        x = dx + 10 + k * (dw - 20) // 2
-        p1.add(f"pairLabel{k}", x, rb + 56, (dw - 20) // 2, 22, textbox([(lab, 11, True, INK_2)], align="center"))
-        p1.add(f"pairDonut{k}", x, rb + 76, (dw - 20) // 2, rbh - 104, chart(
-            "donutChart", {"Category": [C("hospital", "hospital_type", "Hospital type")], "Y": [M(measure)]},
-            objects=donut_obj, pad=(0, 0, 0, 0)))
-    p1.add("pairKey", dx + 10, rb + rbh - 28, dw - 20, 22, textbox(
-        [[("● ", 12, False, TEAL), ("small rural hospitals (25 beds or fewer)     ", 10.5, False, INK_2),
-          ("● ", 12, False, SLATE), ("general hospitals", 10.5, False, INK_2)]], align="center"))
+        objects={**axes(categorical=True, cat_size=11, inner_padding=24), **labels(10), **legend(show=False),
+                 "dataPoint": fill_by_value("hospital_year", "year_type", {RURAL: TEAL, GENERAL: SLATE})}))
+    gx, gw = X0 + tw_ + GAP, W - tw_ - GAP
+    p1.tile("every100", gx, R1, gw, rah, None)
+    p1.add("e100Title", gx + 14, R1 + 10, gw - 28, 26, textbox([("In every 100 hospitals in 2024", 13, True, INK)]))
+    for k, (measure, colour, text) in enumerate([
+            ("Dots Met", COBALT, "met the standards"),
+            ("Dots No EHR", PURPLE, "fell short with no certified EHR"),
+            ("Dots Short", RED, "fell short with a certified EHR")]):
+        y = R1 + 48 + k * 68
+        p1.add(f"e100Num{k}", gx + 14, y, 88, 52, card(measure, colour=colour, size=30))
+        p1.add(f"e100Txt{k}", gx + 106, y + 12, gw - 120, 40, textbox([(text, 11.5, False, INK)]))
+    # row B: donut pair, treemap, columns
+    p1.tile("pair", X0, rb, third, rbh, None, stripe=TEAL)
+    p1.add("pairTitle", X0 + 8, rb + 10, third - 16, 44, card("Pair Title", colour=INK, size=12))
+    for k, (measure, lab) in enumerate([("Type Hospitals", "All hospitals"), ("Type Short", "Fell short")]):
+        x = X0 + 6 + k * (third - 12) // 2
+        p1.add(f"pairLabel{k}", x, rb + 54, (third - 12) // 2, 22, textbox([(lab, 11, True, INK_2)], align="center"))
+        p1.add(f"pairDonut{k}", x, rb + 74, (third - 12) // 2, rbh - 104, donut(
+            ("hospital", "hospital_type", "Hospital type"), measure, {RURAL: TEAL, GENERAL: SLATE}))
+    p1.add("pairKey", X0 + 6, rb + rbh - 30, third - 12, 24, textbox(
+        [[("● ", 12, False, TEAL), ("small rural   ", 10.5, False, INK_2), ("● ", 12, False, SLATE), ("general", 10.5, False, INK_2)]],
+        align="center"))
+    p1.tile("owner", X0 + third + GAP, rb, third, rbh, bars(
+        ("hospital", "ownership", "Owner"), "Owner Short", "=Owner Title", "Share falling short, by owner (50+ hospitals)",
+        colour_measure="Owner Colour", area=34, inner=30, cat_size=10))
+    p1.tile("size", X0 + 2 * (third + GAP), rb, W - 2 * (third + GAP), rbh, bars(
+        ("hospital", "size_band", "Beds"), "Size Short", "=Size Title", "Share falling short, by number of beds",
+        colour_measure="Size Colour", sort_by_value=False, column=True, inner=26, cat_size=10), stripe=RED)
 
     # ---------------------------------------------------------------- 2. EHR companies
     p2 = Page("ehr", "EHR Companies")
@@ -1046,32 +1144,49 @@ def build_pages():
         ("✕", "TruBridge: fell short", RED, "TruBridge Short", "TruBridge Context"),
         ("∅", "No certified EHR", PURPLE, "No EHR Hospitals", "No EHR All Context"),
     ])
-    r1h = 270
+    r1h = 300
     r2 = R1 + r1h + GAP
-    p2.tile("market", X0, R1, half, r1h, bars(
-        ("hospital", "main_developer", "EHR company"), "Market Share", "=Market Title",
-        "Share of hospitals by EHR company. Blue = the 3 biggest.", colour_measure="Market Colour",
-        inner=10, cat_size=10), stripe=SKY)
-    p2.tile("ehrShort", X0 + half + GAP, R1, W - half - GAP, r1h, bars(
-        ("hospital", "ehr_group", "EHR company"), "EHR Short", "=EHR Title",
-        "Fell short in 2024 (40+ hospitals). Purple = no certified EHR.",
-        colour_measure="EHR Colour", inner=8, size=11, cat_size=10), stripe=RED)
-    mw = 620
-    p2.tile("vendorType", X0, r2, mw, BOTTOM - r2, chart(
-        "clusteredBarChart", {"Category": [C("hospital", "ehr_group", "EHR company")],
-                              "Series": [C("hospital", "hospital_type", "Hospital type")],
-                              "Y": [M("Vendor Type Short", "Share falling short")]},
-        "=Matrix Title", "Share that fell short in 2024. Teal = small rural, grey = general hospitals.",
-        sort=(M("Vendor Type Short"), "Descending"),
-        objects={**axes(inner_padding=10, label_area=30), **labels(11), **legend(show=False),
-                 "dataPoint": fill_by_value("hospital", "hospital_type", {RURAL: TEAL, GENERAL: SLATE})}),
-        stripe=TEAL)
-    ex = X0 + mw + GAP
-    p2.tile("meaning", ex, r2, W - mw - GAP, BOTTOM - r2, textbox([
+    mw = 540
+    p2.tile("market", X0, R1, mw, r1h, treemap(
+        ("hospital", "main_developer", "EHR company"), "Market Count", "=Market Title",
+        "Hospitals by the company behind their main EHR. Bigger block = more hospitals.",
+        {TOP3[0]: "#1F4E9E", TOP3[1]: "#4F86D9", TOP3[2]: "#9DB4E0", "TruBridge (CPSI)": "#E08A3C", "MEDHOST": "#C9D1DE",
+         "Altera (Allscripts)": "#B8C1CF", "Other EHR vendor": "#A3AEBF"}), stripe=SKY)
+    p2.tile("ehrTable", X0 + mw + GAP, R1, W - mw - GAP, r1h, chart(
+        "tableEx", {"Values": [C("hospital", "ehr_group", "EHR company"), M("EHR Hospitals", "Hospitals"),
+                               M("EHR Short Count", "Fell short"), M("EHR Short", "Share")]},
+        "=EHR Title", None, sort=(M("EHR Short"), "Descending"),
+        objects={"values": [{"properties": {"fontSize": lit("11D"), "fontFamily": s(FONT), "fontColor": solid(INK),
+                                            "backColorPrimary": solid(PANEL), "backColorSecondary": solid(PANEL_2)}}],
+                 "columnHeaders": [{"properties": {"fontSize": lit("11D"), "fontFamily": s(FONT), "bold": lit("true"),
+                                                   "fontColor": solid(INK_2), "backColor": solid(PANEL)}}],
+                 "grid": [{"properties": {"rowPadding": lit("1D"), "gridHorizontalColor": solid(LINE),
+                                          "gridVerticalColor": solid(PANEL), "outlineColor": solid(LINE)}}],
+                 "total": [{"properties": {"totals": lit("false")}}],
+                 "columnFormatting": [{"properties": {"dataBars": {"positiveColor": solid(RED), "negativeColor": solid(RED),
+                                                                   "axisColor": solid(PANEL), "reverseDirection": lit("false"),
+                                                                   "hideText": lit("false")}},
+                                       "selector": {"metadata": "hospital.EHR Short"}}],
+                 "columnWidth": [{"properties": {"value": lit(f"{w}D")}, "selector": {"metadata": k}} for k, w in {
+                     "hospital.ehr_group": 140, "hospital.EHR Hospitals": 76, "hospital.EHR Short Count": 84,
+                     "hospital.EHR Short": 88}.items()]}), stripe=RED, panel=True)
+    gwid = 660
+    p2.tile("gauges", X0, r2, gwid, BOTTOM - r2, None, stripe=TEAL)
+    p2.add("gaugeTitle", X0 + 12, r2 + 10, gwid - 24, 26, card("Matrix Title", colour=INK, size=14))
+    p2.add("gaugeSub", X0 + 12, r2 + 36, gwid - 24, 22, textbox(
+        [("Small rural hospitals falling short, by EHR company. Black mark = all small rural hospitals.", 11, False, INK_2)]))
+    gw3 = (gwid - 24) // 3
+    for k, (m, name, colour) in enumerate([("Rural TruBridge", "TruBridge", RED), ("Rural MEDITECH", "MEDITECH", AMBER),
+                                           ("Rural Epic", "Epic", SKY)]):
+        x = X0 + 12 + k * gw3
+        p2.add(f"gauge{k}", x, r2 + 58, gw3, BOTTOM - r2 - 92, gauge(m, "Rural Short", colour))
+        p2.add(f"gaugeName{k}", x, BOTTOM - 34, gw3, 24, textbox([(name, 12, True, colour)], align="center"))
+    ex = X0 + gwid + GAP
+    p2.tile("meaning", ex, r2, W - gwid - GAP, BOTTOM - r2, textbox([
         ("What this means", 14, True, INK),
-        ("Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.", 11.5, False, INK),
-        ("TruBridge hospitals fall short far more often, even next to the same kind of hospital.", 11.5, False, INK),
-        ("This is a link, not proof of cause: small budgets and few IT staff often come with cheaper systems.", 11, False, INK_2)],
+        ("Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.", 12, False, INK),
+        ("TruBridge hospitals fall short far more often, even next to the same kind of hospital.", 12, False, INK),
+        ("A link, not proof of cause: small budgets and few IT staff often come with cheaper systems.", 11, False, INK_2)],
         pad=(12, 6, 14, 14)), stripe=SKY)
 
     # ---------------------------------------------------------------- 3. Money and history
@@ -1085,17 +1200,22 @@ def build_pages():
         ("⟳", "Fell short every year", RED, "Every Year", "Every Year Context"),
         ("✓", "Never fell short", COBALT, "Never", "Never Context"),
     ])
-    p3.tile("fifths", X0, R1, half, RH, bars(
-        ("hospital", "margin_fifth_label", "Profit"), "Fifth Short", "=Fifth Title",
-        "Hospitals split into five equal groups by profit (cents kept from each $1 of income)",
-        colour_measure="Fifth Colour", sort_by_value=False, column=True, inner=30), stripe=RED)
-    p3.tile("losses", X0 + half + GAP, R1, W - half - GAP, RH, chart(
-        "clusteredBarChart", {"Category": [C("hospital", "hospital_type", "Type")], "Series": [C("hospital", "lost_money", "Finances")],
-                              "Y": [M("Money Short", "Share falling short")]},
-        "=Money Title", "Share that fell short in 2024. Dark red = lost money in both of its two latest yearly reports.",
-        objects={**axes(inner_padding=14, label_area=34), **labels(12), **legend("Top"),
-                 "dataPoint": fill_by_value("hospital", "lost_money", {SHORT_LBL: RED_D, "Did not": GREY})}),
-        stripe=RED)
+    p3.tile("fifths", X0, R1, half, RH, chart(
+        "areaChart", {"Category": [C("hospital", "margin_fifth_label", "Profit")], "Y": [M("Fifth Short", "Share falling short")]},
+        "=Fifth Title", "Hospitals in five equal groups, from least to most profitable (cents kept from each $1)",
+        sort=(C("hospital", "margin_fifth_label"), "Ascending"),
+        objects={**axes(show_value=False, categorical=True, cat_size=11), **labels(13), **legend(show=False),
+                 "dataPoint": [{"properties": {"fill": solid(RED)}}],
+                 "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true"), "markerSize": lit("7D"),
+                                                "lineChartType": s("smooth")}}]}), stripe=RED)
+    rx, rw = X0 + half + GAP, W - half - GAP
+    p3.tile("rings", rx, R1, rw, RH, None, stripe=RED)
+    p3.add("ringsTitle", rx + 12, R1 + 10, rw - 24, 44, card("Money Title", colour=INK, size=13))
+    for k, (m, lab) in enumerate([("Ring Lost", "Lost money 2 years in a row"), ("Ring Not", "Did not lose money 2 years")]):
+        x = rx + 8 + k * (rw - 16) // 2
+        p3.add(f"ring{k}", x, R1 + 56, (rw - 16) // 2, RH - 92, donut(
+            ("Result", "result", "Result"), m, {"Fell short": RED, "Met the standards": "#3B4F86"}, inner=62))
+        p3.add(f"ringLab{k}", x, R1 + RH - 34, (rw - 16) // 2, 24, textbox([(lab, 11, True, INK_2)], align="center"))
     p3.tile("history", X0, R2, W, BOTTOM - R2, bars(
         ("hospital", "history", "Years falling short"), "History Count", "=History Title",
         "Hospitals in all six yearly Medicare files (2019-2024), by how many of those years they fell short",
@@ -1149,8 +1269,8 @@ def build_pages():
                                                                    "hideText": lit("false")}},
                                        "selector": {"metadata": "hospital.Top 10 Share"}}],
                  "columnWidth": [{"properties": {"value": lit(f"{w}D")}, "selector": {"metadata": k}} for k, w in {
-                     "states.state_name": 108, "hospital.Top 10 Hospitals": 70, "hospital.Top 10 Short": 70,
-                     "hospital.Top 10 Share": 92}.items()]}), stripe=RED, panel=True)
+                     "states.state_name": 100, "hospital.Top 10 Hospitals": 80, "hospital.Top 10 Short": 74,
+                     "hospital.Top 10 Share": 86}.items()]}), stripe=RED, panel=True)
     ky = KPI_Y + th + GAP
     kw = (tw - GAP) // 2
     kh = BOTTOM - ky
@@ -1166,7 +1286,7 @@ def build_pages():
     rail(p5, filters="hospital")
     header(p5, "Find a hospital",
            "Did it meet Medicare's standards for sharing records, which EHR does it use, and how has it done since 2019?")
-    p5.add("namePanel", X0, KPI_Y, W, 72, shape(PANEL, radius=10, border=LINE, shadow=True))     # dark panel for the key result
+    p5.add("namePanel", X0, KPI_Y, W, 72, shape(NAVY, radius=10, shadow=True))     # dark panel for the key result
     p5.add("nameTitle", X0 + 16, KPI_Y + 8, W - 32, 36, card("Profile Name", colour=CARD, size=20))
     p5.add("nameFacts", X0 + 16, KPI_Y + 42, W - 32, 24, card("Profile Facts", colour="#C9D6F5", size=11, bold=False))
     ky = KPI_Y + 72 + GAP
@@ -1176,7 +1296,7 @@ def build_pages():
             ("▣", "Main EHR company", SKY, "Profile EHR", "Profile EHR Context", "Profile EHR Colour"),
             ("⟳", "Years it fell short", RED, "Profile Years", "Profile Years Context", "Profile Years Colour"),
             ("$", "Profit, latest report", GREY_D, "Profile Margin", "Profile Margin Context", "Profile Margin Colour")]):
-        kpi(p5, i, X0 + i * (w4 + GAP), ky, w4, glyph, label, accent, value, ctx, value_measure=vcol, size=20)
+        kpi(p5, i, X0 + i * (w4 + GAP), ky, w4, glyph, label, accent, value, ctx, value_measure=vcol, size=17)
     ry = ky + KPI_H + GAP
     rh = BOTTOM - ry
     sw = 520
@@ -1205,30 +1325,41 @@ def build_pages():
         ("Aa", "Badly formatted EHR IDs", AMBER, "Bad Format Count", "Bad Format Context"),
         ("≠", "Two Medicare files disagree", AMBER, "Disagree Count", "Disagree Context"),
     ])
-    p6.tile("idQuality", X0, R1, half, RH, bars(
-        ("hospital", "id_quality", "EHR ID field"), "ID Count", "=ID Title",
-        "What hospitals put in the certified EHR ID field of the 2024 file", colour_measure="ID Colour",
-        inner=26, area=48), stripe=AMBER)
-    p6.tile("disagree", X0 + half + GAP, R1, W - half - GAP, RH, chart(
-        "clusteredBarChart", {"Category": [C("hospital", "disagree_type", "Disagreement")], "Y": [M("Disagree Count By Type", "Hospitals")]},
-        "=Disagree Title",
-        "The October 2024 hospital file and the latest dedicated file cover different reporting years. I used each for what it covers.",
-        sort=(M("Disagree Count By Type"), "Descending"),
-        objects={**axes(inner_padding=40, label_area=45, cat_size=11), **labels(12),
-                 "dataPoint": [{"properties": {"fill": solid(AMBER)}}]}), stripe=AMBER)
+    p6.tile("idQuality", X0, R1, half, RH, None, stripe=AMBER)
+    p6.add("idTitle", X0 + 12, R1 + 10, half - 24, 26, card("ID Title", colour=INK, size=14))
+    p6.add("idSub", X0 + 12, R1 + 36, half - 24, 22, textbox([("What hospitals put in the EHR ID field of the 2024 file", 11, False, INK_2)]))
+    p6.add("idDonut", X0 + 8, R1 + 60, 250, RH - 70, donut(
+        ("hospital", "id_quality", "EHR ID field"), "ID Count",
+        {"Valid ID, found in the federal list": "#3B4F86", '"Not Available" typed instead of an ID': PURPLE,
+         "Not found in the federal list": AMBER, "Wrong format (lowercase or wrong length)": "#E9C46A"},
+        label_style="Data value", size=12))
+    p6.visuals[-1]["visual"]["objects"]["labels"][0]["properties"]["show"] = lit("false")
+    p6.add("idKey", X0 + 262, R1 + 74, half - 274, 150, textbox([
+        [("● ", 13, False, "#3B4F86"), (f"{F['n'] - F['not_available'] - F['not_in_list'] - F['bad_format']:,}  valid ID found in the federal list", 11, False, INK)],
+        [("● ", 13, False, PURPLE), (f"{F['not_available']:,}  typed \"Not Available\"", 11, False, INK)],
+        [("● ", 13, False, AMBER), (f"{F['not_in_list']:,}  ID not in the federal list", 11, False, INK)],
+        [("● ", 13, False, "#E9C46A"), (f"{F['bad_format']:,}  lowercase or wrong length", 11, False, INK)]]))
+    dx_, dw_ = X0 + half + GAP, W - half - GAP
+    p6.tile("disagree", dx_, R1, dw_, RH, None, stripe=AMBER)
+    p6.add("disTitle", dx_ + 12, R1 + 10, dw_ - 24, 26, card("Disagree Title", colour=INK, size=14))
+    p6.add("disSub", dx_ + 12, R1 + 36, dw_ - 24, 40, textbox(
+        [("The October 2024 hospital file and the latest dedicated file cover different reporting years.", 11, False, INK_2)]))
+    bw = (dw_ - 36) // 2
+    big_number(p6, "disUp", dx_ + 12, R1 + 96, bw, "Disagree Up", AMBER, "fell short in the October 2024 file, met in the latest")
+    big_number(p6, "disDown", dx_ + 24 + bw, R1 + 96, bw, "Disagree Down", RED, "met in the October 2024 file, fell short in the latest")
     p6.tile("files", X0, R2, half, BOTTOM - R2, bars(
         ("hospital", "n_files", "Yearly files"), "Files Count", "=Files Title",
-        "Hospitals by how many of the six yearly Medicare files (2019-2024) they appear in. Openings, closures and mergers explain the rest.",
+        "Hospitals by how many of the six yearly Medicare files (2019-2024) they appear in",
         colour_measure="Files Colour", sort_by_value=False, column=True, inner=30), stripe=AMBER)
     p6.tile("checks", X0 + half + GAP, R2, W - half - GAP, BOTTOM - R2, textbox([
         ("How I checked the data", 14, True, INK),
-        [("✓  ", 12, True, COBALT), ("No hospital appears twice in the same file", 11.5, False, INK)],
-        [("✓  ", 12, True, COBALT), ("Hospital types outside the program are never marked as meeting the standards", 11.5, False, INK)],
-        [("✓  ", 12, True, COBALT), ("Every hospital in the latest file reports the same period (calendar year 2024)", 11.5, False, INK)],
-        [("✓  ", 12, True, COBALT), (f"{F['finance_match']:.0%} of hospitals link to their yearly financial report", 11.5, False, INK)],
+        [("✓  ", 12, True, MINT), ("No hospital appears twice in the same file", 12, False, INK)],
+        [("✓  ", 12, True, MINT), ("Hospital types outside the program are never marked as meeting the standards", 12, False, INK)],
+        [("✓  ", 12, True, MINT), ("Every hospital in the latest file reports the same period (calendar year 2024)", 12, False, INK)],
+        [("✓  ", 12, True, MINT), (f"{F['finance_match']:.0%} of hospitals link to their yearly financial report", 12, False, INK)],
         [("!  ", 12, True, AMBER), (f"Hospitals with no financial report fall short far more often ({F['no_finance_short']:.0%} vs "
-                                     f"{F['finance_short']:.0%}): missing data is itself a warning sign", 11.5, False, INK)],
-    ], pad=(12, 6, 14, 14)), stripe=SKY)
+                                     f"{F['finance_short']:.0%}): missing data is itself a warning sign", 12, False, INK)],
+    ], pad=(12, 6, 14, 14)), stripe=MINT)
 
     # ---------------------------------------------------------------- 7. Data notes
     p7 = Page("dataNotes", "Data Notes")

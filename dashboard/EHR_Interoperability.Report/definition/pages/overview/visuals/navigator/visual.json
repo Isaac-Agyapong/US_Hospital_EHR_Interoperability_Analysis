@@ -3,11 +3,11 @@
   "name": "navigator",
   "position": {
     "x": 1072,
-    "y": 118,
-    "z": 4000,
-    "height": 196,
+    "y": 94,
+    "z": 1000,
+    "height": 186,
     "width": 200,
-    "tabOrder": 4000
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "pageNavigator",
@@ -88,7 +88,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0A1A45'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }
@@ -181,7 +181,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -245,7 +245,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0A1A45'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }
@@ -277,7 +277,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0A1A45'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }
@@ -309,7 +309,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0A1A45'"
+                      "Value": "'#0B1F4D'"
                     }
                   }
                 }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "meaning",
   "position": {
-    "x": 656,
-    "y": 486,
-    "z": 46000,
-    "height": 220,
-    "width": 384,
-    "tabOrder": 46000
+    "x": 696,
+    "y": 506,
+    "z": 47000,
+    "height": 200,
+    "width": 344,
+    "tabOrder": 47000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "What this means",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel",
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -35,9 +35,9 @@
                   {
                     "value": "Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.",
                     "textStyle": {
-                      "fontSize": "11.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "fontSize": "12pt",
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -47,9 +47,9 @@
                   {
                     "value": "TruBridge hospitals fall short far more often, even next to the same kind of hospital.",
                     "textStyle": {
-                      "fontSize": "11.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "fontSize": "12pt",
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -57,11 +57,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "This is a link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
+                    "value": "A link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel"
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -96,7 +96,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -149,7 +149,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -172,7 +172,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },
@@ -215,7 +215,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -226,7 +226,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -237,7 +237,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

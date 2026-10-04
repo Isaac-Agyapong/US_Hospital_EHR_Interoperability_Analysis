@@ -3,11 +3,11 @@
   "name": "kpiTile3",
   "position": {
     "x": 795,
-    "y": 172,
-    "z": 33000,
+    "y": 162,
+    "z": 30000,
     "height": 104,
     "width": 245,
-    "tabOrder": 33000
+    "tabOrder": 30000
   },
   "visual": {
     "visualType": "textbox",
@@ -54,7 +54,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -130,7 +130,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },

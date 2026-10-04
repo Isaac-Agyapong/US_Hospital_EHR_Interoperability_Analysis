@@ -3,11 +3,11 @@
   "name": "searchNote",
   "position": {
     "x": 1076,
-    "y": 404,
-    "z": 7000,
+    "y": 374,
+    "z": 4000,
     "height": 70,
     "width": 196,
-    "tabOrder": 7000
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,9 +22,9 @@
                   {
                     "value": "Open the box and type part of a name, for example Mayo or Memorial.",
                     "textStyle": {
-                      "fontSize": "10.5pt",
+                      "fontSize": "10pt",
                       "color": "#E8EEFB",
-                      "fontFamily": "Corbel"
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -82,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

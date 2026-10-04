@@ -1,7 +1,7 @@
 """Draw the artwork for the Power BI report (written to dashboard/assets/, colours from layout.json, which
 06_build_powerbi_project.py writes):
 
-    page_bg.png  the page background: deep blue to indigo gradient with soft glows and the dark rail on the right
+    page_bg.png  the page background: light grey page with the navy rail on the right
     logo.png     the rail logo: two health records (nodes) joined by a link
 
 Only things that do not depend on exact vertical position are drawn here. Power BI Desktop stretches a page image
@@ -32,7 +32,7 @@ def page(c):
     t = ((xx / W) * 0.55 + (yy / H) * 0.45)[..., None]
     a, b = np.array(rgb(c["paper"])[:3], float), np.array(rgb(c["paper_top"])[:3], float)
     img = a * (1 - t) + b * t
-    for (cx, cy, rx, ry, col, k) in [(0.10, 0.95, 0.45, 0.55, c["grid"], 0.22), (0.72, 0.05, 0.40, 0.45, c["violet"], 0.25)]:
+    for (cx, cy, rx, ry, col, k) in []:          # no glows: a calm, neutral page
         g = np.exp(-(((xx - W * cx) / (W * rx)) ** 2 + ((yy - H * cy) / (H * ry)) ** 2))[..., None]
         img = img + g * (np.array(rgb(col)[:3], float) - img) * k
     im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).convert("RGBA")
@@ -40,7 +40,7 @@ def page(c):
     d = ImageDraw.Draw(dots)
     for y in range(12 * S, H, 24 * S):
         for x in range(12 * S, W, 24 * S):
-            d.ellipse([x, y, x + S, y + S], fill=(255, 255, 255, 18))
+            pass
     im = Image.alpha_composite(im, dots)
     d = ImageDraw.Draw(im)
     x0 = c["rail_x"] * S

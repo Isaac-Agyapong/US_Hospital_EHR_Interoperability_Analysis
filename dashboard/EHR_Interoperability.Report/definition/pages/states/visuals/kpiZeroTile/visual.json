@@ -3,11 +3,11 @@
   "name": "kpiZeroTile",
   "position": {
     "x": 844,
-    "y": 540,
-    "z": 27000,
-    "height": 166,
+    "y": 530,
+    "z": 24000,
+    "height": 176,
     "width": 196,
-    "tabOrder": 27000
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "textbox",
@@ -54,7 +54,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -130,7 +130,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },

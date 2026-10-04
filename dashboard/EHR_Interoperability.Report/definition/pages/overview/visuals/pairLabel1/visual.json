@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pairLabel1",
   "position": {
-    "x": 788,
-    "y": 550,
-    "z": 40000,
+    "x": 189,
+    "y": 522,
+    "z": 51000,
     "height": 22,
-    "width": 242,
-    "tabOrder": 40000
+    "width": 159,
+    "tabOrder": 51000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Hospitals that fell short",
+                    "value": "Fell short",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C9D6F5",
-                      "fontFamily": "Corbel",
+                      "color": "#475569",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -84,7 +84,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -95,7 +95,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -106,7 +106,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

@@ -1,36 +1,36 @@
 {
   "name": "Deep Blue Glass",
   "dataColors": [
-    "#5B8DEF",
-    "#FF6B47",
-    "#A78BFA",
-    "#2DD4BF",
-    "#FBBF24",
-    "#B8C3D9",
-    "#A9BFF2",
-    "#FFB199"
+    "#1F4E9E",
+    "#D64545",
+    "#7C3AED",
+    "#0D9488",
+    "#D97706",
+    "#94A3B8",
+    "#9DB4E0",
+    "#F0A8A8"
   ],
-  "foreground": "#FFFFFF",
-  "foregroundNeutralSecondary": "#C9D6F5",
-  "background": "#0E2259",
-  "backgroundLight": "#13296A",
-  "tableAccent": "#5B8DEF",
+  "foreground": "#1E293B",
+  "foregroundNeutralSecondary": "#475569",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F4F6FA",
+  "tableAccent": "#1F4E9E",
   "textClasses": {
     "title": {
-      "fontFace": "Corbel",
-      "color": "#FFFFFF"
+      "fontFace": "Segoe UI",
+      "color": "#1E293B"
     },
     "label": {
-      "fontFace": "Corbel",
-      "color": "#C9D6F5"
+      "fontFace": "Segoe UI",
+      "color": "#475569"
     },
     "callout": {
-      "fontFace": "Corbel",
-      "color": "#FFFFFF"
+      "fontFace": "Segoe UI",
+      "color": "#1E293B"
     },
     "header": {
-      "fontFace": "Corbel",
-      "color": "#FFFFFF"
+      "fontFace": "Segoe UI",
+      "color": "#1E293B"
     }
   }
 }

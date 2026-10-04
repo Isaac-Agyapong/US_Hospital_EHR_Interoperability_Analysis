@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pairDonut0",
   "position": {
-    "x": 546,
-    "y": 570,
-    "z": 39000,
-    "height": 108,
-    "width": 242,
-    "tabOrder": 39000
+    "x": 30,
+    "y": 542,
+    "z": 50000,
+    "height": 134,
+    "width": 159,
+    "tabOrder": 50000
   },
   "visual": {
     "visualType": "donutChart",
@@ -100,7 +100,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -111,7 +111,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -122,7 +122,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }
@@ -203,7 +203,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -212,14 +212,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "11D"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -262,7 +262,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }
@@ -278,7 +278,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -298,7 +298,7 @@
             "innerRadiusRatio": {
               "expr": {
                 "Literal": {
-                  "Value": "55L"
+                  "Value": "58L"
                 }
               }
             }
@@ -313,7 +313,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2DD4BF'"
+                      "Value": "'#0D9488'"
                     }
                   }
                 }
@@ -354,7 +354,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#B8C3D9'"
+                      "Value": "'#94A3B8'"
                     }
                   }
                 }

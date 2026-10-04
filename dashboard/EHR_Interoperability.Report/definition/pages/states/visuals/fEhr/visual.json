@@ -3,11 +3,11 @@
   "name": "fEhr",
   "position": {
     "x": 1078,
-    "y": 580,
-    "z": 10000,
+    "y": 550,
+    "z": 7000,
     "height": 60,
     "width": 188,
-    "tabOrder": 10000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",
@@ -85,7 +85,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             },
@@ -114,7 +114,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#141B2D'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -141,7 +141,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Corbel'"
+                  "Value": "'Segoe UI'"
                 }
               }
             }

@@ -3,11 +3,11 @@
   "name": "notes2",
   "position": {
     "x": 366,
-    "y": 88,
-    "z": 11000,
-    "height": 618,
+    "y": 78,
+    "z": 10000,
+    "height": 628,
     "width": 330,
-    "tabOrder": 11000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,8 +23,8 @@
                     "value": "Where the data comes from",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#5CC8FF",
-                      "fontFamily": "Corbel",
+                      "color": "#2563EB",
+                      "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
                   }
@@ -36,8 +36,8 @@
                     "value": "•  CMS Hospital General Information, six yearly files 2019-2024 (status of every hospital)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -48,8 +48,8 @@
                     "value": "•  CMS Promoting Interoperability file, latest release (2024 reporting year, with EHR IDs)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -60,8 +60,8 @@
                     "value": "•  ONC Certified Health IT Product List: each EHR ID looked up to find the company behind it",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -72,8 +72,8 @@
                     "value": "•  CMS hospital cost reports for profit and size (companion financial project)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -84,8 +84,8 @@
                     "value": "•  Loaded into PostgreSQL; numbers on every page match the SQL results in the repository",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -96,8 +96,8 @@
                     "value": "•  Which hospitals will fall short next year: see the companion machine learning project",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#FFFFFF",
-                      "fontFamily": "Corbel"
+                      "color": "#1E293B",
+                      "fontFamily": "Segoe UI"
                     }
                   }
                 ]
@@ -132,7 +132,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "89D"
+                  "Value": "0D"
                 }
               }
             }
@@ -154,7 +154,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#000000'"
+                      "Value": "'#1E293B'"
                     }
                   }
                 }
@@ -208,7 +208,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "90D"
                 }
               }
             },
@@ -251,7 +251,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0E2259'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -262,7 +262,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#3E5AA0'"
+                      "Value": "'#DDE3EC'"
                     }
                   }
                 }
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C9D6F5'"
+                      "Value": "'#475569'"
                     }
                   }
                 }

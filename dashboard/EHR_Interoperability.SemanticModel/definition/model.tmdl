@@ -12,3 +12,4 @@ ref table hospital
 ref table hospital_year
 ref table states
 ref table Dots
+ref table Result

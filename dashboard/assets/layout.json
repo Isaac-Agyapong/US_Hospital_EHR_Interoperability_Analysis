@@ -1,13 +1,13 @@
 {
   "colors": {
-    "paper": "#0B1F4D",
-    "paper_top": "#2B1A6B",
-    "grid": "#5CC8FF",
+    "paper": "#E9EDF3",
+    "paper_top": "#F1F4F8",
+    "grid": "#E9EDF3",
     "card": "#FFFFFF",
-    "line": "#3E5AA0",
+    "line": "#DDE3EC",
     "rail": "#06122F",
     "violet": "#8B5CF6",
-    "cobalt": "#5B8DEF",
+    "cobalt": "#1F4E9E",
     "mint": "#5EEAD4",
     "rail_x": 1064
   }
