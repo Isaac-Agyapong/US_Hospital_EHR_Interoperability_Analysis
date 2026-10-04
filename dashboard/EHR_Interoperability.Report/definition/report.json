@@ -43,6 +43,11 @@
           "name": "logo.png",
           "path": "logo.png",
           "type": "Image"
+        },
+        {
+          "name": "banner.png",
+          "path": "banner.png",
+          "type": "Image"
         }
       ]
     }

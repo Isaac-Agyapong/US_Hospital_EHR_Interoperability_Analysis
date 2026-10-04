@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pageLine",
   "position": {
-    "x": 200,
-    "y": 34,
-    "z": 14000,
+    "x": 540,
+    "y": 36,
+    "z": 13000,
     "height": 24,
-    "width": 880,
-    "tabOrder": 14000
+    "width": 759,
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,15 +20,6 @@
               {
                 "textRuns": [
                   {
-                    "value": "MONEY AND HISTORY   ",
-                    "textStyle": {
-                      "fontSize": "9.5pt",
-                      "color": "#4ADE80",
-                      "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
-                    }
-                  },
-                  {
                     "value": "Hospitals short of money fall behind, and some never catch up",
                     "textStyle": {
                       "fontSize": "10.5pt",
@@ -36,8 +27,7 @@
                       "fontFamily": "Segoe UI"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "center"
+                ]
               }
             ]
           }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "reportTitle",
   "position": {
-    "x": 200,
-    "y": 4,
-    "z": 6000,
+    "x": 240,
+    "y": 3,
+    "z": 4000,
     "height": 34,
-    "width": 880,
-    "tabOrder": 6000
+    "width": 800,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +22,7 @@
                   {
                     "value": "U.S. Hospital EHR Interoperability Scorecard 2019-2024",
                     "textStyle": {
-                      "fontSize": "18pt",
+                      "fontSize": "19pt",
                       "color": "#FFFFFF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"

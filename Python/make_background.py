@@ -57,8 +57,41 @@ def logo(c, size=96):
     r = size * 0.15
     a, b = (size * 0.30, size * 0.64), (size * 0.70, size * 0.36)
     d.line([a, b], fill=(255, 255, 255, 255), width=round(size * 0.065))
-    for (cx, cy), fill in ((a, (255, 255, 255, 255)), (b, rgb(c["mint"]))):
+    for (cx, cy), fill in ((a, (255, 255, 255, 255)), (b, rgb("#0B2A1C"))):
         d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=fill, outline=(255, 255, 255, 255), width=round(size * 0.04))
+    return im
+
+
+def banner(c, height=64):
+    """Header strip: near-black to dark-green gradient, a faint network of connected nodes (records that can talk
+    to each other) on both ends, the glowing logo on the left and a bright green rule along the bottom."""
+    import random
+    from PIL import ImageFilter
+    w, h = W, height * S
+    xx = np.linspace(0, 1, w)[None, :, None]
+    a, b = np.array(rgb("#050A18")[:3], float), np.array(rgb("#0B2A1C")[:3], float)
+    img = (a * (1 - xx) + b * xx).repeat(h, axis=0)
+    im = Image.fromarray(img.astype(np.uint8)).convert("RGBA")
+    net = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(net)
+    rnd = random.Random(8)
+    for x_lo, x_hi in ((70, 255), (995, 1080)):
+        pts = [(rnd.uniform(x_lo, x_hi) * S, rnd.uniform(6, height - 8) * S) for _ in range(16)]
+        for i, (x1, y1) in enumerate(pts):
+            for x2, y2 in pts[i + 1:]:
+                if (x1 - x2) ** 2 + (y1 - y2) ** 2 < (70 * S) ** 2:
+                    d.line([x1, y1, x2, y2], fill=(74, 222, 128, 46), width=S)
+        for x1, y1 in pts:
+            r = rnd.choice([1.5, 2, 2.5]) * S
+            d.ellipse([x1 - r, y1 - r, x1 + r, y1 + r], fill=(74, 222, 128, 120))
+    im.alpha_composite(net)
+    glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(glow).ellipse([10 * S, 6 * S, 58 * S, 58 * S], fill=(74, 222, 128, 90))
+    im.alpha_composite(glow.filter(ImageFilter.GaussianBlur(9 * S)))
+    lg = logo(c, size=40 * S)
+    im.alpha_composite(lg, (14 * S, 12 * S))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, h - 3 * S, w, h], fill=rgb(c["cobalt"]))
     return im
 
 
@@ -66,7 +99,8 @@ def main():
     c = json.loads((ASSETS / "layout.json").read_text(encoding="utf-8"))["colors"]
     page(c).convert("RGB").save(ASSETS / "page_bg.png", optimize=True)
     logo(c).save(ASSETS / "logo.png", optimize=True)
-    print(f"wrote page_bg.png and logo.png to {ASSETS.relative_to(ROOT)}")
+    banner(c).convert("RGB").save(ASSETS / "banner.png", optimize=True)
+    print(f"wrote page_bg.png, logo.png and banner.png to {ASSETS.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pageLine",
   "position": {
-    "x": 200,
-    "y": 34,
-    "z": 10000,
+    "x": 662,
+    "y": 36,
+    "z": 9000,
     "height": 24,
-    "width": 880,
-    "tabOrder": 10000
+    "width": 773,
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,15 +20,6 @@
               {
                 "textRuns": [
                   {
-                    "value": "FIND A HOSPITAL   ",
-                    "textStyle": {
-                      "fontSize": "9.5pt",
-                      "color": "#4ADE80",
-                      "fontFamily": "Segoe UI",
-                      "fontWeight": "bold"
-                    }
-                  },
-                  {
                     "value": "Find a hospital",
                     "textStyle": {
                       "fontSize": "10.5pt",
@@ -36,8 +27,7 @@
                       "fontFamily": "Segoe UI"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "center"
+                ]
               }
             ]
           }

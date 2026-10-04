@@ -1,43 +1,37 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "logo",
+  "name": "pagePill",
   "position": {
-    "x": 16,
-    "y": 12,
+    "x": 301,
+    "y": 38,
     "z": 12000,
-    "height": 38,
-    "width": 38,
+    "height": 20,
+    "width": 78,
     "tabOrder": 12000
   },
   "visual": {
-    "visualType": "image",
+    "visualType": "textbox",
     "drillFilterOtherVisuals": true,
     "objects": {
       "general": [
         {
           "properties": {
-            "imageUrl": {
-              "expr": {
-                "ResourcePackageItem": {
-                  "PackageName": "RegisteredResources",
-                  "PackageType": 1,
-                  "ItemName": "logo.png"
-                }
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "OVERVIEW",
+                    "textStyle": {
+                      "fontSize": "8.5pt",
+                      "color": "#070E22",
+                      "fontFamily": "Segoe UI",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
               }
-            }
-          }
-        }
-      ],
-      "imageScaling": [
-        {
-          "properties": {
-            "imageScalingType": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Fit'"
-                }
-              }
-            }
+            ]
           }
         }
       ]
@@ -49,7 +43,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#4ADE80'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -62,7 +74,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#4ADE80'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }
@@ -101,7 +131,7 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "1D"
                 }
               }
             },
@@ -115,14 +145,14 @@
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "2D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "2D"
                 }
               }
             }

@@ -3,11 +3,11 @@
   "name": "badge",
   "position": {
     "x": 1088,
-    "y": 17,
-    "z": 11000,
+    "y": 18,
+    "z": 10000,
     "height": 28,
     "width": 176,
-    "tabOrder": 11000
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "textbox",

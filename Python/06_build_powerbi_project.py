@@ -998,15 +998,17 @@ def rail(page, filters="all"):
 
 
 def header(page, finding, sub=None):
-    """Title banner across the whole top of the page: logo, report title, page name + its finding, author badge."""
-    page.add("banner", 0, 0, 1280, BANNER_H, shape(NAVY))
-    page.add("bannerLine", 0, BANNER_H - 2, 1280, 2, shape(COBALT))
-    page.add("logo", 16, 12, 38, 38, image("logo.png"))
-    page.add("reportTitle", 200, 4, 880, 34, textbox([(TITLE, 18, True, CARD)], align="center", pad=(0, 0, 4, 4)))
-    page.add("pageLine", 200, 34, 880, 24, textbox(
-        [[(page.display.upper() + "   ", 9.5, True, COBALT), (finding, 10.5, False, "#F1F5F9")]], align="center",
-        pad=(0, 0, 4, 4)))
-    page.add("badge", 1088, 17, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, CARD)], align="center",
+    """Custom title banner across the top of every page: a drawn header image (dark gradient, faint network of
+    connected records, glowing logo, accent bar) with the report title, a page-name pill and the finding on top."""
+    page.add("banner", 0, 0, 1280, BANNER_H, image("banner.png"))
+    page.add("reportTitle", 240, 3, 800, 34, textbox([(TITLE, 19, True, CARD)], align="center", pad=(0, 0, 4, 4)))
+    w = 22 + 7 * len(page.display)
+    line_w = w + 12 + int(5.6 * len(finding))
+    x = 640 - line_w // 2
+    page.add("pagePill", x, 38, w, 20, textbox([(page.display.upper(), 8.5, True, NAVY)], align="center",
+                                                 background=COBALT, radius=10, pad=(1, 0, 2, 2)))
+    page.add("pageLine", x + w + 6, 36, 900 - w, 24, textbox([(finding, 10.5, False, "#F1F5F9")], pad=(0, 0, 4, 4)))
+    page.add("badge", 1088, 18, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, CARD)], align="center",
                                                     background="#15803D", radius=14, pad=(4, 0, 4, 4)))
 
 
@@ -1483,7 +1485,7 @@ def build_report():
         old.unlink()
     write_json(ASSETS / "layout.json", {"colors": colours})
     subprocess.run([sys.executable, str(ROOT / "Python" / "make_background.py")], check=True)
-    images = ["page_bg.png", "logo.png"]
+    images = ["page_bg.png", "logo.png", "banner.png"]
 
     d = RPT / "definition"
     write_json(RPT / "definition.pbir", {"$schema": S_PBIR, "version": "4.0",
