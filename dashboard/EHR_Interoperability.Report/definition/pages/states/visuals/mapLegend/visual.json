@@ -80,7 +80,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#FF6B6B",
+                      "color": "#F87171",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -96,7 +96,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#E11D48",
+                      "color": "#DC2626",
                       "fontFamily": "Segoe UI"
                     }
                   },

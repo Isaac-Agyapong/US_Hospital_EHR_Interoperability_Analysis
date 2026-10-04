@@ -10,7 +10,7 @@
     "tabOrder": 39000
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "lineChart",
     "query": {
       "queryState": {
         "Category": {
@@ -358,7 +358,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share falling short each year  ·  teal = small rural  ·  grey = general hospitals'"
+                  "Value": "'Share of hospitals falling short each year.  Red line = small rural hospitals,  grey line = general hospitals'"
                 }
               }
             },
@@ -627,7 +627,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2DD4BF'"
+                      "Value": "'#F87171'"
                     }
                   }
                 }
@@ -652,7 +652,7 @@
                     },
                     "Right": {
                       "Literal": {
-                        "Value": "'Small rural (critical access)'"
+                        "Value": "'Small rural'"
                       }
                     }
                   }
@@ -668,7 +668,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#94A3B8'"
+                      "Value": "'#64748B'"
                     }
                   }
                 }

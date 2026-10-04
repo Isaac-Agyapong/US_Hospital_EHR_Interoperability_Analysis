@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "pageLine",
   "position": {
-    "x": 62,
+    "x": 200,
     "y": 34,
     "z": 14000,
     "height": 24,
-    "width": 980,
+    "width": 880,
     "tabOrder": 14000
   },
   "visual": {
@@ -23,7 +23,7 @@
                     "value": "DATA QUALITY   ",
                     "textStyle": {
                       "fontSize": "9.5pt",
-                      "color": "#5EEAD4",
+                      "color": "#60A5FA",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,8 @@
                       "fontFamily": "Segoe UI"
                     }
                   }
-                ]
+                ],
+                "horizontalTextAlignment": "center"
               }
             ]
           }

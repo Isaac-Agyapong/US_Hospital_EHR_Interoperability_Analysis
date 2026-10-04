@@ -65,7 +65,7 @@ table hospital
 
 	measure 'Size Colour' =
 			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[size_band] ), "@v", [Size Short] ), NOT ISBLANK ( [@v] ) )
-			RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "#FF6B6B", "#4B5D87" )
+			RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "#F87171", "#4B5D87" )
 		displayFolder: Colours
 		lineageTag: 9732c11d-d2de-53e3-97b7-99a849abdac8
 
@@ -89,7 +89,7 @@ table hospital
 
 	measure 'Owner Colour' =
 			VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[ownership] ), "@v", [Owner Short] ), NOT ISBLANK ( [@v] ) )
-			RETURN IF ( [Owner Short] = MAXX ( _t, [@v] ), "#FF6B6B", "#4B5D87" )
+			RETURN IF ( [Owner Short] = MAXX ( _t, [@v] ), "#F87171", "#4B5D87" )
 		displayFolder: Colours
 		lineageTag: 0b4410d1-620d-57eb-b835-3633c9e7b618
 
@@ -117,8 +117,8 @@ table hospital
 		lineageTag: 2f27e40a-84e7-58eb-b913-4ef2360674c3
 
 	measure 'Pair Title' =
-			VAR _a = DIVIDE ( CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) ), [Hospitals] )
-			VAR _b = DIVIDE ( CALCULATE ( [Short], KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) ), [Short] )
+			VAR _a = DIVIDE ( CALCULATE ( [Hospitals], KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) ), [Hospitals] )
+			VAR _b = DIVIDE ( CALCULATE ( [Short], KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) ), [Short] )
 			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ) || _a = 1, "Who the hospitals that fell short are",
 			    "Small rural: " & FORMAT ( _a, "0%" ) & " of all, " & FORMAT ( _b, "0%" ) & " of shortfalls" )
 		displayFolder: Titles
@@ -145,7 +145,7 @@ table hospital
 		displayFolder: KPI
 		lineageTag: fee96237-12cc-5766-8602-727407efeeed
 
-	measure 'Market Colour' = IF ( SELECTEDVALUE ( hospital[main_developer] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" }, "#38BDF8", "#64748B" )
+	measure 'Market Colour' = IF ( SELECTEDVALUE ( hospital[main_developer] ) IN { "Epic", "Oracle Health (Cerner)", "MEDITECH" }, "#60A5FA", "#64748B" )
 		displayFolder: Colours
 		lineageTag: 158e1e8c-2214-5040-be28-3fcfdeb2eba7
 
@@ -189,7 +189,7 @@ table hospital
 		displayFolder: EHR
 		lineageTag: 7fe60c29-9e4e-5273-af06-987c315008cd
 
-	measure 'EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) = "No EHR ID reported", "#A78BFA", "#FF6B6B" )
+	measure 'EHR Colour' = IF ( SELECTEDVALUE ( hospital[ehr_group] ) = "No EHR ID reported", "#A78BFA", "#F87171" )
 		displayFolder: Colours
 		lineageTag: a1792baf-ae7d-5f62-8b11-16fe653663fa
 
@@ -212,8 +212,8 @@ table hospital
 		lineageTag: 24663b00-a795-581a-81f9-ea5ef8443113
 
 	measure 'Matrix Title' =
-			VAR _t = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
-			VAR _e = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+			VAR _t = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
+			VAR _e = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
 			RETURN IF ( ISBLANK ( _t ) || ISBLANK ( _e ), "Share falling short by EHR company, small rural vs general hospitals",
 			    "Small rural: " & FORMAT ( _t, "0%" ) & " fall short on TruBridge, " & FORMAT ( _e, "0%" ) & " on Epic" )
 		displayFolder: Titles
@@ -224,7 +224,7 @@ table hospital
 		displayFolder: Money
 		lineageTag: 8a64259c-9aa9-5aec-8e77-2bd636e6141d
 
-	measure 'Fifth Colour' = IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "#FF6B6B", "#FCA5A5" )
+	measure 'Fifth Colour' = IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "#F87171", "#FCA5A5" )
 		displayFolder: Colours
 		lineageTag: a3cfd86e-9563-51b5-99cc-1cf62850d9db
 
@@ -277,8 +277,8 @@ table hospital
 		lineageTag: 6748f30f-b5a2-5c18-bb6e-8a68b8f7f722
 
 	measure 'History Colour' =
-			SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#60A5FA", "Every year", "#E11D48",
-			    "1 of 6 years", "#FCA5A5", "2 of 6 years", "#FCA5A5", "#FF6B6B" )
+			SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#60A5FA", "Every year", "#DC2626",
+			    "1 of 6 years", "#FCA5A5", "2 of 6 years", "#FCA5A5", "#F87171" )
 		displayFolder: Colours
 		lineageTag: 0191c9f0-8dd2-50db-8bf5-003ec9ac7a06
 
@@ -337,8 +337,8 @@ table hospital
 			    _r < 0.05, "#FDF0EA",
 			    _r < 0.10, "#F9CDBB",
 			    _r < 0.15, "#F29A78",
-			    _r < 0.25, "#FF6B6B",
-			    "#E11D48" )
+			    _r < 0.25, "#F87171",
+			    "#DC2626" )
 		displayFolder: Map
 		lineageTag: 1ba12b64-6996-586d-909e-37dcc04202f1
 
@@ -478,7 +478,7 @@ table hospital
 		displayFolder: KPI
 		lineageTag: 5358482f-a9f4-5d04-b689-539ffc98b1ee
 
-	measure 'Rural Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+	measure 'Rural Short' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
 		formatString: 0%
 		displayFolder: KPI
 		lineageTag: 4b696ca6-fc57-5376-8487-055271c1d4e8
@@ -533,17 +533,17 @@ table hospital
 		displayFolder: EHR
 		lineageTag: 401208fb-8748-5204-bce5-1864c41286e0
 
-	measure 'Rural TruBridge' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+	measure 'Rural TruBridge' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "TruBridge (CPSI)" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: e76edc12-d7c5-5e8f-9d38-8eed1c545106
 
-	measure 'Rural MEDITECH' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "MEDITECH" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+	measure 'Rural MEDITECH' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "MEDITECH" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: 5d889620-571d-575d-ae39-3ca37775b80a
 
-	measure 'Rural Epic' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural (critical access)" ) )
+	measure 'Rural Epic' = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[ehr_group] = "Epic" ), KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
 		formatString: 0%
 		displayFolder: EHR
 		lineageTag: b1730faf-1009-5890-8a0e-52ee9599e2a7
@@ -581,7 +581,7 @@ table hospital
 
 	measure 'Short Delta Colour' =
 			VAR _a = CALCULATE ( [Year Share], KEEPFILTERS ( hospital_year[snapshot_year] = 2019 ) )
-			RETURN IF ( [Short Share] <= _a, "#34D399", "#FF6B6B" )
+			RETURN IF ( [Short Share] <= _a, "#34D399", "#F87171" )
 		displayFolder: Colours
 		lineageTag: 36392f75-ee2b-5081-9f58-f68c768dd93c
 
@@ -594,7 +594,7 @@ table hospital
 
 	measure 'Count Delta Colour' =
 			VAR _a = CALCULATE ( SUM ( hospital_year[not_met] ), KEEPFILTERS ( hospital_year[snapshot_year] = 2019 ) )
-			RETURN IF ( [Short] <= _a, "#34D399", "#FF6B6B" )
+			RETURN IF ( [Short] <= _a, "#34D399", "#F87171" )
 		displayFolder: Colours
 		lineageTag: a371b6b1-5e9b-50b8-9e95-fcd7ccecb8bd
 
@@ -607,7 +607,7 @@ table hospital
 
 	measure 'Rural Delta Colour' =
 			VAR _g = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[hospital_type] = "General hospital" ) )
-			RETURN IF ( [Rural Short] > _g, "#FF6B6B", "#34D399" )
+			RETURN IF ( [Rural Short] > _g, "#F87171", "#34D399" )
 		displayFolder: Colours
 		lineageTag: b0496b25-22b8-5399-941a-ffbf3fcac1db
 
@@ -615,14 +615,26 @@ table hospital
 		displayFolder: Colours
 		lineageTag: 6a7a9492-edae-50a7-b857-df137a0b5747
 
-	measure 'Funnel Count' = SWITCH ( SELECTEDVALUE ( Stage[order] ), 1, [Hospitals], 2, [Short] + 0, 3, [No EHR Short] + 0 )
+	measure 'Funnel Count' = SWITCH ( SELECTEDVALUE ( Stage[order] ), 1, [No EHR Short] + 0, 2, [Short] - [No EHR Short] )
 		formatString: #,0
 		displayFolder: Charts
 		lineageTag: 28141a21-bfd2-5108-85a9-a349b1651c61
 
-	measure 'Funnel Title' = FORMAT ( [Short] + 0, "#,0" ) & " fell short; " & FORMAT ( [No EHR Short] + 0, "#,0" ) & " had no certified EHR"
+	measure 'Funnel Title' = IF ( [Short] > 0, FORMAT ( ROUND ( [No EHR Share] * 10, 0 ), "0" ) & " in 10 that fell short had no certified EHR", "No hospitals fell short" )
 		displayFolder: Titles
 		lineageTag: 4b39c9db-3a05-57e6-a4ae-25e3bba13d7f
+
+	measure 'Type Colour' = IF ( SELECTEDVALUE ( hospital[hospital_type] ) = "Small rural", "#F87171", "#64748B" )
+		displayFolder: Colours
+		lineageTag: 653aa5e4-1831-5f17-9fe1-528ae68962e2
+
+	measure 'Type Title' =
+			VAR _r = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[hospital_type] = "Small rural" ) )
+			VAR _g = CALCULATE ( [Short Share], KEEPFILTERS ( hospital[hospital_type] = "General hospital" ) )
+			RETURN IF ( ISBLANK ( _r ) || ISBLANK ( _g ) || _g = 0, "Small rural vs general hospitals",
+			    "Small rural fall short " & FORMAT ( DIVIDE ( _r, _g ), "0.0" ) & "x as often" )
+		displayFolder: Titles
+		lineageTag: fd4c7428-ce06-53c2-bd30-c91d2a3eb458
 
 	measure 'Top3 Share Text' =
 			VAR _v = [Top3 Share]
@@ -732,7 +744,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: 74f79ff6-4470-564d-844e-80c64a084f93
 
-	measure 'Profile Status Colour' = IF ( SUM ( hospital[not_met] ) = 1, "#FF6B6B", "#60A5FA" )
+	measure 'Profile Status Colour' = IF ( SUM ( hospital[not_met] ) = 1, "#F87171", "#60A5FA" )
 		displayFolder: Hospital
 		lineageTag: 78758bb8-0fdc-5ab0-97ab-e5c7c9f41000
 
@@ -761,7 +773,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: 98ae0c03-5c64-5f79-9de5-0f43f4ef459d
 
-	measure 'Profile Years Colour' = IF ( SUM ( hospital_year[not_met] ) > 0, "#FF6B6B", "#60A5FA" )
+	measure 'Profile Years Colour' = IF ( SUM ( hospital_year[not_met] ) > 0, "#F87171", "#60A5FA" )
 		displayFolder: Hospital
 		lineageTag: 8e9486ab-f3f7-5e58-bee1-28b80c4b87cc
 
@@ -773,7 +785,7 @@ table hospital
 		displayFolder: Hospital
 		lineageTag: ce7bdfc6-a1eb-50d2-811d-68aff739d168
 
-	measure 'Profile Margin Colour' = IF ( SUM ( hospital[total_margin] ) < 0, "#FF6B6B", "#FFFFFF" )
+	measure 'Profile Margin Colour' = IF ( SUM ( hospital[total_margin] ) < 0, "#F87171", "#FFFFFF" )
 		displayFolder: Hospital
 		lineageTag: f5249ded-f07a-5425-b3d7-7c1949cf614d
 

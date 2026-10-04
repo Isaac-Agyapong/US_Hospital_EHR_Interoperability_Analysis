@@ -3,9 +3,9 @@
   "name": "bannerLine",
   "position": {
     "x": 0,
-    "y": 61,
+    "y": 62,
     "z": 7000,
-    "height": 3,
+    "height": 2,
     "width": 1280,
     "tabOrder": 7000
   },
@@ -45,7 +45,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5EEAD4'"
+                      "Value": "'#60A5FA'"
                     }
                   }
                 }
@@ -76,7 +76,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5EEAD4'"
+                      "Value": "'#60A5FA'"
                     }
                   }
                 }

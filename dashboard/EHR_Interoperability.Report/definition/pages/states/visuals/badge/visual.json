@@ -23,7 +23,7 @@
                     "value": "Built by Isaac Agyapong",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#070E22",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -52,7 +52,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5EEAD4'"
+                      "Value": "'#1E3A8A'"
                     }
                   }
                 }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5EEAD4'"
+                      "Value": "'#1E3A8A'"
                     }
                   }
                 }

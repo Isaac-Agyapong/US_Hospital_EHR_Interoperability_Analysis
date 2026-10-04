@@ -61,9 +61,9 @@ CUSTOM_THEME = "BlueprintTheme.json"
 
 # palette: dark executive. Deep navy page, solid navy cards, white text, one bright colour per meaning:
 # red = fell short, purple = no certified EHR, teal = small rural, blue = met / main, grey-blue = everything else
-COBALT, COBALT_L, NAVY, SKY = "#60A5FA", "#93C5FD", "#070E22", "#38BDF8"
-RED, RED_L, RED_D = "#FF6B6B", "#FCA5A5", "#E11D48"
-PURPLE, AMBER, TEAL, SLATE, GREY = "#A78BFA", "#FBBF24", "#2DD4BF", "#94A3B8", "#64748B"
+COBALT, COBALT_L, NAVY, SKY = "#60A5FA", "#93C5FD", "#070E22", "#60A5FA"
+RED, RED_L, RED_D = "#F87171", "#FCA5A5", "#DC2626"
+PURPLE, AMBER, TEAL, SLATE, GREY = "#A78BFA", "#FBBF24", "#F87171", "#64748B", "#64748B"
 GREEN = "#34D399"
 GREY_D = "#94A3B8"
 PANEL, PANEL_2, DARK = "#15244A", "#1B2C57", "#0B1530"
@@ -75,7 +75,7 @@ PAPER, PAPER_TOP, GRIDC, MINT = "#0E1A38", "#0B1530", "#0E1A38", "#5EEAD4"
 GLASS_T = 0
 FONT = "Segoe UI"
 PCT, PCT1, INT = "0%", "0.0%", "#,0"
-GENERAL, RURAL = "General hospital", "Small rural (critical access)"
+GENERAL, RURAL = "General hospital", "Small rural"
 NO_EHR = "No EHR ID reported"
 
 
@@ -440,9 +440,17 @@ MEASURES += [
      f'VAR _g = {share_for(eq("hospital[hospital_type]", GENERAL))}\nRETURN IF ( [Rural Short] > _g, "{RED}", "{GREEN}" )', None, "Colours"),
     ("hospital", "Neutral Colour", f'"{INK_2}"', None, "Colours"),
     ("hospital", "Funnel Count",
-     "SWITCH ( SELECTEDVALUE ( Stage[order] ), 1, [Hospitals], 2, [Short] + 0, 3, [No EHR Short] + 0 )", INT, "Charts"),
+     "SWITCH ( SELECTEDVALUE ( Stage[order] ), 1, [No EHR Short] + 0, 2, [Short] - [No EHR Short] )", INT, "Charts"),
     ("hospital", "Funnel Title",
-     'FORMAT ( [Short] + 0, "#,0" ) & " fell short; " & FORMAT ( [No EHR Short] + 0, "#,0" ) & " had no certified EHR"', None, "Titles"),
+     'IF ( [Short] > 0, FORMAT ( ROUND ( [No EHR Share] * 10, 0 ), "0" ) & " in 10 that fell short had no certified EHR", "No hospitals fell short" )', None, "Titles"),
+]
+
+MEASURES += [
+    ("hospital", "Type Colour", f'IF ( SELECTEDVALUE ( hospital[hospital_type] ) = "{RURAL}", "{RED}", "{GREY}" )', None, "Colours"),
+    ("hospital", "Type Title",
+     f'VAR _r = {share_for(eq("hospital[hospital_type]", RURAL))}\nVAR _g = {share_for(eq("hospital[hospital_type]", GENERAL))}\n'
+     'RETURN IF ( ISBLANK ( _r ) || ISBLANK ( _g ) || _g = 0, "Small rural vs general hospitals",\n'
+     '    "Small rural fall short " & FORMAT ( DIVIDE ( _r, _g ), "0.0" ) & "x as often" )', None, "Titles"),
 ]
 
 # every KPI number also gets a text version, so a card shows "–" instead of "(Blank)" when a filter leaves no hospitals
@@ -604,7 +612,7 @@ def build_model():
         "Result", [("result", "string")], 'DATATABLE ( "result", STRING, { { "Fell short" }, { "Met the standards" } } )'))
     write(d / "tables" / "Stage.tmdl", calc_table(     # funnel steps
         "Stage", [("order", "int64"), ("stage", "string", "order")],
-        'DATATABLE ( "order", INTEGER, "stage", STRING, { { 1, "Checked" }, { 2, "Fell short" }, { 3, "No EHR" } } )'))
+        'DATATABLE ( "order", INTEGER, "stage", STRING, { { 1, "No certified EHR" }, { 2, "Had a certified EHR" } } )'))
     write(d / "relationships.tmdl", "\n".join([
         f"relationship {tag('rel', 'year')}", "\tfromColumn: hospital_year.ccn", "\ttoColumn: hospital.ccn", "",
         f"relationship {tag('rel', 'states')}", "\tfromColumn: hospital.state", "\ttoColumn: states.state", ""]))
@@ -979,13 +987,14 @@ def rail(page, filters="all"):
 def header(page, finding, sub=None):
     """Title banner across the whole top of the page: logo, report title, page name + its finding, author badge."""
     page.add("banner", 0, 0, 1280, BANNER_H, shape(NAVY))
-    page.add("bannerLine", 0, BANNER_H - 3, 1280, 3, shape(MINT))
+    page.add("bannerLine", 0, BANNER_H - 2, 1280, 2, shape(COBALT))
     page.add("logo", 16, 12, 38, 38, image("logo.png"))
-    page.add("reportTitle", 62, 6, 900, 30, textbox([(TITLE, 17, True, CARD)], pad=(0, 0, 4, 4)))
-    page.add("pageLine", 62, 34, 980, 24, textbox(
-        [[(page.display.upper() + "   ", 9.5, True, MINT), (finding, 10.5, False, "#D6E0F5")]], pad=(0, 0, 4, 4)))
-    page.add("badge", 1088, 17, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, NAVY)], align="center",
-                                                    background=MINT, radius=14, pad=(4, 0, 4, 4)))
+    page.add("reportTitle", 200, 4, 880, 34, textbox([(TITLE, 18, True, CARD)], align="center", pad=(0, 0, 4, 4)))
+    page.add("pageLine", 200, 34, 880, 24, textbox(
+        [[(page.display.upper() + "   ", 9.5, True, COBALT), (finding, 10.5, False, "#D6E0F5")]], align="center",
+        pad=(0, 0, 4, 4)))
+    page.add("badge", 1088, 17, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, CARD)], align="center",
+                                                    background="#1E3A8A", radius=14, pad=(4, 0, 4, 4)))
 
 
 def sparkline(measure, colour):
@@ -1132,34 +1141,28 @@ def build_pages():
     rbh = BOTTOM - rb
     tw_ = 604
     p1.tile("trend", X0, R1, tw_, rah, chart(
-        "areaChart", {"Category": [C("hospital_year", "snapshot_year", "Yearly file")],
+        "lineChart", {"Category": [C("hospital_year", "snapshot_year", "Yearly file")],
                       "Series": [C("hospital_year", "year_type", "Hospital type")],
                       "Y": [M("Year Share", "Share falling short")]},
-        "=Trend Title", "Share falling short each year  ·  teal = small rural  ·  grey = general hospitals",
+        "=Trend Title", "Share of hospitals falling short each year.  Red line = small rural hospitals,  grey line = general hospitals",
         objects={**axes(categorical=True, cat_size=11), **labels(10), **legend(show=False),
                  "dataPoint": fill_by_value("hospital_year", "year_type", {RURAL: TEAL, GENERAL: SLATE}),
                  "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true"), "markerSize": lit("6D"),
                                                 "lineChartType": s("smooth")}}]}))
     gx, gw = X0 + tw_ + GAP, W - tw_ - GAP
     p1.tile("funnel", gx, R1, gw, rah, chart(
-        "funnel", {"Category": [C("Stage", "stage", "Step")], "Y": [M("Funnel Count", "Hospitals")]},
-        "=Funnel Title", "Hospitals checked in 2024 → fell short → had no certified EHR",
-        sort=(C("Stage", "stage"), "Ascending"),
-        objects={"labels": [{"properties": {"show": lit("true"), "color": solid(INK), "fontSize": lit("12D"),
-                                            "fontFamily": s(FONT), "labelDisplayUnits": lit("1D")}}],
-                 "categoryAxis": [{"properties": {"color": solid(INK_2), "fontSize": lit("11D"), "fontFamily": s(FONT)}}],
-                 "dataPoint": fill_by_value("Stage", "stage", {"Checked": COBALT, "Fell short": RED, "No EHR": PURPLE})}))
+        "donutChart", {"Category": [C("Stage", "stage", "Result")], "Y": [M("Funnel Count", "Hospitals")]},
+        "=Funnel Title", "The hospitals that fell short in 2024, by whether they reported certified EHR software",
+        objects={"labels": [{"properties": {"show": lit("true"), "labelStyle": s("Data value, percent of total"), "color": solid(INK),
+                                            "fontSize": lit("12D"), "fontFamily": s(FONT), "labelDisplayUnits": lit("1D"), "percentageLabelPrecision": lit("0L")}}],
+                 "legend": [{"properties": {"show": lit("true"), "position": s("Bottom"), "labelColor": solid(INK),
+                                            "fontSize": lit("11D"), "fontFamily": s(FONT), "showTitle": lit("false")}}],
+                 "slices": [{"properties": {"innerRadiusRatio": lit("60L")}}],
+                 "dataPoint": fill_by_value("Stage", "stage", {"No certified EHR": PURPLE, "Had a certified EHR": RED})}))
     # row B: donut pair, treemap, columns
-    p1.tile("pair", X0, rb, third, rbh, None, stripe=TEAL)
-    p1.add("pairTitle", X0 + 8, rb + 10, third - 16, 44, card("Pair Title", colour=INK, size=12))
-    for k, (measure, lab) in enumerate([("Type Hospitals", "All hospitals"), ("Type Short", "Fell short")]):
-        x = X0 + 6 + k * (third - 12) // 2
-        p1.add(f"pairLabel{k}", x, rb + 54, (third - 12) // 2, 22, textbox([(lab, 11, True, INK_2)], align="center"))
-        p1.add(f"pairDonut{k}", x, rb + 74, (third - 12) // 2, rbh - 104, donut(
-            ("hospital", "hospital_type", "Hospital type"), measure, {RURAL: TEAL, GENERAL: SLATE}))
-    p1.add("pairKey", X0 + 6, rb + rbh - 30, third - 12, 24, textbox(
-        [[("● ", 12, False, TEAL), ("small rural   ", 10.5, False, INK_2), ("● ", 12, False, SLATE), ("general", 10.5, False, INK_2)]],
-        align="center"))
+    p1.tile("type", X0, rb, third, rbh, bars(
+        ("hospital", "hospital_type", "Hospital type"), "Short Share", "=Type Title", "Share falling short in 2024",
+        colour_measure="Type Colour", area=48, inner=40, cat_size=10))
     p1.tile("owner", X0 + third + GAP, rb, third, rbh, bars(
         ("hospital", "ownership", "Owner"), "Owner Short", "=Owner Title", "Share falling short, by owner",
         colour_measure="Owner Colour", area=34, inner=30, cat_size=10))

@@ -4,10 +4,10 @@
   "position": {
     "x": 366,
     "y": 468,
-    "z": 48000,
+    "z": 42000,
     "height": 238,
     "width": 330,
-    "tabOrder": 48000
+    "tabOrder": 42000
   },
   "visual": {
     "visualType": "clusteredBarChart",

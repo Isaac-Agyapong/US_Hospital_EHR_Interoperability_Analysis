@@ -23,7 +23,7 @@
                     "value": "◆",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#38BDF8",
+                      "color": "#60A5FA",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -52,7 +52,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E7F7FE'"
+                      "Value": "'#ECF4FE'"
                     }
                   }
                 }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#38BDF8'"
+                      "Value": "'#60A5FA'"
                     }
                   }
                 }

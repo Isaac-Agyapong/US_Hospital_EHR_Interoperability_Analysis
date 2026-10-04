@@ -24,4 +24,4 @@ table Stage
 	partition Stage = calculated
 		mode: import
 		source =
-				DATATABLE ( "order", INTEGER, "stage", STRING, { { 1, "Checked" }, { 2, "Fell short" }, { 3, "No EHR" } } )
+				DATATABLE ( "order", INTEGER, "stage", STRING, { { 1, "No certified EHR" }, { 2, "Had a certified EHR" } } )

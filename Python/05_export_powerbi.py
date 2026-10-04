@@ -21,7 +21,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(ROOT / "Python"))
 CONNINFO = import_module("02_load_postgres").CONNINFO
 
-TYPE = {"General acute care": "General hospital", "Critical access": "Small rural (critical access)"}
+TYPE = {"General acute care": "General hospital", "Critical access": "Small rural"}
 STATES = {
     "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado",
     "CT": "Connecticut", "DE": "Delaware", "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia",
