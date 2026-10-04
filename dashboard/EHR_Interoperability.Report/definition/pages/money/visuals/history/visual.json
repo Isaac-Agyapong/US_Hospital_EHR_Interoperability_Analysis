@@ -28,7 +28,7 @@
               },
               "queryRef": "hospital.history",
               "nativeQueryRef": "history",
-              "displayName": "Years falling short"
+              "displayName": "Years failing"
             }
           ]
         },
@@ -356,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Hospitals in all six yearly Medicare files (2019-2024), by how many of those years they fell short'"
+                  "Value": "'Hospitals in all six yearly Medicare files (2019-2024), by how many of those years they failed'"
                 }
               }
             },

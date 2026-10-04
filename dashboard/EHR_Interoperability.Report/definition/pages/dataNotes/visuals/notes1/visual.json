@@ -57,7 +57,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "•  Met the standards: met Medicare's Promoting Interoperability program for the year (certified EHR, sharing records, e-prescribing, patient online access, reporting to public health)",
+                    "value": "•  Passed: met Medicare's Promoting Interoperability program for the year (certified EHR, sharing records, e-prescribing, patient online access, reporting to public health)",
                     "textStyle": {
                       "fontSize": "12.5pt",
                       "color": "#FFFFFF",
@@ -69,7 +69,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "•  Fell short: did not meet them, which cuts the hospital's Medicare payments",
+                    "value": "•  Failed: failed them, which cuts the hospital's Medicare payments",
                     "textStyle": {
                       "fontSize": "12.5pt",
                       "color": "#FFFFFF",

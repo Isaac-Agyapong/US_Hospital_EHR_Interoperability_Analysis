@@ -9,16 +9,16 @@ software and the hospitals' own financial reports.
 ![Dashboard overview](Image/dashboard_1_overview.png)
 
 > ### In short
-> - **About 1 in 8 US hospitals fell short in 2024.** 574 of 4,489 hospitals did not meet Medicare's standards for
+> - **About 1 in 8 US hospitals failed in 2024.** 574 of 4,489 hospitals did not meet Medicare's standards for
 >   sharing records electronically, which cuts their Medicare payments. In 2019 it was 1 in 5.
-> - **Most of them had no certified EHR at all.** 8 in 10 hospitals that fell short did not report any certified
+> - **Most of them had no certified EHR at all.** 8 in 10 hospitals that failed did not report any certified
 >   EHR software. The problem is mostly hospitals without the right system, not hospitals using it badly.
-> - **Small rural hospitals fall short about twice as often** (19% against 10% for other hospitals), and the gap has
+> - **Small rural hospitals fail about twice as often** (19% against 10% for other hospitals), and the gap has
 >   been there every year since 2019.
-> - **The software company matters.** Hospitals on Epic or Oracle Health almost never fall short (about 1 in 100).
->   Hospitals on TruBridge, a system common in small rural hospitals, fall short 14 times in 100, even compared with
+> - **The software company matters.** Hospitals on Epic or Oracle Health almost never fail (about 1 in 100).
+>   Hospitals on TruBridge, a system common in small rural hospitals, fail 14 times in 100, even compared with
 >   the same kind of hospital.
-> - **Money matters.** Hospitals that lost money two years in a row fall short about twice as often as those that
+> - **Money matters.** Hospitals that lost money two years in a row fail about twice as often as those that
 >   did not.
 > - **The data itself has gaps.** 585 hospitals typed "Not Available" where the ID of their EHR software should be,
 >   and the two Medicare files give different answers for 430 hospitals.
@@ -33,34 +33,34 @@ The sections below go into technical detail.
 
 ## Key findings
 
-"Fell short" means the hospital did not meet the Medicare Promoting Interoperability program for the year. The study
+"Failed" means the hospital did not meet the Medicare Promoting Interoperability program for the year. The study
 group is the two hospital types the program applies to: general acute care hospitals and critical access hospitals
 (small rural hospitals with 25 beds or fewer). Every number comes from [SQL/query_results.md](SQL/query_results.md).
 
 | Finding | Evidence |
 |---|---|
-| 574 of 4,489 hospitals (13%) fell short in the latest reporting year (2024) | Business Q5 |
-| Critical access hospitals fall short 19% of the time, general hospitals 10% | Business Q2 |
+| 574 of 4,489 hospitals (13%) failed in the latest reporting year (2024) | Business Q5 |
+| Critical access hospitals fail 19% of the time, general hospitals 10% | Business Q2 |
 | The gap holds every year: critical access 30% (2019) to 24% (2024), general 16% to 10% | Business Q1 |
 | 448 of the 574 (78%) reported no certified EHR at all | Business Q5 |
-| Share falling short by main EHR company: Epic 1.1%, Oracle Health 1.3%, MEDITECH 4.0%, TruBridge 13.9% | Business Q3 |
+| Share failing by main EHR company: Epic 1.1%, Oracle Health 1.3%, MEDITECH 4.0%, TruBridge 13.9% | Business Q3 |
 | Among critical access hospitals only: TruBridge 15.4% against Epic 3.0% | Business Q4 |
 | Three companies (Epic, Oracle Health, MEDITECH) run 85% of hospital EHRs; market concentration index (HHI) 3,030, "highly concentrated" | Business Q12 |
-| Lost money two years in a row: 25% fall short against 15% (critical access); 12% against 6.5% (general) | Business Q6 |
-| The least profitable fifth of hospitals fall short 19.7% of the time; the other fifths 6.7% to 10.1% | Business Q7 |
-| Hospitals with under 25 beds fall short 23% of the time, those with 250+ beds 4% | Business Q8 |
+| Lost money two years in a row: 25% fail against 15% (critical access); 12% against 6.5% (general) | Business Q6 |
+| The least profitable fifth of hospitals fail 19.7% of the time; the other fifths 6.7% to 10.1% | Business Q7 |
+| Hospitals with under 25 beds fail 23% of the time, those with 250+ beds 4% | Business Q8 |
 | Nonprofit 9%, for-profit 17%, government 19%, physician-owned 22% | Business Q2 |
 | Highest shares: Puerto Rico 45%, Idaho 29%, Nevada and Texas 26% | Business Q9 |
-| Of hospitals in all six yearly files, 2,770 never fell short and 169 fell short every year | Business Q10 |
-| Hospitals with no matching financial report fall short 60% of the time (missing data is itself a warning sign) | Business Q2 |
+| Of hospitals in all six yearly files, 2,770 never failed and 169 failed every year | Business Q10 |
+| Hospitals with no matching financial report fail 60% of the time (missing data is itself a warning sign) | Business Q2 |
 
 ## Recommendations
 
-1. **Start with hospitals that have no certified EHR.** They are 8 in 10 of the hospitals that fall short. Outreach
+1. **Start with hospitals that have no certified EHR.** They are 8 in 10 of the hospitals that fail. Outreach
    and help to adopt certified software would close most of the gap.
-2. **Give small rural hospitals shared IT support.** They fall short twice as often and many run on smaller EHR
+2. **Give small rural hospitals shared IT support.** They fail twice as often and many run on smaller EHR
    systems. Shared services through health systems, rural health IT grants or state networks fit their size.
-3. **Watch hospitals under financial stress.** Losing money two years in a row doubles the chance of falling short;
+3. **Watch hospitals under financial stress.** Losing money two years in a row doubles the chance of failing;
    the [Hospital Financial Distress Model](https://github.com/Isaac-Agyapong/Hospital_Financial_Distress_Model)
    already forecasts which hospitals will be in that group.
 4. **Check the EHR ID when hospitals submit it.** A simple format check and a lookup in the federal product list at
@@ -112,7 +112,7 @@ consistency between files and over time, and linkage ([SQL/03_data_quality.sql](
 | **The two Medicare files disagree** for 430 hospitals, because they cover different reporting periods. | Used the yearly general files for the 2019-2024 trend and the dedicated file for the latest year; both kept and compared. |
 | **Hospitals come and go**: 432 appear in only some of the six yearly files (openings, closures, mergers). | The trend uses whatever each file holds; the "every year / never" analysis uses hospitals present all six years. |
 | **Column names changed over time** ("Provider ID" became "Facility ID"; "meaningful use" became "promoting interoperability"). | The loader maps every spelling to one name. |
-| **Linking to finances**: 96% of hospitals match a cost report. | The 4% that do not match fall short far more often, so they are kept and shown as "unknown" rather than dropped. |
+| **Linking to finances**: 96% of hospitals match a cost report. | The 4% that do not match fail far more often, so they are kept and shown as "unknown" rather than dropped. |
 
 Every number on the dashboard was checked against the SQL results by running the same measures in DAX against the
 loaded model.
@@ -191,7 +191,7 @@ Transform data > Edit parameters and set `DataFolder` to your `dashboard\data\` 
 - The data says whether a hospital met the standards, not how well records actually move between providers.
 - The yearly files and the latest dedicated file cover different reporting periods, so a hospital's status can
   differ between them (430 hospitals).
-- The link between EHR company, money, size and falling short is an association, not proof of cause: small, poorer
+- The link between EHR company, money, size and failing is an association, not proof of cause: small, poorer
   hospitals tend to buy smaller systems and have fewer IT staff.
 - "Main EHR company" is my rule for EHR bundles that mix products from several companies.
 - Puerto Rico and four small territories are included; only Puerto Rico is drawn on the dashboard map.

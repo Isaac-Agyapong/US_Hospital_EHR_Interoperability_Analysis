@@ -29,7 +29,7 @@
                     }
                   },
                   {
-                    "value": "Can U.S. hospitals share health records electronically?",
+                    "value": "Can U.S. hospitals share health records electronically?  Failed = did not meet Medicare's yearly standard",
                     "textStyle": {
                       "fontSize": "10.5pt",
                       "color": "#D6E0F5",

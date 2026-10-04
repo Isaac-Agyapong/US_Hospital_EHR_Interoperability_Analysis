@@ -13,4 +13,4 @@ table Result
 	partition Result = calculated
 		mode: import
 		source =
-				DATATABLE ( "result", STRING, { { "Fell short" }, { "Met the standards" } } )
+				DATATABLE ( "result", STRING, { { "Failed" }, { "Passed" } } )

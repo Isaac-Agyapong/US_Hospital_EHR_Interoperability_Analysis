@@ -66,7 +66,7 @@
               },
               "queryRef": "hospital_year.Year Share",
               "nativeQueryRef": "Year Share",
-              "displayName": "Share falling short"
+              "displayName": "Share failing"
             }
           ]
         }
@@ -358,7 +358,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of hospitals falling short each year.  Red line = small rural hospitals,  grey line = general hospitals'"
+                  "Value": "'Share of hospitals failing each year.  Red line = small rural hospitals,  grey line = general hospitals'"
                 }
               }
             },
@@ -668,7 +668,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#64748B'"
+                      "Value": "'#94A3B8'"
                     }
                   }
                 }

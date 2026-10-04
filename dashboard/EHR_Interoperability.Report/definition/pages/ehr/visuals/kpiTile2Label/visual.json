@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "TruBridge: fell short",
+                    "value": "TruBridge: failed",
                     "textStyle": {
                       "fontSize": "10.5pt",
                       "color": "#A9B6D3",

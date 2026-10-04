@@ -58,7 +58,7 @@
               },
               "queryRef": "hospital.EHR Short Count",
               "nativeQueryRef": "EHR Short Count",
-              "displayName": "Fell short"
+              "displayName": "Failed"
             },
             {
               "field": {

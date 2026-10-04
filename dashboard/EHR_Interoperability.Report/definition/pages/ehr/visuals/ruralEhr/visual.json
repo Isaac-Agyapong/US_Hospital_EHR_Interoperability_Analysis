@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "market",
+  "name": "ruralEhr",
   "position": {
     "x": 24,
-    "y": 194,
-    "z": 36000,
-    "height": 300,
-    "width": 540,
-    "tabOrder": 36000
+    "y": 506,
+    "z": 38000,
+    "height": 200,
+    "width": 660,
+    "tabOrder": 38000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "main_developer"
+                  "Property": "ehr_group"
                 }
               },
-              "queryRef": "hospital.main_developer",
-              "nativeQueryRef": "main_developer",
+              "queryRef": "hospital.ehr_group",
+              "nativeQueryRef": "ehr_group",
               "displayName": "EHR company"
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Market Share"
+                  "Property": "Rural EHR Short"
                 }
               },
-              "queryRef": "hospital.Market Share",
-              "nativeQueryRef": "Market Share"
+              "queryRef": "hospital.Rural EHR Short",
+              "nativeQueryRef": "Rural EHR Short"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "hospital"
                   }
                 },
-                "Property": "Market Share"
+                "Property": "Rural EHR Short"
               }
             },
             "direction": "Descending"
@@ -297,7 +297,7 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Market Title"
+                  "Property": "Matrix Title"
                 }
               }
             },
@@ -356,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of hospitals using each company''s EHR. Blue = the 3 biggest.'"
+                  "Value": "'Small rural hospitals only: share that failed, by EHR company'"
                 }
               }
             },
@@ -443,14 +443,14 @@
             "innerPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "14L"
+                  "Value": "22L"
                 }
               }
             },
             "maxMarginFactor": {
               "expr": {
                 "Literal": {
-                  "Value": "36L"
+                  "Value": "30L"
                 }
               }
             }
@@ -585,7 +585,7 @@
                           "Entity": "hospital"
                         }
                       },
-                      "Property": "Market Colour"
+                      "Property": "Rural EHR Colour"
                     }
                   }
                 }

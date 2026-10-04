@@ -126,7 +126,7 @@
                     }
                   },
                   {
-                    "value": "Hospitals with no financial report fall short far more often (59% vs 11%): missing data is itself a warning sign",
+                    "value": "Hospitals with no financial report fail far more often (59% vs 11%): missing data is itself a warning sign",
                     "textStyle": {
                       "fontSize": "12pt",
                       "color": "#FFFFFF",

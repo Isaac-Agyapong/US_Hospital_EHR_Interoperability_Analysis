@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "None fell short",
+                    "value": "None failed",
                     "textStyle": {
                       "fontSize": "10.5pt",
                       "color": "#A9B6D3",

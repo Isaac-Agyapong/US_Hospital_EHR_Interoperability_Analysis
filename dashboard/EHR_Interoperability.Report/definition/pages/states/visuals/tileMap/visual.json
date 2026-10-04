@@ -356,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Darker red = a bigger share of hospitals falling short'"
+                  "Value": "'Darker red = a bigger share of hospitals failing'"
                 }
               }
             },

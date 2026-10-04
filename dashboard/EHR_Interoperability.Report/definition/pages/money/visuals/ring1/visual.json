@@ -338,7 +338,7 @@
                     },
                     "Right": {
                       "Literal": {
-                        "Value": "'Fell short'"
+                        "Value": "'Failed'"
                       }
                     }
                   }
@@ -379,7 +379,7 @@
                     },
                     "Right": {
                       "Literal": {
-                        "Value": "'Met the standards'"
+                        "Value": "'Passed'"
                       }
                     }
                   }

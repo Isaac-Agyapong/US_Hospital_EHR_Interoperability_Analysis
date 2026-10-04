@@ -4,10 +4,10 @@
   "position": {
     "x": 696,
     "y": 506,
-    "z": 47000,
+    "z": 39000,
     "height": 200,
     "width": 344,
-    "tabOrder": 47000
+    "tabOrder": 39000
   },
   "visual": {
     "visualType": "textbox",
@@ -33,7 +33,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Hospitals on Epic, Oracle Health or MEDITECH almost never fall short.",
+                    "value": "Hospitals on Epic, Oracle Health or MEDITECH almost never fail.",
                     "textStyle": {
                       "fontSize": "12pt",
                       "color": "#FFFFFF",
@@ -45,7 +45,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "TruBridge hospitals fall short far more often, even next to the same kind of hospital.",
+                    "value": "TruBridge hospitals fail far more often, even next to the same kind of hospital.",
                     "textStyle": {
                       "fontSize": "12pt",
                       "color": "#FFFFFF",

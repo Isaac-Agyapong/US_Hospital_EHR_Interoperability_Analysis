@@ -136,8 +136,8 @@ def main():
     h["files_disagree"] = ((h.in_latest == 1) & h.status_2024_file.notna() &
                            (h.status_2024_file != h.not_met)).astype(int)
     h["disagree_type"] = None
-    h.loc[(h.files_disagree == 1) & (h.not_met == 0), "disagree_type"] = "Short in Oct 2024 file, met in latest"
-    h.loc[(h.files_disagree == 1) & (h.not_met == 1), "disagree_type"] = "Met in Oct 2024 file, short in latest"
+    h.loc[(h.files_disagree == 1) & (h.not_met == 0), "disagree_type"] = "Failed in Oct 2024 file, passed in latest"
+    h.loc[(h.files_disagree == 1) & (h.not_met == 1), "disagree_type"] = "Passed in Oct 2024 file, failed in latest"
     h["n_files"] = h.ccn.map(hy.groupby("ccn").size()).fillna(0).astype(int)
     h["finance_match"] = (h.rural_urban != "Unknown").astype(int)
     h["state_name"] = h.state.map(STATES).fillna(h.state)

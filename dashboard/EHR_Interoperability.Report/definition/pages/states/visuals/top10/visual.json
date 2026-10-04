@@ -58,7 +58,7 @@
               },
               "queryRef": "hospital.Top 10 Short",
               "nativeQueryRef": "Top 10 Short",
-              "displayName": "Fell short"
+              "displayName": "Failed"
             },
             {
               "field": {
@@ -319,7 +319,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'The 10 states with the biggest share falling short'"
+                  "Value": "'The 10 states with the biggest share failing'"
                 }
               }
             },

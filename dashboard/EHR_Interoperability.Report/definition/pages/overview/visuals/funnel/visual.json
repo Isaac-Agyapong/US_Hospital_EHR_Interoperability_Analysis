@@ -339,7 +339,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'The hospitals that fell short in 2024, by whether they reported certified EHR software'"
+                  "Value": "'The hospitals that failed in 2024, by whether they reported certified EHR software'"
                 }
               }
             },
