@@ -71,7 +71,7 @@ plausibility, consistency, linkage). The main problems and how I handled them:
 | 585 hospitals have the text "Not Available" typed into the EHR ID field | Treated as "no EHR ID reported" |
 | 9 EHR IDs have the wrong format; 24 IDs are not in the government's product list | Kept, labelled "Unknown" |
 | 430 hospitals have a different status in the 2024 general file than in the latest dedicated file (different reporting years) | Used the general file for the 2019-2024 trend and the dedicated file for the latest year |
-| 532 hospitals are missing from some yearly snapshots (openings, closures, mergers) | Trend uses whatever hospitals each snapshot holds; "stuck behind" uses hospitals present all six years |
+| 432 hospitals are missing from some yearly snapshots (openings, closures, mergers) | Trend uses whatever hospitals each snapshot holds; "stuck behind" uses hospitals present all six years |
 """)
 
 md("## 2. Small rural hospitals fall short twice as often, and the gap is not closing")
