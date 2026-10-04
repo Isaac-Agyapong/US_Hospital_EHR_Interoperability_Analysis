@@ -31,6 +31,30 @@ The sections below go into technical detail.
 
 ---
 
+## Dashboard
+
+An interactive Power BI scorecard with seven pages. The filters on the right (hospital type, owner, rural or urban,
+state, EHR company) change every number and chart, and hovering over a state shows its details. The Overview is at
+the top of this page.
+
+**EHR Companies:** which software companies run hospital EHRs, and how often their hospitals fail.
+![EHR companies](Image/dashboard_2_ehr_companies.png)
+
+**Money and History:** hospitals losing money fail more often; 169 hospitals failed every year since 2019.
+![Money and history](Image/dashboard_3_money_history.png)
+
+**States:** a map of the share of hospitals failing in each state, and the 10 highest.
+![States](Image/dashboard_4_states.png)
+
+**Find a Hospital:** type any hospital's name to see its status, EHR company and year-by-year record.
+![Find a hospital](Image/dashboard_5_find_a_hospital.png)
+
+**Data Quality:** the problems I found in the data itself, such as "Not Available" typed instead of an EHR ID.
+![Data quality](Image/dashboard_6_data_quality.png)
+
+**Data Notes:** plain-language definitions, sources and limits.
+![Data notes](Image/dashboard_7_data_notes.png)
+
 ## Key findings
 
 "Failed" means the hospital did not meet the Medicare Promoting Interoperability program for the year. The study
@@ -144,18 +168,6 @@ From the [analysis notebook](Python/04_analysis.ipynb):
 | ![By EHR company](Image/by_vendor.png) | ![Money and size](Image/money_and_size.png) |
 | ![By owner](Image/by_owner.png) | ![By state](Image/by_state.png) |
 | ![Stuck behind](Image/stuck_behind.png) | ![Market share](Image/market_share.png) |
-
-## Dashboard
-
-Seven pages: **Overview**, **EHR Companies**, **Money and History**, **States**, **Find a Hospital**, **Data Quality**
-and **Data Notes**. The filters on the right (hospital type, owner, rural or urban, state, EHR company) apply to
-every page.
-
-| | |
-|---|---|
-| ![EHR companies](Image/dashboard_2_ehr_companies.png) | ![Money and history](Image/dashboard_3_money_history.png) |
-| ![States](Image/dashboard_4_states.png) | ![Find a hospital](Image/dashboard_5_find_a_hospital.png) |
-| ![Data quality](Image/dashboard_6_data_quality.png) | ![Data notes](Image/dashboard_7_data_notes.png) |
 
 ## Project structure
 
