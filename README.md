@@ -19,8 +19,9 @@ added each hospital's yearly financial report.
 > - **The software company matters.** About 1 in 100 hospitals using Epic or Oracle Health failed. For TruBridge,
 >   a system common in small rural hospitals, it was 14 in 100.
 > - **Money matters.** Hospitals that lost money two years in a row failed about twice as often.
-> - **The data has problems of its own.** 585 hospitals typed "Not Available" where their EHR software ID should be,
->   and two Medicare files give different answers for 430 hospitals.
+> - **The data has gaps of its own.** 585 hospitals entered "Not Available" instead of an EHR software ID. That may
+>   mean they have no certified EHR, or that the field wasn't filled in properly; the data doesn't say which. Two
+>   Medicare files also give different answers for 430 hospitals.
 >
 > I built a database, checked the quality of the data, answered the questions with SQL, and made an interactive
 > dashboard. Anyone can filter it by hospital type, owner, rural or urban, state and EHR company, or look up a
@@ -88,8 +89,8 @@ hospitals). The query behind each number is in [SQL/query_results.md](SQL/query_
 3. **Keep an eye on hospitals that are losing money.** Two years of losses doubles the chance of failing. My
    [Hospital Financial Distress Model](https://github.com/Isaac-Agyapong/Hospital_Financial_Distress_Model) predicts
    which hospitals will end up in that group.
-4. **Check the EHR ID when hospitals submit it.** A simple check at submission would stop entries like
-   "Not Available" or IDs that don't exist from reaching the public data.
+4. **Make the EHR ID field clearer.** A separate "no certified EHR" option would show what "Not Available" means,
+   and a simple check at submission would stop IDs that don't exist from reaching the public data.
 5. **Watch how few companies there are.** With three companies serving 85% of hospitals, their choices shape
    record sharing for almost everyone.
 
@@ -109,7 +110,7 @@ All public, all real:
 | Problem | What I did |
 |---|---|
 | A blank result means two things: "failed" for general and small rural hospitals, but "not checked at all" for psychiatric, children's, VA and military hospitals | Kept only the two hospital types Medicare checks |
-| 585 hospitals typed "Not Available" instead of their EHR ID | Counted them as "no EHR reported" (none of them passed) |
+| 585 hospitals entered "Not Available" instead of an EHR ID. This may mean they have no certified EHR, or that the field wasn't filled in; the data doesn't say which | Counted them as "no certified EHR reported" (none of them passed) |
 | 9 EHR IDs were in the wrong format, and 24 IDs were not in the government's product list | Kept them, and showed them on the Data Quality page |
 | One EHR ID can cover several products from different companies | Counted the company with the most core EHR products as the hospital's main EHR company |
 | Two Medicare files disagree for 430 hospitals, because they cover different time periods | Used each file only for the period it covers |
