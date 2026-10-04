@@ -9,9 +9,8 @@ table hospital_year
 	measure 'Trend Title' =
 			VAR _a = CALCULATE ( [Year Share], KEEPFILTERS ( hospital_year[snapshot_year] = 2019 ) )
 			VAR _b = CALCULATE ( [Year Share], KEEPFILTERS ( hospital_year[snapshot_year] = 2024 ) )
-			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ), "Share falling short in each yearly Medicare file",
-			    IF ( _b < _a, "Fewer hospitals fall short than in 2019: ", "More hospitals fall short than in 2019: " )
-			    & FORMAT ( _a, "0%" ) & " then, " & FORMAT ( _b, "0%" ) & " in 2024" )
+			RETURN IF ( ISBLANK ( _a ) || ISBLANK ( _b ), "Falling short, 2019-2024",
+			    IF ( _b < _a, "Down from ", "Up from " ) & FORMAT ( _a, "0%" ) & " in 2019 to " & FORMAT ( _b, "0%" ) & " in 2024" )
 		displayFolder: Titles
 		lineageTag: 25d8e602-6e29-504e-a19d-07d0bad5090c
 
@@ -20,12 +19,17 @@ table hospital_year
 		displayFolder: Spark
 		lineageTag: cf395fe4-b46e-5472-8542-2ce7f0f3c220
 
+	measure 'Year Short Count' = SUM ( hospital_year[not_met] )
+		formatString: #,0
+		displayFolder: Spark
+		lineageTag: df764cf4-c59f-5f09-b91d-a4842a383477
+
 	measure 'Strip Value' = IF ( HASONEVALUE ( hospital[hospital_label] ), COUNTROWS ( hospital_year ) )
 		formatString: 0
 		displayFolder: Hospital
 		lineageTag: f8e83886-51de-5066-b9a9-7aeb62704bb7
 
-	measure 'Strip Colour' = IF ( SUM ( hospital_year[not_met] ) = 1, "#D64545", "#1F4E9E" )
+	measure 'Strip Colour' = IF ( SUM ( hospital_year[not_met] ) = 1, "#FF6B6B", "#60A5FA" )
 		displayFolder: Hospital
 		lineageTag: cba660ed-1e86-53be-be01-9363ca8c0dee
 

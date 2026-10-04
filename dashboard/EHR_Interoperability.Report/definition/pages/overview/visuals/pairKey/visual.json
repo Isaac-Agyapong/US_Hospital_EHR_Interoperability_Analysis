@@ -4,10 +4,10 @@
   "position": {
     "x": 30,
     "y": 676,
-    "z": 53000,
+    "z": 47000,
     "height": 24,
     "width": 318,
-    "tabOrder": 53000
+    "tabOrder": 47000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#0D9488",
+                      "color": "#2DD4BF",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -31,7 +31,7 @@
                     "value": "small rural   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -47,7 +47,7 @@
                     "value": "general",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -129,7 +129,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

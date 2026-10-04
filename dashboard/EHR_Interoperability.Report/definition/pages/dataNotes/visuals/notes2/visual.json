@@ -23,7 +23,7 @@
                     "value": "Where the data comes from",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#2563EB",
+                      "color": "#38BDF8",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "•  CMS Hospital General Information, six yearly files 2019-2024 (status of every hospital)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -48,7 +48,7 @@
                     "value": "•  CMS Promoting Interoperability file, latest release (2024 reporting year, with EHR IDs)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -60,7 +60,7 @@
                     "value": "•  ONC Certified Health IT Product List: each EHR ID looked up to find the company behind it",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -72,7 +72,7 @@
                     "value": "•  CMS hospital cost reports for profit and size (companion financial project)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -84,7 +84,7 @@
                     "value": "•  Loaded into PostgreSQL; numbers on every page match the SQL results in the repository",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -96,7 +96,7 @@
                     "value": "•  Which hospitals will fall short next year: see the companion machine learning project",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -123,7 +123,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -154,7 +154,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E293B'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -208,7 +208,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "72D"
                 }
               }
             },
@@ -251,7 +251,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -262,7 +262,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

@@ -4,10 +4,10 @@
   "position": {
     "x": 588,
     "y": 96,
-    "z": 29000,
+    "z": 30000,
     "height": 30,
     "width": 189,
-    "tabOrder": 29000
+    "tabOrder": 30000
   },
   "visual": {
     "visualType": "textbox",
@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Small rural: fell short",
+                    "value": "Of those: no certified EHR",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -82,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

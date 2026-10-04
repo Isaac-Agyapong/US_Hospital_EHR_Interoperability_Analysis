@@ -6,7 +6,7 @@
     "y": 122,
     "z": 25000,
     "height": 38,
-    "width": 221,
+    "width": 122,
     "tabOrder": 25000
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "No EHR Pct Text"
+                  "Property": "Short"
                 }
               },
-              "queryRef": "hospital.No EHR Pct Text",
-              "nativeQueryRef": "No EHR Pct Text",
+              "queryRef": "hospital.Short",
+              "nativeQueryRef": "Short",
               "displayName": " "
             }
           ]
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#7C3AED'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -142,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -153,7 +153,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -164,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

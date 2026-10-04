@@ -23,7 +23,7 @@
                     "value": "TruBridge",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#D64545",
+                      "color": "#FF6B6B",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -84,7 +84,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -95,7 +95,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -106,7 +106,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

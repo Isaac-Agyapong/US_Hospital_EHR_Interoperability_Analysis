@@ -23,7 +23,7 @@
                     "value": "Falling short   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -40,7 +40,7 @@
                     "value": "under 5%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -56,7 +56,7 @@
                     "value": "5-10%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -72,7 +72,7 @@
                     "value": "10-15%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -80,7 +80,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#D64545",
+                      "color": "#FF6B6B",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -88,7 +88,7 @@
                     "value": "15-25%   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -96,7 +96,7 @@
                     "value": "■ ",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#9F1D1D",
+                      "color": "#E11D48",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -104,7 +104,7 @@
                     "value": "25%+   ",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -163,7 +163,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -174,7 +174,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

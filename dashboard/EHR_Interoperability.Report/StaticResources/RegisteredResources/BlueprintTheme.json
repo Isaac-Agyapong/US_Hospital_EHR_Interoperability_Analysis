@@ -1,36 +1,36 @@
 {
   "name": "Deep Blue Glass",
   "dataColors": [
-    "#1F4E9E",
-    "#D64545",
-    "#7C3AED",
-    "#0D9488",
-    "#D97706",
+    "#60A5FA",
+    "#FF6B6B",
+    "#A78BFA",
+    "#2DD4BF",
+    "#FBBF24",
     "#94A3B8",
-    "#9DB4E0",
-    "#F0A8A8"
+    "#93C5FD",
+    "#FCA5A5"
   ],
-  "foreground": "#1E293B",
-  "foregroundNeutralSecondary": "#475569",
-  "background": "#FFFFFF",
-  "backgroundLight": "#F4F6FA",
-  "tableAccent": "#1F4E9E",
+  "foreground": "#FFFFFF",
+  "foregroundNeutralSecondary": "#A9B6D3",
+  "background": "#15244A",
+  "backgroundLight": "#1B2C57",
+  "tableAccent": "#60A5FA",
   "textClasses": {
     "title": {
       "fontFace": "Segoe UI",
-      "color": "#1E293B"
+      "color": "#FFFFFF"
     },
     "label": {
       "fontFace": "Segoe UI",
-      "color": "#475569"
+      "color": "#A9B6D3"
     },
     "callout": {
       "fontFace": "Segoe UI",
-      "color": "#1E293B"
+      "color": "#FFFFFF"
     },
     "header": {
       "fontFace": "Segoe UI",
-      "color": "#1E293B"
+      "color": "#FFFFFF"
     }
   }
 }

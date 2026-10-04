@@ -1,7 +1,7 @@
 """Draw the artwork for the Power BI report (written to dashboard/assets/, colours from layout.json, which
 06_build_powerbi_project.py writes):
 
-    page_bg.png  the page background: light grey page with the navy rail on the right
+    page_bg.png  the page background: deep navy page with the darker rail on the right
     logo.png     the rail logo: two health records (nodes) joined by a link
 
 Only things that do not depend on exact vertical position are drawn here. Power BI Desktop stretches a page image

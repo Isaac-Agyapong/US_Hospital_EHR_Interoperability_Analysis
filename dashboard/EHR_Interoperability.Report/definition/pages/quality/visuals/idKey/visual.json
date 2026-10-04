@@ -23,7 +23,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#3B4F86",
+                      "color": "#4B5D87",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -31,7 +31,7 @@
                     "value": "4,015  valid ID found in the federal list",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -43,7 +43,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#7C3AED",
+                      "color": "#A78BFA",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -51,7 +51,7 @@
                     "value": "448  typed \"Not Available\"",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -63,7 +63,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#D97706",
+                      "color": "#FBBF24",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -71,7 +71,7 @@
                     "value": "17  ID not in the federal list",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -91,7 +91,7 @@
                     "value": "9  lowercase or wrong length",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -150,7 +150,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -161,7 +161,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -172,7 +172,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

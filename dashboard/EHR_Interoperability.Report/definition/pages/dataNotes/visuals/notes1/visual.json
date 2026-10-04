@@ -23,7 +23,7 @@
                     "value": "Words used here",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#1F4E9E",
+                      "color": "#60A5FA",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "•  EHR: electronic health record, the software a hospital keeps patient records in",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -48,7 +48,7 @@
                     "value": "•  Interoperability: records that can move safely between hospitals, doctors, labs and patients",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -60,7 +60,7 @@
                     "value": "•  Met the standards: met Medicare's Promoting Interoperability program for the year (certified EHR, sharing records, e-prescribing, patient online access, reporting to public health)",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -72,7 +72,7 @@
                     "value": "•  Fell short: did not meet them, which cuts the hospital's Medicare payments",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -84,7 +84,7 @@
                     "value": "•  Small rural (critical access) hospital: 25 beds or fewer, far from other hospitals",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -96,7 +96,7 @@
                     "value": "•  Certified EHR ID: the code that names the certified software a hospital used",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -123,7 +123,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -154,7 +154,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -185,7 +185,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E293B'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -208,7 +208,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "72D"
                 }
               }
             },
@@ -251,7 +251,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -262,7 +262,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

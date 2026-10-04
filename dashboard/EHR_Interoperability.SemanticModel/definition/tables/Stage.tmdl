@@ -1,0 +1,27 @@
+table Stage
+	lineageTag: e84e7649-4c9f-5b29-96d2-cb358cb9b112
+
+	column order
+		dataType: int64
+		formatString: 0
+		lineageTag: 61803bae-af14-5f7e-9b2d-4945df3225c5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		sortByColumn: order
+		lineageTag: d845982b-bd62-5866-b9ec-74136ccbb404
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [stage]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stage = calculated
+		mode: import
+		source =
+				DATATABLE ( "order", INTEGER, "stage", STRING, { { 1, "Checked" }, { 2, "Fell short" }, { 3, "No EHR" } } )

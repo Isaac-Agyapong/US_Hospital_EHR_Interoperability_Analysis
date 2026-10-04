@@ -23,7 +23,7 @@
                     "value": "The October 2024 hospital file and the latest dedicated file cover different reporting years.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#475569",
+                      "color": "#A9B6D3",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -82,7 +82,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

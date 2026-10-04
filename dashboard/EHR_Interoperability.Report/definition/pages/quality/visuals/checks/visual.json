@@ -23,7 +23,7 @@
                     "value": "How I checked the data",
                     "textStyle": {
                       "fontSize": "14pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -45,7 +45,7 @@
                     "value": "No hospital appears twice in the same file",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -66,7 +66,7 @@
                     "value": "Hospital types outside the program are never marked as meeting the standards",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -87,7 +87,7 @@
                     "value": "Every hospital in the latest file reports the same period (calendar year 2024)",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -108,7 +108,7 @@
                     "value": "96% of hospitals link to their yearly financial report",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -120,7 +120,7 @@
                     "value": "!  ",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#D97706",
+                      "color": "#FBBF24",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -129,7 +129,7 @@
                     "value": "Hospitals with no financial report fall short far more often (59% vs 11%): missing data is itself a warning sign",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -156,7 +156,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -187,7 +187,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -218,7 +218,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E293B'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -241,7 +241,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "72D"
                 }
               }
             },
@@ -284,7 +284,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -295,7 +295,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -306,7 +306,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

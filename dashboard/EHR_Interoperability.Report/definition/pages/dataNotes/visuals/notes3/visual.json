@@ -23,7 +23,7 @@
                     "value": "Keep in mind",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#D97706",
+                      "color": "#FBBF24",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -36,7 +36,7 @@
                     "value": "•  Only general and small rural hospitals are in the program; psychiatric, children's, VA and military hospitals are left out because they are never rated",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -48,7 +48,7 @@
                     "value": "•  The yearly files and the latest file cover different reporting years, so a few hospitals differ",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -60,7 +60,7 @@
                     "value": "•  Main EHR company = the company with the most certified products in the hospital's EHR setup",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -72,7 +72,7 @@
                     "value": "•  Links between money, size, software and falling short are associations, not proof of cause",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -84,7 +84,7 @@
                     "value": "•  Puerto Rico and four small territories are included; only Puerto Rico is drawn on the map",
                     "textStyle": {
                       "fontSize": "12.5pt",
-                      "color": "#1E293B",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -111,7 +111,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -142,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -173,7 +173,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E293B'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -196,7 +196,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "72D"
                 }
               }
             },
@@ -239,7 +239,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -250,7 +250,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -261,7 +261,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

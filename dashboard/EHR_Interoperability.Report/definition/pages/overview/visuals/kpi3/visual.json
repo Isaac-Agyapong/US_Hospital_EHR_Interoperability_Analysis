@@ -6,7 +6,7 @@
     "y": 122,
     "z": 36000,
     "height": 38,
-    "width": 221,
+    "width": 122,
     "tabOrder": 36000
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "hospital"
                     }
                   },
-                  "Property": "Top3 Share Text"
+                  "Property": "Rural Short Text"
                 }
               },
-              "queryRef": "hospital.Top3 Share Text",
-              "nativeQueryRef": "Top3 Share Text",
+              "queryRef": "hospital.Rural Short Text",
+              "nativeQueryRef": "Rural Short Text",
               "displayName": " "
             }
           ]
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2563EB'"
+                      "Value": "'#2DD4BF'"
                     }
                   }
                 }
@@ -142,7 +142,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#15244A'"
                     }
                   }
                 }
@@ -153,7 +153,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DDE3EC'"
+                      "Value": "'#24365F'"
                     }
                   }
                 }
@@ -164,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#475569'"
+                      "Value": "'#A9B6D3'"
                     }
                   }
                 }

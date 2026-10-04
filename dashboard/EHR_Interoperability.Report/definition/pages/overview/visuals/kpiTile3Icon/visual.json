@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "◆",
+                    "value": "▲",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#2563EB",
+                      "color": "#2DD4BF",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -52,7 +52,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E5ECFD'"
+                      "Value": "'#E6FAF7'"
                     }
                   }
                 }
@@ -83,7 +83,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2563EB'"
+                      "Value": "'#2DD4BF'"
                     }
                   }
                 }
