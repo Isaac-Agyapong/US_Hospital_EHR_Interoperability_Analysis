@@ -210,5 +210,5 @@ Transform data > Edit parameters and set `DataFolder` to your `dashboard\data\` 
 
 ---
 
-Built by **Isaac Agyapong** · M.S. Data Science, Florida Polytechnic University ·
+Built by **Isaac Agyapong** ·
 [GitHub](https://github.com/Isaac-Agyapong)
