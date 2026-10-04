@@ -23,7 +23,7 @@
                     "value": "Words used here",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#60A5FA",
+                      "color": "#4ADE80",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -69,7 +69,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "•  Failed: failed them, which cuts the hospital's Medicare payments",
+                    "value": "•  Failed: did not meet them, which cuts the hospital's Medicare payments",
                     "textStyle": {
                       "fontSize": "12.5pt",
                       "color": "#FFFFFF",
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

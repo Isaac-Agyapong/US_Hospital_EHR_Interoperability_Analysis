@@ -23,7 +23,7 @@
                     "value": "LOOK UP",
                     "textStyle": {
                       "fontSize": "9.5pt",
-                      "color": "#8A9AC0",
+                      "color": "#E2E8F0",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -105,7 +105,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

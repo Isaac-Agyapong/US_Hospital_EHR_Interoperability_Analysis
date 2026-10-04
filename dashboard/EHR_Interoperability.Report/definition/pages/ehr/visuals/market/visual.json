@@ -236,7 +236,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }
@@ -356,7 +356,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of hospitals using each company''s EHR. Blue = the 3 biggest.'"
+                  "Value": "'Share of hospitals using each company''s EHR. Green = the 3 biggest, white = the rest.'"
                 }
               }
             },
@@ -365,7 +365,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }
@@ -420,7 +420,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }
@@ -479,7 +479,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

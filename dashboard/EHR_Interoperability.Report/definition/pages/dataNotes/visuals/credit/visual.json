@@ -23,7 +23,7 @@
                     "value": "4,489 Hospitals  ·  2019-2024",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#8A9AC0",
+                      "color": "#E2E8F0",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -35,7 +35,7 @@
                     "value": "Data: Medicare (CMS) and the ONC certified EHR list",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#8A9AC0",
+                      "color": "#E2E8F0",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -116,7 +116,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

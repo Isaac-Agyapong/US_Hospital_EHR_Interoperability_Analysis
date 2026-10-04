@@ -23,7 +23,7 @@
                     "value": "Keep in mind",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#FBBF24",
+                      "color": "#FB923C",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -261,7 +261,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

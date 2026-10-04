@@ -23,7 +23,7 @@
                     "value": "STATES   ",
                     "textStyle": {
                       "fontSize": "9.5pt",
-                      "color": "#60A5FA",
+                      "color": "#4ADE80",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -32,7 +32,7 @@
                     "value": "Where hospitals fail",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#D6E0F5",
+                      "color": "#F1F5F9",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -114,7 +114,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

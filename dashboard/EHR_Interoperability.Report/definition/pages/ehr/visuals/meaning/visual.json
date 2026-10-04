@@ -60,7 +60,7 @@
                     "value": "A link, not proof of cause: small budgets and few IT staff often come with cheaper systems.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#A9B6D3",
+                      "color": "#E2E8F0",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -237,7 +237,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

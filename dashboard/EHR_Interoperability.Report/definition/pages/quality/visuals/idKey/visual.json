@@ -23,7 +23,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#60A5FA",
+                      "color": "#4ADE80",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -43,7 +43,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#A78BFA",
+                      "color": "#FDE047",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -63,7 +63,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#FBBF24",
+                      "color": "#FB923C",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -83,7 +83,7 @@
                     "value": "● ",
                     "textStyle": {
                       "fontSize": "13pt",
-                      "color": "#E9C46A",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   },
@@ -172,7 +172,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

@@ -23,7 +23,7 @@
                     "value": "Top 3 companies' share",
                     "textStyle": {
                       "fontSize": "10.5pt",
-                      "color": "#A9B6D3",
+                      "color": "#E2E8F0",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

@@ -23,7 +23,7 @@
                     "value": "Where the data comes from",
                     "textStyle": {
                       "fontSize": "16pt",
-                      "color": "#60A5FA",
+                      "color": "#4ADE80",
                       "fontFamily": "Segoe UI",
                       "fontWeight": "bold"
                     }
@@ -273,7 +273,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

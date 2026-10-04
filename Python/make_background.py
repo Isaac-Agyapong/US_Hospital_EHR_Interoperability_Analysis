@@ -50,7 +50,7 @@ def page(c):
 
 
 def logo(c, size=96):
-    """Rounded cobalt square, two nodes joined by a line (one white, one mint)."""
+    """Rounded green square, two nodes joined by a line (one white, one mint)."""
     im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     d.rounded_rectangle([0, 0, size - 1, size - 1], size * 0.24, fill=rgb(c["cobalt"]))

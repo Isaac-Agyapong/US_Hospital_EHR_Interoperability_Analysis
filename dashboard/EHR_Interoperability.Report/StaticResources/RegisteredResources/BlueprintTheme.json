@@ -1,20 +1,20 @@
 {
-  "name": "Deep Blue Glass",
+  "name": "Navy Scorecard",
   "dataColors": [
-    "#60A5FA",
+    "#4ADE80",
     "#F87171",
-    "#A78BFA",
+    "#FDE047",
     "#F87171",
-    "#FBBF24",
-    "#94A3B8",
-    "#93C5FD",
+    "#FB923C",
+    "#4ADE80",
+    "#BBF7D0",
     "#FCA5A5"
   ],
   "foreground": "#FFFFFF",
-  "foregroundNeutralSecondary": "#A9B6D3",
+  "foregroundNeutralSecondary": "#E2E8F0",
   "background": "#15244A",
   "backgroundLight": "#1B2C57",
-  "tableAccent": "#60A5FA",
+  "tableAccent": "#4ADE80",
   "textClasses": {
     "title": {
       "fontFace": "Segoe UI",
@@ -22,7 +22,7 @@
     },
     "label": {
       "fontFace": "Segoe UI",
-      "color": "#A9B6D3"
+      "color": "#E2E8F0"
     },
     "callout": {
       "fontFace": "Segoe UI",

@@ -23,7 +23,7 @@
                     "value": "Open the box and type part of a name, for example Mayo or Memorial.",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#E8EEFB",
+                      "color": "#FFFFFF",
                       "fontFamily": "Segoe UI"
                     }
                   }
@@ -104,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A9B6D3'"
+                      "Value": "'#E2E8F0'"
                     }
                   }
                 }

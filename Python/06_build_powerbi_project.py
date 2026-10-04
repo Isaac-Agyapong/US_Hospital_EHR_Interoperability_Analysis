@@ -61,17 +61,17 @@ CUSTOM_THEME = "BlueprintTheme.json"
 
 # palette: dark executive. Deep navy page, solid navy cards, white text, one bright colour per meaning:
 # red = failed, purple = no certified EHR, teal = small rural, blue = met / main, grey-blue = everything else
-COBALT, COBALT_L, NAVY, SKY = "#60A5FA", "#93C5FD", "#070E22", "#60A5FA"
+COBALT, COBALT_L, NAVY, SKY = "#4ADE80", "#BBF7D0", "#070E22", "#4ADE80"
 RED, RED_L, RED_D = "#F87171", "#FCA5A5", "#DC2626"
-PURPLE, AMBER, TEAL, SLATE, GREY = "#A78BFA", "#FBBF24", "#F87171", "#94A3B8", "#94A3B8"
+PURPLE, AMBER, TEAL, SLATE, GREY = "#FDE047", "#FB923C", "#F87171", "#4ADE80", "#4ADE80"
 GREEN = "#34D399"
-GREY_D = "#94A3B8"
+GREY_D = "#F1F5F9"
 PANEL, PANEL_2, DARK = "#15244A", "#1B2C57", "#0B1530"
-CARD_D, REST = "#15244A", "#94A3B8"
-DOT_BLUE, DOT_RED, DOT_PURPLE = "#60A5FA", "#FF6B6B", "#A78BFA"
-RAIL_TEXT, RAIL_MUTED = "#E8EEFB", "#8A9AC0"
-INK, INK_2, MUTED, LINE, CARD = "#FFFFFF", "#A9B6D3", "#8A9AC0", "#24365F", "#FFFFFF"
-PAPER, PAPER_TOP, GRIDC, MINT = "#0E1A38", "#0B1530", "#0E1A38", "#5EEAD4"
+CARD_D, REST = "#15244A", "#FFFFFF"
+DOT_BLUE, DOT_RED, DOT_PURPLE = "#4ADE80", "#F87171", "#FDE047"
+RAIL_TEXT, RAIL_MUTED = "#FFFFFF", "#E2E8F0"
+INK, INK_2, MUTED, LINE, CARD = "#FFFFFF", "#E2E8F0", "#E2E8F0", "#24365F", "#FFFFFF"
+PAPER, PAPER_TOP, GRIDC, MINT = "#0E1A38", "#0B1530", "#0E1A38", "#4ADE80"
 GLASS_T = 0
 FONT = "Segoe UI"
 PCT, PCT1, INT = "0%", "0.0%", "#,0"
@@ -195,9 +195,7 @@ MEASURES = [
      None, "Titles"),
     ("hospital", "Size Short", "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[size_band] ) ) && SELECTEDVALUE ( hospital[size_band] ) <> \"\" && [Hospitals] >= 20, [Short Share] )",
      PCT, "Charts"),
-    ("hospital", "Size Colour",
-     "VAR _t = FILTER ( ADDCOLUMNS ( ALLSELECTED ( hospital[size_band] ), \"@v\", [Size Short] ), NOT ISBLANK ( [@v] ) )\n"
-     f'RETURN IF ( [Size Short] = MAXX ( _t, [@v] ), "{RED}", "{REST}" )', None, "Colours"),
+    ("hospital", "Size Colour", f'IF ( SELECTEDVALUE ( hospital[size_order] ) = 1, "{RED}", "{REST}" )', None, "Colours"),
     ("hospital", "Size Title",
      top_bottom("hospital[size_band]", 20,
                 'IF ( LEFT ( _h, 5 ) = "Under", _h, _h & " beds" ) & " fail most: " & _hp',
@@ -232,7 +230,7 @@ MEASURES = [
      f'"{TOP3[0]} alone: " & FORMAT ( DIVIDE ( CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), hospital[main_developer] = "{TOP3[0]}" ),\n'
      '    CALCULATE ( [Hospitals], REMOVEFILTERS ( hospital[ehr_group] ), NOT ISBLANK ( hospital[main_developer] ) ) ), "0%" ) & " of hospitals"',
      None, "KPI"),
-    ("hospital", "Market Colour", f'IF ( SELECTEDVALUE ( hospital[main_developer] ) IN {TOP3_DAX}, "{SKY}", "{GREY}" )',
+    ("hospital", "Market Colour", f'IF ( SELECTEDVALUE ( hospital[main_developer] ) IN {TOP3_DAX}, "{SKY}", "{REST}" )',
      None, "Colours"),
     ("hospital", "Market Title",
      f'"3 companies run " & FORMAT ( [Top3 Share], "0%" ) & " of hospital EHRs"',
@@ -269,7 +267,7 @@ MEASURES = [
 
     # ---- money, size and history
     ("hospital", "Fifth Short", "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[margin_fifth] ) ) && [Hospitals] >= 20, [Short Share] )", PCT, "Money"),
-    ("hospital", "Fifth Colour", f'IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "{RED}", "{RED_L}" )', None, "Colours"),
+    ("hospital", "Fifth Colour", f'IF ( SELECTEDVALUE ( hospital[margin_fifth] ) = 1, "{RED}", "{REST}" )', None, "Colours"),
     ("hospital", "Least Profitable Short", share_for("hospital[margin_fifth] = 1"), PCT, "KPI"),
     ("hospital", "Least Profitable Context",
      f'VAR _b = {share_for("hospital[margin_fifth] = 5")}\n'
@@ -293,8 +291,8 @@ MEASURES = [
      None, "Titles"),
     ("hospital", "History Count", "IF ( NOT ISBLANK ( SELECTEDVALUE ( hospital[history] ) ), [Hospitals] )", INT, "Money"),
     ("hospital", "History Colour",
-     f'SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "{COBALT}", "Every year", "{RED_D}",\n'
-     f'    "1 of 6 years", "{RED_L}", "2 of 6 years", "{RED_L}", "{RED}" )', None, "Colours"),
+     'SWITCH ( SELECTEDVALUE ( hospital[history] ), "Never", "#4ADE80", "Every year", "#F87171",\n'
+     '    "1 of 6 years", "#FDE047", "2 of 6 years", "#FDE047", "#FB923C" )', None, "Colours"),
     ("hospital", "Every Year", f'CALCULATE ( [Hospitals], {kf(eq("hospital[history]", "Every year"))} )', INT, "KPI"),
     ("hospital", "Every Year Context", '"hospitals, in all six yearly files"', None, "KPI"),
     ("hospital", "Never", f'CALCULATE ( [Hospitals], {kf(eq("hospital[history]", "Never"))} )', INT, "KPI"),
@@ -866,9 +864,9 @@ def navigator():
                 "pages": [{"properties": {"showHiddenPages": lit("false"), "showTooltipPages": lit("false")}}],
                 "shape": [{"properties": {"tileShape": s("rectangleRounded"), "rectangleRoundedCurve": lit("6L")}}],
                 "fill": [state("default", {"show": lit("true"), "fillColor": solid(NAVY), "transparency": lit("100D")}),
-                         state("hover", {"fillColor": solid("#16306B"), "transparency": lit("0D")}),
-                         state("selected", {"fillColor": solid("#1E3F8A"), "transparency": lit("0D")})],
-                "text": [state("default", {"fontColor": solid("#C9D6F5"), "fontSize": lit("12D"), "fontFamily": s(FONT),
+                         state("hover", {"fillColor": solid("#14532D"), "transparency": lit("0D")}),
+                         state("selected", {"fillColor": solid("#15803D"), "transparency": lit("0D")})],
+                "text": [state("default", {"fontColor": solid("#F1F5F9"), "fontSize": lit("12D"), "fontFamily": s(FONT),
                                            "horizontalAlignment": s("left"), "leftMargin": lit("14D")}),
                          state("selected", {"fontColor": solid(CARD), "bold": lit("true")})],
                 "outline": [state(k, {"show": lit("false"), "lineColor": solid(NAVY), "transparency": lit("100D")})
@@ -955,9 +953,9 @@ def clear_button():
                                          "fontFamily": lit_s(FONT), "bold": lit("true")}, "selector": {"id": "default"}}],
                 "outline": [{"properties": {"show": lit("true"), "lineColor": solid(MINT), "transparency": lit("40D"),
                                             "roundEdge": lit("8L")}, "selector": {"id": "default"}}],
-                "fill": [{"properties": {"show": lit("true"), "fillColor": solid("#16306B"), "transparency": lit("0D")},
+                "fill": [{"properties": {"show": lit("true"), "fillColor": solid("#14532D"), "transparency": lit("0D")},
                           "selector": {"id": "default"}},
-                         {"properties": {"fillColor": solid("#1E3F8A")}, "selector": {"id": "hover"}}]},
+                         {"properties": {"fillColor": solid("#15803D")}, "selector": {"id": "hover"}}]},
             "visualContainerObjects": {
                 "visualLink": [{"properties": {"show": lit("true"), "type": lit_s("ClearAllSlicers"),
                                                "tooltipPlaceholderText": lit_s("Clear every filter on this page")}}],
@@ -1006,17 +1004,18 @@ def header(page, finding, sub=None):
     page.add("logo", 16, 12, 38, 38, image("logo.png"))
     page.add("reportTitle", 200, 4, 880, 34, textbox([(TITLE, 18, True, CARD)], align="center", pad=(0, 0, 4, 4)))
     page.add("pageLine", 200, 34, 880, 24, textbox(
-        [[(page.display.upper() + "   ", 9.5, True, COBALT), (finding, 10.5, False, "#D6E0F5")]], align="center",
+        [[(page.display.upper() + "   ", 9.5, True, COBALT), (finding, 10.5, False, "#F1F5F9")]], align="center",
         pad=(0, 0, 4, 4)))
     page.add("badge", 1088, 17, 176, 28, textbox([("Built by Isaac Agyapong", 10, True, CARD)], align="center",
-                                                    background="#1E3A8A", radius=14, pad=(4, 0, 4, 4)))
+                                                    background="#15803D", radius=14, pad=(4, 0, 4, 4)))
 
 
 def sparkline(measure, colour):
     """Small trend line by yearly file for a KPI card (no axes, no labels)."""
     return chart("areaChart", {"Category": [C("hospital_year", "snapshot_year")], "Y": [M(measure)]}, pad=(0, 0, 0, 0),
                  objects={**axes(show_cat=False), **labels(show=False), **legend(show=False),
-                          "dataPoint": [{"properties": {"fill": solid(colour)}}],
+                          "dataPoint": [{"properties": {"fill": solid(colour)}},
+                                        {"properties": {"fill": solid(colour)}, "selector": {"metadata": f"{home(measure)}.{measure}"}}],
                           "lineStyles": [{"properties": {"strokeWidth": lit("2D"), "lineChartType": s("smooth")}}]})
 
 
@@ -1064,7 +1063,7 @@ def hero(page):
     page.add("heroTitle", hx + 22, hy + 34, 650, 40, textbox([("Can U.S. hospitals share health records electronically?", 19, True, CARD)]))
     page.add("heroSub", hx + 22, hy + 74, 640, 44, textbox(
         [("Medicare checks every year if hospitals use a certified electronic health record (EHR) to share records, "
-          "e-prescribe and give patients online access. Failing cuts their Medicare pay.", 11, False, "#C9D6F5")]))
+          "e-prescribe and give patients online access. Failing cuts their Medicare pay.", 11, False, "#F1F5F9")]))
     page.add("heroLine", hx + 18, hy + 122, 650, 36, card("Hero Line", colour=MINT, size=14))
     tw = 200
     for k, (measure, label, colour) in enumerate([
@@ -1072,10 +1071,10 @@ def hero(page):
             ("Hero Short", "failed the check", DOT_RED),
             ("Hero No EHR", "of them had no certified EHR", DOT_PURPLE)]):
         x = hx + 22 + k * (tw + 12)
-        page.add(f"glass{k}", x, hy + 172, tw, 62, textbox([], background=CARD, radius=8, border="#3A5596",
+        page.add(f"glass{k}", x, hy + 172, tw, 62, textbox([], background=CARD, radius=8, border="#4ADE80",
                                                           pad=(0, 0, 0, 0), transparency=90))
         page.add(f"glassValue{k}", x + 10, hy + 174, tw - 20, 32, card(measure, colour=colour, size=21))
-        page.add(f"glassLabel{k}", x + 10, hy + 206, tw - 20, 24, textbox([(label, 10.5, False, "#C9D6F5")], align="center"))
+        page.add(f"glassLabel{k}", x + 10, hy + 206, tw - 20, 24, textbox([(label, 10.5, False, "#F1F5F9")], align="center"))
     # 100-dot grid: one dot per 1 in 100 hospitals shown, coloured by result
     every_cell = {"data": [{"dataViewWildcard": {"matchingOption": 1}}], "metadata": "hospital.Dot"}
     hidden = {"fontColor": solid(PANEL), "backColor": solid(PANEL), "fontSize": lit("6D"), "outline": s("None")}
@@ -1095,9 +1094,9 @@ def hero(page):
             "drillFilterOtherVisuals": True}
     page.add("dotGrid", hx + 664, hy + 12, 228, 228, {"visual": grid})
     page.add("dotLegend", hx + 884, hy + 28, 128, 206, textbox([
-        [("● ", 13, False, DOT_BLUE), ("passed", 10.5, False, "#E8EEFB")],
-        [("● ", 13, False, DOT_RED), ("failed", 10.5, False, "#E8EEFB")],
-        [("● ", 13, False, DOT_PURPLE), ("failed, no certified EHR", 10.5, False, "#E8EEFB")],
+        [("● ", 13, False, DOT_BLUE), ("passed", 10.5, False, "#F1F5F9")],
+        [("● ", 13, False, DOT_RED), ("failed", 10.5, False, "#F1F5F9")],
+        [("● ", 13, False, DOT_PURPLE), ("failed, no certified EHR", 10.5, False, "#F1F5F9")],
         ("", 6, False, PANEL),
         ("Each dot is 1 in every 100 hospitals shown. The filters on the right change it.", 9.5, False, RAIL_MUTED)]))
 
@@ -1159,7 +1158,7 @@ def build_pages():
         "lineChart", {"Category": [C("hospital_year", "snapshot_year", "Yearly file")],
                       "Series": [C("hospital_year", "year_type", "Hospital type")],
                       "Y": [M("Year Share", "Share failing")]},
-        "=Trend Title", "Share of hospitals failing each year.  Red line = small rural hospitals,  grey line = general hospitals",
+        "=Trend Title", "Share of hospitals failing each year.  Red line = small rural hospitals,  green line = general hospitals",
         objects={**axes(categorical=True, cat_size=11), **labels(10), **legend(show=False),
                  "dataPoint": fill_by_value("hospital_year", "year_type", {RURAL: TEAL, GENERAL: SLATE}),
                  "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true"), "markerSize": lit("6D"),
@@ -1201,7 +1200,7 @@ def build_pages():
     mw = 540
     p2.tile("market", X0, R1, mw, r1h, bars(
         ("hospital", "main_developer", "EHR company"), "Market Share", "=Market Title",
-        "Share of hospitals using each company's EHR. Blue = the 3 biggest.", colour_measure="Market Colour",
+        "Share of hospitals using each company's EHR. Green = the 3 biggest, white = the rest.", colour_measure="Market Colour",
         inner=14, area=36))
     p2.tile("ehrTable", X0 + mw + GAP, R1, W - mw - GAP, r1h, chart(
         "tableEx", {"Values": [C("hospital", "ehr_group", "EHR company"), M("EHR Hospitals", "Hospitals"),
@@ -1250,7 +1249,8 @@ def build_pages():
         "=Fifth Title", "Hospitals in five equal groups, from least to most profitable (cents kept from each $1)",
         sort=(C("hospital", "margin_fifth_label"), "Ascending"),
         objects={**axes(show_value=False, categorical=True, cat_size=11), **labels(13), **legend(show=False),
-                 "dataPoint": [{"properties": {"fill": solid(RED)}}],
+                 "dataPoint": [{"properties": {"fill": solid(RED)}},
+                               {"properties": {"fill": solid(RED)}, "selector": {"metadata": "hospital.Fifth Short"}}],
                  "lineStyles": [{"properties": {"strokeWidth": lit("3D"), "showMarker": lit("true"), "markerSize": lit("7D"),
                                                 "lineChartType": s("smooth")}}]}), stripe=RED)
     rx, rw = X0 + half + GAP, W - half - GAP
@@ -1331,9 +1331,9 @@ def build_pages():
     rail(p5, filters="hospital")
     header(p5, "Find a hospital",
            "Did it meet Medicare's standards for sharing records, which EHR does it use, and how has it done since 2019?")
-    p5.add("namePanel", X0, KPI_Y, W, 72, shape("#1E3A8A", radius=10, shadow=True))     # dark panel for the key result
+    p5.add("namePanel", X0, KPI_Y, W, 72, shape("#15803D", radius=10, shadow=True))     # dark panel for the key result
     p5.add("nameTitle", X0 + 16, KPI_Y + 8, W - 32, 36, card("Profile Name", colour=CARD, size=20))
-    p5.add("nameFacts", X0 + 16, KPI_Y + 42, W - 32, 24, card("Profile Facts", colour="#C9D6F5", size=11, bold=False))
+    p5.add("nameFacts", X0 + 16, KPI_Y + 42, W - 32, 24, card("Profile Facts", colour="#F1F5F9", size=11, bold=False))
     ky = KPI_Y + 72 + GAP
     w4 = (W - 3 * GAP) // 4
     for i, (glyph, label, accent, value, ctx, vcol) in enumerate([
@@ -1385,14 +1385,14 @@ def build_pages():
     p6.add("idDonut", X0 + 8, R1 + 60, 250, RH - 70, donut(
         ("hospital", "id_quality", "EHR ID field"), "ID Count",
         {"Valid ID, found in the federal list": COBALT, '"Not Available" typed instead of an ID': PURPLE,
-         "Not found in the federal list": AMBER, "Wrong format (lowercase or wrong length)": "#E9C46A"},
+         "Not found in the federal list": AMBER, "Wrong format (lowercase or wrong length)": "#FFFFFF"},
         label_style="Data value", size=12))
     p6.visuals[-1]["visual"]["objects"]["labels"][0]["properties"]["show"] = lit("false")
     p6.add("idKey", X0 + 262, R1 + 74, half - 274, 150, textbox([
         [("● ", 13, False, COBALT), (f"{F['n'] - F['not_available'] - F['not_in_list'] - F['bad_format']:,}  valid ID found in the federal list", 11, False, INK)],
         [("● ", 13, False, PURPLE), (f"{F['not_available']:,}  typed \"Not Available\"", 11, False, INK)],
         [("● ", 13, False, AMBER), (f"{F['not_in_list']:,}  ID not in the federal list", 11, False, INK)],
-        [("● ", 13, False, "#E9C46A"), (f"{F['bad_format']:,}  lowercase or wrong length", 11, False, INK)]]))
+        [("● ", 13, False, "#FFFFFF"), (f"{F['bad_format']:,}  lowercase or wrong length", 11, False, INK)]]))
     dx_, dw_ = X0 + half + GAP, W - half - GAP
     p6.tile("disagree", dx_, R1, dw_, RH, None, stripe=AMBER)
     p6.add("disTitle", dx_ + 12, R1 + 10, dw_ - 24, 26, card("Disagree Title", colour=INK, size=14))
@@ -1426,7 +1426,7 @@ def build_pages():
             "Interoperability: records that can move safely between hospitals, doctors, labs and patients",
             "Passed: met Medicare's Promoting Interoperability program for the year (certified EHR, "
             "sharing records, e-prescribing, patient online access, reporting to public health)",
-            "Failed: failed them, which cuts the hospital's Medicare payments",
+            "Failed: did not meet them, which cuts the hospital's Medicare payments",
             "Small rural (critical access) hospital: 25 beds or fewer, far from other hospitals",
             "Certified EHR ID: the code that names the certified software a hospital used"]),
         ("Where the data comes from", SKY, [
@@ -1508,7 +1508,7 @@ def build_report():
     for im in images:
         shutil.copy(ASSETS / im, static / "RegisteredResources" / im)
     write_json(static / "RegisteredResources" / CUSTOM_THEME, {
-        "name": "Deep Blue Glass",
+        "name": "Navy Scorecard",
         "dataColors": [COBALT, RED, PURPLE, TEAL, AMBER, SLATE, COBALT_L, RED_L],
         "foreground": INK, "foregroundNeutralSecondary": INK_2, "background": PANEL, "backgroundLight": PANEL_2,
         "tableAccent": COBALT,
