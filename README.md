@@ -26,6 +26,11 @@ software and the hospitals' own financial reports.
 > I built a database, checked the data the way EHR data-quality research does, answered the questions with SQL, and
 > made an interactive dashboard where anyone can filter by hospital type, owner, rural or urban, state and EHR
 > company, or look up a single hospital.
+>
+> **Machine learning follow-up:** my
+> [EHR Interoperability Risk Model](https://github.com/Isaac-Agyapong/EHR_Interoperability_Risk_Model) uses this data
+> to predict which hospitals will fail the standard next year. Among hospitals that passed, its top picks failed
+> 3 times as often as average.
 
 The sections below go into technical detail.
 
